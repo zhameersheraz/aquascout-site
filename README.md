@@ -4,14 +4,14 @@ Static marketing site for the AQUASCOUT Android app. Three sections on the home 
 
 ## Files
 
-- `index.html` â€” home page. Hero with one full phone mockup of the live detection screen, a "Screens" gallery with three more phone mockups (alerts, stats, settings), six feature cards, a four-step "How it works", and a download CTA.
-- `nav.js` â€” hamburger menu toggle for mobile.
-- `style.css` â€” monochrome styles, responsive.
-- `privacy.html` â€” privacy policy. Plain English, follows the data the app actually touches.
-- `logo_light.png` â€” full AQUASCOUT chrome logo (transparent background, used in the page header).
-- `mark.png` â€” simplified chrome triangle mark (transparent background, used inside the app bar of each phone mockup).
-- `favicon-16.png`, `favicon-32.png`, `apple-touch-icon.png`, `android-chrome-192.png`, `android-chrome-512.png` â€” icon files for browser tabs, iOS home screen, Android home screen. All are a cropped view of the chrome triangle on a black background so they stay readable at 16x16.
-- `vercel.json` â€” Vercel config: clean URLs, no trailing slash, security headers, cache policy for the privacy page.
+- `index.html` — home page. Hero with one full phone mockup of the live detection screen, a "Screens" gallery with three more phone mockups (alerts, stats, settings), six feature cards, a four-step "How it works", and a download CTA.
+- `nav.js` — hamburger menu toggle for mobile.
+- `style.css` — monochrome styles, responsive.
+- `privacy.html` — privacy policy. Plain English, follows the data the app actually touches.
+- `logo_light.png` — full AQUASCOUT chrome logo (transparent background, used in the page header).
+- `mark.png` — simplified chrome triangle mark (transparent background, used inside the app bar of each phone mockup).
+- `favicon-16.png`, `favicon-32.png`, `apple-touch-icon.png`, `android-chrome-192.png`, `android-chrome-512.png` — icon files for browser tabs, iOS home screen, Android home screen. All are a cropped view of the chrome triangle on a black background so they stay readable at 16x16.
+- `vercel.json` — Vercel config: clean URLs, no trailing slash, security headers, cache policy for the privacy page.
 
 ## What's NOT here
 
