@@ -1,6 +1,6 @@
 ﻿# AQUASCOUT website
 
-Marketing site for the [AQUASCOUT](https://github.com/zhameersheraz/aquascout) Android app. Static HTML, no build step, deployed on Vercel.
+Marketing site for the [AQUASCOUT](https://aquascout.vercel.app) Android app. Static HTML, no build step, deployed on Vercel.
 
 The site presents what the app does (on-device fire and smoke detection), shows the app's interface as phone mockups, and links to the download. The Android app is the product; this site is the front door.
 
@@ -21,12 +21,6 @@ The site presents what the app does (on-device fire and smoke detection), shows 
 | `logo_light.png` | AQUASCOUT mark, transparent background |
 | `favicon-32.png`, `favicon-16.png`, `apple-touch-icon.png`, `android-chrome-192.png`, `android-chrome-512.png` | Browser, iOS, Android icons |
 | `vercel.json` | Vercel config: clean URLs, security headers, cache policy |
-
-## Notes
-
-- Replace the `https://example.com/aquascout-download` link in `index.html` with the real Play Store URL or APK download link.
-- Replace `zhameersheraztampugao@gmail.com` in `index.html` and `privacy.html` with a real contact address.
-- The site is intentionally monochrome and minimal. It is a marketing page, not a web app.
 
 ## License
 
