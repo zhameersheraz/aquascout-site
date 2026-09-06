@@ -14,9 +14,12 @@
 
 <header class="nav">
   <a class="brand" href="/">
-    <img class="logo" src="/logo_original.png" alt="AQUASCOUT" />
+    <img class="logo" src="/logo_light.png" alt="AQUASCOUT" />
   </a>
-  <nav class="nav-links">
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="nav-links">
     <a href="/#features">Features</a>
     <a href="/#how">How it works</a>
     <a href="/privacy.html">Privacy</a>
@@ -89,6 +92,8 @@
     <a href="mailto:contact@example.com">Contact</a>
   </nav>
 </footer>
+
+<script src="/nav.js"></script>
 
 </body>
 </html>

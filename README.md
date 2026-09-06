@@ -1,28 +1,21 @@
 # AQUASCOUT website
 
-Static marketing site for the AQUASCOUT Android app. Three pages: home, privacy policy, and an in-browser AI demo. Deploys to Vercel in one click.
+Static marketing site for the AQUASCOUT Android app. Three sections on the home page (hero, screens, features), a privacy policy, and a download link. Deploys to Vercel in one click.
 
 ## Files
 
-- `index.html` — home page. Hero, "Try the AI" section, six feature cards, four-step "How it works", download CTA.
-- `try-ai.js` — client-side color-based fire and smoke detector. Runs entirely in the browser, no upload, no API.
+- `index.html` — home page. Hero with one full phone mockup of the live detection screen, a "Screens" gallery with three more phone mockups (alerts, stats, settings), six feature cards, a four-step "How it works", and a download CTA.
 - `nav.js` — hamburger menu toggle for mobile.
 - `style.css` — monochrome styles, responsive.
 - `privacy.html` — privacy policy. Plain English, follows the data the app actually touches.
-- `logo_light.png`, `logo_dark.png`, `logo_light_wb.png` — AQUASCOUT logo in three variants (transparent, black-bg, white-bg).
-- `favicon-16.png`, `favicon-32.png`, `apple-touch-icon.png`, `android-chrome-192.png`, `android-chrome-512.png` — icon files for browser tabs, iOS home screen, Android home screen.
+- `logo_light.png` — full AQUASCOUT chrome logo (transparent background, used in the page header).
+- `mark.png` — simplified chrome triangle mark (transparent background, used inside the app bar of each phone mockup).
+- `favicon-16.png`, `favicon-32.png`, `apple-touch-icon.png`, `android-chrome-192.png`, `android-chrome-512.png` — icon files for browser tabs, iOS home screen, Android home screen. All are a cropped view of the chrome triangle on a black background so they stay readable at 16x16.
 - `vercel.json` — Vercel config: clean URLs, no trailing slash, security headers, cache policy for the privacy page.
 
-## The Try the AI demo
+## What's NOT here
 
-The home page has a working demo at the `#try` section. Drop a photo, get a fire/smoke verdict with bounding boxes drawn on the image. It runs entirely in your browser using pixel color analysis. No upload, no API, no signup.
-
-Three sample buttons are included so the demo works without uploading anything:
-- **Use fire sample** — synthetic fire scene
-- **Use smoke sample** — synthetic smoke scene
-- **Use clear sample** — synthetic clear scene
-
-The demo is honest: it is a quick color-based preview, not the real AI. The real YOLOv8n INT8 model lives in the Android app and is trained on the D-Fire dataset for far higher accuracy.
+- No live AI demo. The home page shows the app's interface as phone mockups instead. The real YOLOv8n model lives in the Android APK and is not embedded on the website.
 
 ## Deploy
 

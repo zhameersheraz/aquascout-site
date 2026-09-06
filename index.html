@@ -21,7 +21,7 @@
     <span></span><span></span><span></span>
   </button>
   <nav class="nav-links" id="nav-links">
-    <a href="#try">Try the AI</a>
+    <a href="#screens">Screens</a>
     <a href="#features">Features</a>
     <a href="#how">How it works</a>
     <a href="/privacy.html">Privacy</a>
@@ -38,81 +38,229 @@
       <p class="lede">AQUASCOUT runs a custom YOLOv8n model on your device and shows you the verdict in under a second. No images leave the phone. No subscription. No extra hardware.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" id="download" href="https://example.com/aquascout-download">Get it on Android</a>
-        <a class="btn btn-ghost" href="#try">Try the AI in browser</a>
+        <a class="btn btn-ghost" href="#features">See features</a>
       </div>
       <p class="meta">Free · No ads · Works offline</p>
     </div>
-    <div class="hero-art">
-      <div class="hero-card">
-        <div class="hero-card-head">
-          <span class="dot pulse"></span>
-          <span class="hero-card-title">AQUASCOUT · LIVE</span>
-        </div>
-        <div class="hero-card-body">
-          <div class="hero-detection">
-            <div class="hero-detection-label">smoke <span class="conf">0.91</span></div>
-            <div class="hero-detection-box"></div>
-            <div class="hero-confidence">
-              <div class="hero-confidence-bar" style="--w:91%"></div>
+
+    <div class="phone phone-hero">
+      <div class="phone-bezel">
+        <div class="phone-screen">
+          <div class="phone-statusbar">
+            <span class="sb-time">9:41</span>
+            <span class="sb-icons">
+              <span class="sb-signal"></span>
+              <span class="sb-wifi"></span>
+              <span class="sb-batt"></span>
+            </span>
+          </div>
+          <div class="phone-appbar">
+            <div class="appbar-title">
+              <img class="appbar-icon" src="/mark.png" alt="" />
+              <span>AQUASCOUT</span>
+            </div>
+            <span class="appbar-action">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </span>
+          </div>
+          <div class="phone-viewfinder">
+            <div class="vf-box">
+              <div class="vf-label">smoke <span class="vf-conf">0.91</span></div>
+            </div>
+            <div class="vf-confbar"><div class="vf-confbar-fill" style="--w:91%"></div></div>
+          </div>
+          <div class="phone-results">
+            <div class="rrow">
+              <span class="rdot fire"></span>
+              <span class="rlabel">fire</span>
+              <span class="rval">0.04</span>
+            </div>
+            <div class="rrow">
+              <span class="rdot smoke"></span>
+              <span class="rlabel">smoke</span>
+              <span class="rval">0.91</span>
             </div>
           </div>
-        </div>
-        <div class="hero-card-foot">
-          <span class="badge">on-device</span>
-          <span class="latency">0.6s · INT8</span>
+          <div class="phone-tabbar">
+            <button class="tab active"><span class="ti">●</span><span>Live</span></button>
+            <button class="tab"><span class="ti">≡</span><span>Alerts</span></button>
+            <button class="tab"><span class="ti">▦</span><span>Stats</span></button>
+            <button class="tab"><span class="ti">⚙</span><span>Settings</span></button>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="try" class="try">
-    <div class="try-head">
-      <p class="eyebrow">Live demo</p>
-      <h2>Try the AI right here, in your browser.</h2>
-      <p class="lede">Drop a photo. We run a fast color-based fire and smoke check on your device, then draw a bounding box around the largest region we find. No upload, no signup.</p>
+  <section id="screens" class="screens">
+    <div class="screens-head">
+      <p class="eyebrow">The app</p>
+      <h2>Three screens. One job: see fire and smoke before you smell it.</h2>
     </div>
+    <div class="screens-grid">
 
-    <div class="try-grid">
-      <div class="try-pane">
-        <label class="dropzone" id="dropzone">
-          <input type="file" id="file-input" accept="image/*" hidden />
-          <div class="dropzone-inner">
-            <div class="dropzone-icon">+</div>
-            <div class="dropzone-text">
-              <strong>Drop an image here</strong>
-              <span>or click to browse</span>
+      <article class="phone phone-card">
+        <div class="phone-bezel">
+          <div class="phone-screen">
+            <div class="phone-statusbar"><span class="sb-time">9:41</span><span class="sb-icons"><span class="sb-signal"></span><span class="sb-wifi"></span><span class="sb-batt"></span></span></div>
+            <div class="phone-appbar">
+              <div class="appbar-title"><img class="appbar-icon" src="/mark.png" alt="" /><span>AQUASCOUT</span></div>
+              <span class="appbar-action"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+            </div>
+            <ul class="alert-list">
+              <li>
+                <div class="alert-thumb smoke"></div>
+                <div class="alert-body">
+                  <div class="alert-title">smoke · 0.91</div>
+                  <div class="alert-meta">Today · 14:02 · GPS on</div>
+                </div>
+                <div class="alert-time">2m</div>
+              </li>
+              <li>
+                <div class="alert-thumb fire"></div>
+                <div class="alert-body">
+                  <div class="alert-title">fire · 0.87</div>
+                  <div class="alert-meta">Today · 09:18 · SMS sent</div>
+                </div>
+                <div class="alert-time">5h</div>
+              </li>
+              <li>
+                <div class="alert-thumb smoke"></div>
+                <div class="alert-body">
+                  <div class="alert-title">smoke · 0.78</div>
+                  <div class="alert-meta">Yesterday · 22:41</div>
+                </div>
+                <div class="alert-time">1d</div>
+              </li>
+              <li>
+                <div class="alert-thumb smoke"></div>
+                <div class="alert-body">
+                  <div class="alert-title">smoke · 0.65</div>
+                  <div class="alert-meta">Yesterday · 18:09</div>
+                </div>
+                <div class="alert-time">1d</div>
+              </li>
+            </ul>
+            <div class="phone-tabbar">
+              <button class="tab"><span class="ti">●</span><span>Live</span></button>
+              <button class="tab active"><span class="ti">≡</span><span>Alerts</span></button>
+              <button class="tab"><span class="ti">▦</span><span>Stats</span></button>
+              <button class="tab"><span class="ti">⚙</span><span>Settings</span></button>
             </div>
           </div>
-        </label>
-        <div class="try-actions">
-          <button class="btn btn-ghost btn-sm" id="sample-fire">Use fire sample</button>
-          <button class="btn btn-ghost btn-sm" id="sample-smoke">Use smoke sample</button>
-          <button class="btn btn-ghost btn-sm" id="sample-none">Use clear sample</button>
-          <button class="btn btn-ghost btn-sm" id="reset-btn" hidden>Clear</button>
         </div>
-      </div>
-      <div class="try-pane">
-        <div class="canvas-wrap">
-          <canvas id="canvas" width="640" height="480"></canvas>
-          <div class="canvas-empty" id="canvas-empty">
-            <span>Your image will appear here</span>
+        <h3 class="phone-cap">Alert history</h3>
+        <p class="phone-sub">Every detection is logged with timestamp, confidence, and GPS. Sign in to sync across devices.</p>
+      </article>
+
+      <article class="phone phone-card">
+        <div class="phone-bezel">
+          <div class="phone-screen">
+            <div class="phone-statusbar"><span class="sb-time">9:41</span><span class="sb-icons"><span class="sb-signal"></span><span class="sb-wifi"></span><span class="sb-batt"></span></span></div>
+            <div class="phone-appbar">
+              <div class="appbar-title"><img class="appbar-icon" src="/mark.png" alt="" /><span>Stats</span></div>
+              <span class="appbar-action"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+            </div>
+            <div class="stats-body">
+              <div class="stats-row">
+                <div class="stats-num">14</div>
+                <div class="stats-label">alerts this week</div>
+              </div>
+              <div class="bars">
+                <div class="bar" style="--h:30%"></div>
+                <div class="bar" style="--h:55%"></div>
+                <div class="bar" style="--h:20%"></div>
+                <div class="bar" style="--h:80%"></div>
+                <div class="bar" style="--h:45%"></div>
+                <div class="bar" style="--h:65%"></div>
+                <div class="bar" style="--h:90%"></div>
+              </div>
+              <div class="bars-days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+              <div class="stats-split">
+                <div class="split-card">
+                  <div class="split-num fire">9</div>
+                  <div class="split-label">smoke</div>
+                </div>
+                <div class="split-card">
+                  <div class="split-num smoke">5</div>
+                  <div class="split-label">fire</div>
+                </div>
+              </div>
+            </div>
+            <div class="phone-tabbar">
+              <button class="tab"><span class="ti">●</span><span>Live</span></button>
+              <button class="tab"><span class="ti">≡</span><span>Alerts</span></button>
+              <button class="tab active"><span class="ti">▦</span><span>Stats</span></button>
+              <button class="tab"><span class="ti">⚙</span><span>Settings</span></button>
+            </div>
           </div>
         </div>
-        <div class="result" id="result" hidden>
-          <div class="result-row">
-            <div class="result-label">Fire region</div>
-            <div class="result-bar"><div class="result-fill fire" id="bar-fire"></div></div>
-            <div class="result-pct" id="pct-fire">0%</div>
+        <h3 class="phone-cap">Stats and trends</h3>
+        <p class="phone-sub">Last 7 days of detections as a bar chart. Split by class. Battery at 87%.</p>
+      </article>
+
+      <article class="phone phone-card">
+        <div class="phone-bezel">
+          <div class="phone-screen">
+            <div class="phone-statusbar"><span class="sb-time">9:41</span><span class="sb-icons"><span class="sb-signal"></span><span class="sb-wifi"></span><span class="sb-batt"></span></span></div>
+            <div class="phone-appbar">
+              <div class="appbar-title"><img class="appbar-icon" src="/mark.png" alt="" /><span>Settings</span></div>
+              <span class="appbar-action"></span>
+            </div>
+            <div class="settings-body">
+              <div class="settings-section">
+                <div class="settings-label">Emergency contact</div>
+                <div class="settings-row">
+                  <div class="settings-info">
+                    <div class="settings-name">Mom</div>
+                    <div class="settings-meta">+63 951 940 1416</div>
+                  </div>
+                  <div class="settings-action">Edit</div>
+                </div>
+              </div>
+              <div class="settings-section">
+                <div class="settings-label">SMS alert</div>
+                <div class="settings-row">
+                  <div class="settings-info">
+                    <div class="settings-name">Send SMS on detection</div>
+                    <div class="settings-meta">Includes GPS coordinates</div>
+                  </div>
+                  <div class="switch on"><div class="knob"></div></div>
+                </div>
+              </div>
+              <div class="settings-section">
+                <div class="settings-label">Threshold</div>
+                <div class="settings-row">
+                  <div class="settings-info">
+                    <div class="settings-name">Confidence</div>
+                    <div class="settings-meta">Alert at 0.70 and above</div>
+                  </div>
+                  <div class="settings-action">70%</div>
+                </div>
+              </div>
+              <div class="settings-section">
+                <div class="settings-label">Appearance</div>
+                <div class="settings-row">
+                  <div class="settings-info">
+                    <div class="settings-name">Theme</div>
+                    <div class="settings-meta">Auto</div>
+                  </div>
+                  <div class="settings-action">›</div>
+                </div>
+              </div>
+            </div>
+            <div class="phone-tabbar">
+              <button class="tab"><span class="ti">●</span><span>Live</span></button>
+              <button class="tab"><span class="ti">≡</span><span>Alerts</span></button>
+              <button class="tab"><span class="ti">▦</span><span>Stats</span></button>
+              <button class="tab active"><span class="ti">⚙</span><span>Settings</span></button>
+            </div>
           </div>
-          <div class="result-row">
-            <div class="result-label">Smoke region</div>
-            <div class="result-bar"><div class="result-fill smoke" id="bar-smoke"></div></div>
-            <div class="result-pct" id="pct-smoke">0%</div>
-          </div>
-          <div class="result-verdict" id="verdict">—</div>
-          <p class="result-note">This is a quick color-based preview. The Android app runs a real YOLOv8n INT8 model trained on the D-Fire dataset for higher accuracy.</p>
         </div>
-      </div>
+        <h3 class="phone-cap">SMS and settings</h3>
+        <p class="phone-sub">Set an emergency contact, toggle SMS alerts, tune the confidence threshold.</p>
+      </article>
+
     </div>
   </section>
 
@@ -206,7 +354,6 @@
   </nav>
 </footer>
 
-<script src="/try-ai.js"></script>
 <script src="/nav.js"></script>
 
 </body>
