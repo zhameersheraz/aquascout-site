@@ -1,43 +1,44 @@
 # AQUASCOUT website
 
-Static landing site for the AQUASCOUT Android app. Three pages: home, privacy policy, and a download link.
+Static marketing site for the AQUASCOUT Android app. Three pages: home, privacy policy, and an in-browser AI demo. Deploys to Vercel in one click.
 
 ## Files
 
-- `index.html` — home page. Has 6 feature cards, a "how it works" section, a CTA, and links to `/privacy.html` and the download.
-- `privacy.html` — privacy policy. Plain English, follows the data the app actually touches (camera frames stay on device, alert log goes to Firebase if signed in, SMS goes to Semaphore if turned on).
-- `style.css` — shared styles. Monochrome, system fonts, no external dependencies.
-- `favicon.svg` — small AQUASCOUT mark.
+- `index.html` — home page. Hero, "Try the AI" section, six feature cards, four-step "How it works", download CTA.
+- `try-ai.js` — client-side color-based fire and smoke detector. Runs entirely in the browser, no upload, no API.
+- `nav.js` — hamburger menu toggle for mobile.
+- `style.css` — monochrome styles, responsive.
+- `privacy.html` — privacy policy. Plain English, follows the data the app actually touches.
+- `logo_light.png`, `logo_dark.png`, `logo_light_wb.png` — AQUASCOUT logo in three variants (transparent, black-bg, white-bg).
+- `favicon-16.png`, `favicon-32.png`, `apple-touch-icon.png`, `android-chrome-192.png`, `android-chrome-512.png` — icon files for browser tabs, iOS home screen, Android home screen.
 - `vercel.json` — Vercel config: clean URLs, no trailing slash, security headers, cache policy for the privacy page.
 
-## Deploy to Vercel
+## The Try the AI demo
 
-The site is plain static files, so it deploys in one step.
+The home page has a working demo at the `#try` section. Drop a photo, get a fire/smoke verdict with bounding boxes drawn on the image. It runs entirely in your browser using pixel color analysis. No upload, no API, no signup.
 
-### Option A: Vercel CLI (fastest)
+Three sample buttons are included so the demo works without uploading anything:
+- **Use fire sample** — synthetic fire scene
+- **Use smoke sample** — synthetic smoke scene
+- **Use clear sample** — synthetic clear scene
 
-1. Install the CLI if you do not have it: `npm i -g vercel`
-2. From this folder, run: `vercel`
-3. Follow the prompts. The first deploy gives you a `*.vercel.app` URL. Subsequent deploys use `vercel --prod`.
-4. To attach a custom domain, run `vercel domains add yourdomain.com` and follow the DNS instructions Vercel prints.
+The demo is honest: it is a quick color-based preview, not the real AI. The real YOLOv8n INT8 model lives in the Android app and is trained on the D-Fire dataset for far higher accuracy.
 
-### Option B: Vercel dashboard (no CLI)
+## Deploy
 
-1. Push this folder to a GitHub repo.
-2. In Vercel, click `Add New -> Project` and import the repo.
-3. Leave all build settings blank. Vercel auto-detects static sites.
-4. Click `Deploy`. Done in about 30 seconds.
+The site is plain static files. Vercel auto-detects it on import.
 
-## Before you ship
+### Vercel dashboard
 
-- Replace the `https://example.com/aquascout-download` URL in `index.html` with the real Play Store URL (or your APK direct download link).
-- Replace `contact@example.com` in both `index.html` and `privacy.html` with a real email you check.
-- If you want a custom domain, register it (Namecheap, Cloudflare Registrar, etc.) and point it at Vercel.
-- Optional: add `sitemap.xml` and `robots.txt` if you want search engines to index the privacy page.
+1. Push this repo to GitHub (already done).
+2. In Vercel, click `Add New` then `Project`.
+3. Select `zhameersheraz/aquascout-site`. Click `Import`.
+4. Framework preset: `Other`. Root directory: `./`. Leave build and output empty.
+5. Click `Deploy`. The site is live at `<project-name>.vercel.app` in about 30 seconds.
 
-## Local preview
+### Local preview
 
-Any static file server works. Quickest:
+Any static file server works:
 
 ```
 npx serve .
@@ -50,3 +51,13 @@ python -m http.server 8000
 ```
 
 then open `http://localhost:8000`.
+
+## Before you ship
+
+- Replace the `https://example.com/aquascout-download` URL in `index.html` (hero CTA, final CTA, and the nav `Download` button) with the real Play Store URL or your APK direct link.
+- Replace `contact@example.com` in `index.html` and `privacy.html` with a real email.
+- If you want a custom domain, register it (Namecheap, Cloudflare Registrar, Porkbun) and add it under Vercel `Project Settings -> Domains`.
+
+## License
+
+(c) 2026 Saint Columban College. All rights reserved.

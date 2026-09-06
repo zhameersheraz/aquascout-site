@@ -17,7 +17,10 @@
   <a class="brand" href="/">
     <img class="logo" src="/logo_light.png" alt="AQUASCOUT" />
   </a>
-  <nav class="nav-links">
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="nav-links">
     <a href="#try">Try the AI</a>
     <a href="#features">Features</a>
     <a href="#how">How it works</a>
@@ -31,8 +34,8 @@
   <section class="hero">
     <div class="hero-text">
       <p class="eyebrow">Android · On-device AI</p>
-      <h1>Fire and smoke detection that runs on the phone you already own.</h1>
-      <p class="lede">AQUASCOUT points at a room, runs a custom YOLOv8n model on your device, and shows you the verdict in under a second. No images leave the phone. No subscription. No extra hardware to buy.</p>
+      <h1>Fire and smoke detection on the phone you already own.</h1>
+      <p class="lede">AQUASCOUT runs a custom YOLOv8n model on your device and shows you the verdict in under a second. No images leave the phone. No subscription. No extra hardware.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" id="download" href="https://example.com/aquascout-download">Get it on Android</a>
         <a class="btn btn-ghost" href="#try">Try the AI in browser</a>
@@ -40,7 +43,6 @@
       <p class="meta">Free · No ads · Works offline</p>
     </div>
     <div class="hero-art">
-      <img class="hero-logo" src="/logo_light.png" alt="AQUASCOUT logo" />
       <div class="hero-card">
         <div class="hero-card-head">
           <span class="dot pulse"></span>
@@ -108,7 +110,7 @@
             <div class="result-pct" id="pct-smoke">0%</div>
           </div>
           <div class="result-verdict" id="verdict">—</div>
-          <p class="result-note">This is a quick color-based preview. The Android app runs a real YOLOv8n INT8 model trained on the D-Fire dataset for far higher accuracy.</p>
+          <p class="result-note">This is a quick color-based preview. The Android app runs a real YOLOv8n INT8 model trained on the D-Fire dataset for higher accuracy.</p>
         </div>
       </div>
     </div>
@@ -130,7 +132,7 @@
       <article class="card">
         <div class="card-num">03</div>
         <h3>SMS alert with GPS</h3>
-        <p>On detection, the app can send an SMS to your emergency contact with the phone's GPS location. The alert reaches someone even when you are not looking at the screen.</p>
+        <p>On detection, the app can send an SMS to your emergency contact with the phone's GPS location.</p>
       </article>
       <article class="card">
         <div class="card-num">04</div>
@@ -140,7 +142,7 @@
       <article class="card">
         <div class="card-num">05</div>
         <h3>Phone alone is enough</h3>
-        <p>The app is useful with no rover, no extra camera, no extra battery. Open it, point it, get a verdict, close it. The Bluetooth rover is an optional add-on.</p>
+        <p>The app is useful with no rover, no extra camera, no extra battery. Open it, point it, get a verdict, close it.</p>
       </article>
       <article class="card">
         <div class="card-num">06</div>
@@ -171,7 +173,7 @@
         <span class="step-num">3</span>
         <div>
           <h4>Get the alert, on screen or by SMS.</h4>
-          <p>The on-screen alert always fires. If you set an emergency contact and Semaphore API key in Settings, an SMS with the GPS pin is also sent.</p>
+          <p>The on-screen alert always fires. With an emergency contact and Semaphore API key in Settings, an SMS with the GPS pin is also sent.</p>
         </div>
       </li>
       <li>
@@ -205,6 +207,7 @@
 </footer>
 
 <script src="/try-ai.js"></script>
+<script src="/nav.js"></script>
 
 </body>
 </html>
