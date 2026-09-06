@@ -15,9 +15,10 @@
 
 <header class="nav">
   <a class="brand" href="/">
-    <img class="logo" src="/logo_original.png" alt="AQUASCOUT" />
+    <img class="logo" src="/logo_light.png" alt="AQUASCOUT" />
   </a>
   <nav class="nav-links">
+    <a href="#try">Try the AI</a>
     <a href="#features">Features</a>
     <a href="#how">How it works</a>
     <a href="/privacy.html">Privacy</a>
@@ -34,26 +35,80 @@
       <p class="lede">AQUASCOUT points at a room, runs a custom YOLOv8n model on your device, and shows you the verdict in under a second. No images leave the phone. No subscription. No extra hardware to buy.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" id="download" href="https://example.com/aquascout-download">Get it on Android</a>
-        <a class="btn btn-ghost" href="#how">How it works</a>
+        <a class="btn btn-ghost" href="#try">Try the AI in browser</a>
       </div>
       <p class="meta">Free · No ads · Works offline</p>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <div class="phone">
-        <div class="phone-screen">
-          <div class="phone-bar">
-            <span class="dot"></span>
-            <span class="bar-title">AQUASCOUT · LIVE</span>
-          </div>
-          <div class="phone-frame">
-            <div class="detection-box">
-              <span class="detection-label">smoke 0.91</span>
+    <div class="hero-art">
+      <img class="hero-logo" src="/logo_light.png" alt="AQUASCOUT logo" />
+      <div class="hero-card">
+        <div class="hero-card-head">
+          <span class="dot pulse"></span>
+          <span class="hero-card-title">AQUASCOUT · LIVE</span>
+        </div>
+        <div class="hero-card-body">
+          <div class="hero-detection">
+            <div class="hero-detection-label">smoke <span class="conf">0.91</span></div>
+            <div class="hero-detection-box"></div>
+            <div class="hero-confidence">
+              <div class="hero-confidence-bar" style="--w:91%"></div>
             </div>
           </div>
-          <div class="phone-foot">
-            <span class="badge">on-device</span>
-            <span class="time">0.6s</span>
+        </div>
+        <div class="hero-card-foot">
+          <span class="badge">on-device</span>
+          <span class="latency">0.6s · INT8</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="try" class="try">
+    <div class="try-head">
+      <p class="eyebrow">Live demo</p>
+      <h2>Try the AI right here, in your browser.</h2>
+      <p class="lede">Drop a photo. We run a fast color-based fire and smoke check on your device, then draw a bounding box around the largest region we find. No upload, no signup.</p>
+    </div>
+
+    <div class="try-grid">
+      <div class="try-pane">
+        <label class="dropzone" id="dropzone">
+          <input type="file" id="file-input" accept="image/*" hidden />
+          <div class="dropzone-inner">
+            <div class="dropzone-icon">+</div>
+            <div class="dropzone-text">
+              <strong>Drop an image here</strong>
+              <span>or click to browse</span>
+            </div>
           </div>
+        </label>
+        <div class="try-actions">
+          <button class="btn btn-ghost btn-sm" id="sample-fire">Use fire sample</button>
+          <button class="btn btn-ghost btn-sm" id="sample-smoke">Use smoke sample</button>
+          <button class="btn btn-ghost btn-sm" id="sample-none">Use clear sample</button>
+          <button class="btn btn-ghost btn-sm" id="reset-btn" hidden>Clear</button>
+        </div>
+      </div>
+      <div class="try-pane">
+        <div class="canvas-wrap">
+          <canvas id="canvas" width="640" height="480"></canvas>
+          <div class="canvas-empty" id="canvas-empty">
+            <span>Your image will appear here</span>
+          </div>
+        </div>
+        <div class="result" id="result" hidden>
+          <div class="result-row">
+            <div class="result-label">Fire region</div>
+            <div class="result-bar"><div class="result-fill fire" id="bar-fire"></div></div>
+            <div class="result-pct" id="pct-fire">0%</div>
+          </div>
+          <div class="result-row">
+            <div class="result-label">Smoke region</div>
+            <div class="result-bar"><div class="result-fill smoke" id="bar-smoke"></div></div>
+            <div class="result-pct" id="pct-smoke">0%</div>
+          </div>
+          <div class="result-verdict" id="verdict">—</div>
+          <p class="result-note">This is a quick color-based preview. The Android app runs a real YOLOv8n INT8 model trained on the D-Fire dataset for far higher accuracy.</p>
         </div>
       </div>
     </div>
@@ -148,6 +203,8 @@
     <a href="mailto:contact@example.com">Contact</a>
   </nav>
 </footer>
+
+<script src="/try-ai.js"></script>
 
 </body>
 </html>
