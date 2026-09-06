@@ -21,7 +21,6 @@
     <span></span><span></span><span></span>
   </button>
   <nav class="nav-links" id="nav-links">
-    <a href="#screens">Screens</a>
     <a href="#features">Features</a>
     <a href="#how">How it works</a>
     <a href="/privacy.html">Privacy</a>
@@ -101,173 +100,31 @@
   <section id="screens" class="screens">
     <div class="screens-head">
       <p class="eyebrow">The app</p>
-      <h2>Three screens. One job: see fire and smoke before you smell it.</h2>
+      <h2>What ships in v1.43</h2>
     </div>
-    <div class="screens-grid">
-
-      <article class="phone phone-card">
-        <div class="phone-bezel">
-          <div class="phone-screen">
-            <div class="phone-statusbar"><span class="sb-time">9:41</span><span class="sb-icons"><span class="sb-signal"></span><span class="sb-wifi"></span><span class="sb-batt"></span></span></div>
-            <div class="phone-appbar">
-              <div class="appbar-title"><img class="appbar-icon" src="/mark.png" alt="" /><span>AQUASCOUT</span></div>
-              <span class="appbar-action"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-            </div>
-            <ul class="alert-list">
-              <li>
-                <div class="alert-thumb smoke"></div>
-                <div class="alert-body">
-                  <div class="alert-title">smoke · 0.91</div>
-                  <div class="alert-meta">Today · 14:02 · GPS on</div>
-                </div>
-                <div class="alert-time">2m</div>
-              </li>
-              <li>
-                <div class="alert-thumb fire"></div>
-                <div class="alert-body">
-                  <div class="alert-title">fire · 0.87</div>
-                  <div class="alert-meta">Today · 09:18 · SMS sent</div>
-                </div>
-                <div class="alert-time">5h</div>
-              </li>
-              <li>
-                <div class="alert-thumb smoke"></div>
-                <div class="alert-body">
-                  <div class="alert-title">smoke · 0.78</div>
-                  <div class="alert-meta">Yesterday · 22:41</div>
-                </div>
-                <div class="alert-time">1d</div>
-              </li>
-              <li>
-                <div class="alert-thumb smoke"></div>
-                <div class="alert-body">
-                  <div class="alert-title">smoke · 0.65</div>
-                  <div class="alert-meta">Yesterday · 18:09</div>
-                </div>
-                <div class="alert-time">1d</div>
-              </li>
-            </ul>
-            <div class="phone-tabbar">
-              <button class="tab"><svg class="ti" viewBox="0 0 16 16" width="14" height="14"><circle cx="8" cy="8" r="3.5" fill="currentColor"/></svg><span>Live</span></button>
-              <button class="tab active"><svg class="ti" viewBox="0 0 16 16" width="14" height="14"><rect x="2" y="3" width="12" height="2" rx="0.5" fill="currentColor"/><rect x="2" y="7" width="12" height="2" rx="0.5" fill="currentColor"/><rect x="2" y="11" width="12" height="2" rx="0.5" fill="currentColor"/></svg><span>Alerts</span></button>
-              <button class="tab"><svg class="ti" viewBox="0 0 16 16" width="14" height="14"><rect x="2" y="2" width="5" height="5" rx="0.5" fill="currentColor"/><rect x="9" y="2" width="5" height="5" rx="0.5" fill="currentColor"/><rect x="2" y="9" width="5" height="5" rx="0.5" fill="currentColor"/><rect x="9" y="9" width="5" height="5" rx="0.5" fill="currentColor"/></svg><span>Stats</span></button>
-              <button class="tab"><svg class="ti" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="2"/><path d="M8 1.5v2M8 12.5v2M14.5 8h-2M3.5 8h-2M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4M12.6 12.6l-1.4-1.4M4.8 4.8 3.4 3.4"/></svg><span>Settings</span></button>
-            </div>
-          </div>
-        </div>
-        <h3 class="phone-cap">Alert history</h3>
-        <p class="phone-sub">Every detection is logged with timestamp, confidence, and GPS. Sign in to sync across devices.</p>
+    <div class="ship-grid">
+      <article class="ship-card">
+        <div class="ship-tag">Live</div>
+        <h3>Real-time camera AI</h3>
+        <p>Point the camera at a scene. YOLOv8n INT8 runs on-device, draws bounding boxes on fire and smoke, and shows the confidence score per detection.</p>
       </article>
-
-      <article class="phone phone-card">
-        <div class="phone-bezel">
-          <div class="phone-screen">
-            <div class="phone-statusbar"><span class="sb-time">9:41</span><span class="sb-icons"><span class="sb-signal"></span><span class="sb-wifi"></span><span class="sb-batt"></span></span></div>
-            <div class="phone-appbar">
-              <div class="appbar-title"><img class="appbar-icon" src="/mark.png" alt="" /><span>Stats</span></div>
-              <span class="appbar-action"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
-            </div>
-            <div class="stats-body">
-              <div class="stats-row">
-                <div class="stats-num">14</div>
-                <div class="stats-label">alerts this week</div>
-              </div>
-              <div class="bars">
-                <div class="bar" style="--h:30%"></div>
-                <div class="bar" style="--h:55%"></div>
-                <div class="bar" style="--h:20%"></div>
-                <div class="bar" style="--h:80%"></div>
-                <div class="bar" style="--h:45%"></div>
-                <div class="bar" style="--h:65%"></div>
-                <div class="bar" style="--h:90%"></div>
-              </div>
-              <div class="bars-days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
-              <div class="stats-split">
-                <div class="split-card">
-                  <div class="split-num fire">9</div>
-                  <div class="split-label">smoke</div>
-                </div>
-                <div class="split-card">
-                  <div class="split-num smoke">5</div>
-                  <div class="split-label">fire</div>
-                </div>
-              </div>
-            </div>
-            <div class="phone-tabbar">
-              <button class="tab"><svg class="ti" viewBox="0 0 16 16" width="14" height="14"><circle cx="8" cy="8" r="3.5" fill="currentColor"/></svg><span>Live</span></button>
-              <button class="tab"><svg class="ti" viewBox="0 0 16 16" width="14" height="14"><rect x="2" y="3" width="12" height="2" rx="0.5" fill="currentColor"/><rect x="2" y="7" width="12" height="2" rx="0.5" fill="currentColor"/><rect x="2" y="11" width="12" height="2" rx="0.5" fill="currentColor"/></svg><span>Alerts</span></button>
-              <button class="tab active"><svg class="ti" viewBox="0 0 16 16" width="14" height="14"><rect x="2" y="2" width="5" height="5" rx="0.5" fill="currentColor"/><rect x="9" y="2" width="5" height="5" rx="0.5" fill="currentColor"/><rect x="2" y="9" width="5" height="5" rx="0.5" fill="currentColor"/><rect x="9" y="9" width="5" height="5" rx="0.5" fill="currentColor"/></svg><span>Stats</span></button>
-              <button class="tab"><svg class="ti" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="2"/><path d="M8 1.5v2M8 12.5v2M14.5 8h-2M3.5 8h-2M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4M12.6 12.6l-1.4-1.4M4.8 4.8 3.4 3.4"/></svg><span>Settings</span></button>
-            </div>
-          </div>
-        </div>
-        <h3 class="phone-cap">Stats and trends</h3>
-        <p class="phone-sub">Last 7 days of detections as a bar chart. Split by class. Battery at 87%.</p>
+      <article class="ship-card">
+        <div class="ship-tag">Report Fire</div>
+        <h3>Manual alert button</h3>
+        <p>Hold a red button for 3 seconds to send an SMS alert to your emergency contact with the phone's GPS coordinates. Works even when the AI misses.</p>
       </article>
-
-      <article class="phone phone-card">
-        <div class="phone-bezel">
-          <div class="phone-screen">
-            <div class="phone-statusbar"><span class="sb-time">9:41</span><span class="sb-icons"><span class="sb-signal"></span><span class="sb-wifi"></span><span class="sb-batt"></span></span></div>
-            <div class="phone-appbar">
-              <div class="appbar-title"><img class="appbar-icon" src="/mark.png" alt="" /><span>Settings</span></div>
-              <span class="appbar-action"></span>
-            </div>
-            <div class="settings-body">
-              <div class="settings-section">
-                <div class="settings-label">Emergency contact</div>
-                <div class="settings-row">
-                  <div class="settings-info">
-                    <div class="settings-name">Mom</div>
-                    <div class="settings-meta">+63 951 940 1416</div>
-                  </div>
-                  <div class="settings-action">Edit</div>
-                </div>
-              </div>
-              <div class="settings-section">
-                <div class="settings-label">SMS alert</div>
-                <div class="settings-row">
-                  <div class="settings-info">
-                    <div class="settings-name">Send SMS on detection</div>
-                    <div class="settings-meta">Includes GPS coordinates</div>
-                  </div>
-                  <div class="switch on"><div class="knob"></div></div>
-                </div>
-              </div>
-              <div class="settings-section">
-                <div class="settings-label">Threshold</div>
-                <div class="settings-row">
-                  <div class="settings-info">
-                    <div class="settings-name">Confidence</div>
-                    <div class="settings-meta">Alert at 0.70 and above</div>
-                  </div>
-                  <div class="settings-action">70%</div>
-                </div>
-              </div>
-              <div class="settings-section">
-                <div class="settings-label">Appearance</div>
-                <div class="settings-row">
-                  <div class="settings-info">
-                    <div class="settings-name">Theme</div>
-                    <div class="settings-meta">Auto</div>
-                  </div>
-                  <div class="settings-action">›</div>
-                </div>
-              </div>
-            </div>
-            <div class="phone-tabbar">
-              <button class="tab"><svg class="ti" viewBox="0 0 16 16" width="14" height="14"><circle cx="8" cy="8" r="3.5" fill="currentColor"/></svg><span>Live</span></button>
-              <button class="tab"><svg class="ti" viewBox="0 0 16 16" width="14" height="14"><rect x="2" y="3" width="12" height="2" rx="0.5" fill="currentColor"/><rect x="2" y="7" width="12" height="2" rx="0.5" fill="currentColor"/><rect x="2" y="11" width="12" height="2" rx="0.5" fill="currentColor"/></svg><span>Alerts</span></button>
-              <button class="tab"><svg class="ti" viewBox="0 0 16 16" width="14" height="14"><rect x="2" y="2" width="5" height="5" rx="0.5" fill="currentColor"/><rect x="9" y="2" width="5" height="5" rx="0.5" fill="currentColor"/><rect x="2" y="9" width="5" height="5" rx="0.5" fill="currentColor"/><rect x="9" y="9" width="5" height="5" rx="0.5" fill="currentColor"/></svg><span>Stats</span></button>
-              <button class="tab active"><svg class="ti" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="2"/><path d="M8 1.5v2M8 12.5v2M14.5 8h-2M3.5 8h-2M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4M12.6 12.6l-1.4-1.4M4.8 4.8 3.4 3.4"/></svg><span>Settings</span></button>
-            </div>
-          </div>
-        </div>
-        <h3 class="phone-cap">SMS and settings</h3>
-        <p class="phone-sub">Set an emergency contact, toggle SMS alerts, tune the confidence threshold.</p>
+      <article class="ship-card">
+        <div class="ship-tag">Settings</div>
+        <h3>Emergency contact and SMS</h3>
+        <p>Set a phone number, paste a Semaphore API key, toggle auto-SMS on detection, tune the confidence threshold. SMS is debounced 30 seconds.</p>
       </article>
-
+      <article class="ship-card">
+        <div class="ship-tag">Dashboard</div>
+        <h3>System status and rover</h3>
+        <p>Alerts count, model mAP50, current FPS, cloud sync status. Front and rear camera placeholders, rover control, and the model info card.</p>
+      </article>
     </div>
+    <p class="ship-note">The 4-card grid above is what you can do on the phone right now. A bottom tab bar and a dedicated Stats screen are planned for the next build.</p>
   </section>
 
   <section id="features" class="features">

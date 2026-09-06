@@ -486,3 +486,54 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
   .phone-screen { height: 460px; }
   .phone-card .phone-screen { height: 440px; }
 }
+
+
+/* Honest "what ships" grid (replaces phone mockups) */
+.ship-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.ship-card {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  padding: 20px 22px;
+}
+.ship-tag {
+  display: inline-block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #777;
+  border: 1px solid #d6d6d6;
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin-bottom: 10px;
+}
+.ship-card h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+  color: #0f0f0f;
+}
+.ship-card p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #444;
+  margin: 0;
+}
+.ship-note {
+  max-width: 720px;
+  margin: 28px auto 0;
+  padding: 0 24px;
+  font-size: 13px;
+  color: #888;
+  text-align: center;
+  font-style: italic;
+}
