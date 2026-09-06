@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy — AQUASCOUT</title>
+  <meta name="description" content="AQUASCOUT privacy policy. What the app collects, what it does not, and how to contact the developer." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <img class="logo" src="/logo_original.png" alt="AQUASCOUT" />
+  </a>
+  <nav class="nav-links">
+    <a href="/#features">Features</a>
+    <a href="/#how">How it works</a>
+    <a href="/privacy.html">Privacy</a>
+    <a class="btn btn-primary btn-sm" href="/#download">Download</a>
+  </nav>
+</header>
+
+<main class="legal">
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: 06 September 2026</p>
+
+  <p>AQUASCOUT is an Android application that detects fire and smoke using on-device AI. This page explains what the app does and does not do with your data, in plain English.</p>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>Camera frames are processed on your phone. They are not uploaded anywhere.</li>
+    <li>You can use every local feature (camera, AI, alert log) without creating an account.</li>
+    <li>If you sign in, only your alert history is synced to Firebase. Camera frames are not.</li>
+    <li>If you turn on SMS alerts, the message is sent through Semaphore using the API key you enter yourself.</li>
+  </ul>
+
+  <h2>1. Data we do not collect</h2>
+  <p>AQUASCOUT does not collect, store, or transmit:</p>
+  <ul>
+    <li>Camera frames or video.</li>
+    <li>Audio.</li>
+    <li>Location (unless you turn on SMS alerts, in which case the GPS is added to the SMS body only).</li>
+    <li>Contacts.</li>
+    <li>Files on your device.</li>
+  </ul>
+
+  <h2>2. Data stored on your device</h2>
+  <p>The app stores the following locally on your phone only:</p>
+  <ul>
+    <li>Alert log entries (timestamp, class, confidence).</li>
+    <li>User settings (theme, emergency contact phone, Semaphore API key if you entered one, alert SMS toggle).</li>
+    <li>Optional Firebase Auth session, if you sign in.</li>
+  </ul>
+  <p>Clearing app data from Android Settings erases all of the above.</p>
+
+  <h2>3. Data sent to Firebase (only when signed in)</h2>
+  <p>If you sign in with Google, the app writes your alert log to Firebase Realtime Database under your user ID. The data is visible only to that user ID and is removed when the account is deleted.</p>
+  <p>Firebase is provided by Google. Google's privacy policy applies to data held by Firebase: <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>.</p>
+
+  <h2>4. Data sent to Semaphore (only when SMS alert is on)</h2>
+  <p>If you turn on SMS alerts, the app sends a short message to the Semaphore API when a fire or smoke detection exceeds the configured confidence. The message includes the GPS coordinates of the phone at that moment. Semaphore then delivers the SMS to the phone number you entered in Settings.</p>
+  <p>Semaphore is a third-party SMS provider. Their privacy policy applies to the data they hold: <a href="https://semaphore.co/privacy">https://semaphore.co/privacy</a>.</p>
+  <p>You can disable SMS alerts at any time from the Settings screen. The API key is stored only on your device.</p>
+
+  <h2>5. Bluetooth</h2>
+  <p>The app uses Bluetooth only to talk to a paired rover. It does not scan for other devices in the background, and it does not send your location to Bluetooth peers.</p>
+
+  <h2>6. Children</h2>
+  <p>AQUASCOUT is not directed at children under 13. We do not knowingly collect data from children under 13.</p>
+
+  <h2>7. Changes to this policy</h2>
+  <p>If this policy changes, the change will be posted on this page with an updated date. Continued use of the app after a change means you accept the new policy.</p>
+
+  <h2>8. Contact</h2>
+  <p>For questions about this policy or to request deletion of data held in Firebase, contact: <a href="mailto:contact@example.com">contact@example.com</a>.</p>
+</main>
+
+<footer class="foot">
+  <div>
+    <span class="foot-brand">AQUASCOUT</span>
+    <span class="foot-meta">On-device fire and smoke detection for Android.</span>
+  </div>
+  <nav>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="mailto:contact@example.com">Contact</a>
+  </nav>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AQUASCOUT — On-device fire and smoke detection for Android</title>
+  <meta name="description" content="AQUASCOUT is an Android app that uses on-device AI to detect fire and smoke from your phone camera. No cloud upload, no subscription, no extra hardware required." />
+  <meta name="theme-color" content="#0f0f0f" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <img class="logo" src="/logo_original.png" alt="AQUASCOUT" />
+  </a>
+  <nav class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="/privacy.html">Privacy</a>
+    <a class="btn btn-primary btn-sm" href="#download">Download</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Android · On-device AI</p>
+      <h1>Fire and smoke detection that runs on the phone you already own.</h1>
+      <p class="lede">AQUASCOUT points at a room, runs a custom YOLOv8n model on your device, and shows you the verdict in under a second. No images leave the phone. No subscription. No extra hardware to buy.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" id="download" href="https://example.com/aquascout-download">Get it on Android</a>
+        <a class="btn btn-ghost" href="#how">How it works</a>
+      </div>
+      <p class="meta">Free · No ads · Works offline</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-bar">
+            <span class="dot"></span>
+            <span class="bar-title">AQUASCOUT · LIVE</span>
+          </div>
+          <div class="phone-frame">
+            <div class="detection-box">
+              <span class="detection-label">smoke 0.91</span>
+            </div>
+          </div>
+          <div class="phone-foot">
+            <span class="badge">on-device</span>
+            <span class="time">0.6s</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <h2>What it does</h2>
+    <div class="grid">
+      <article class="card">
+        <div class="card-num">01</div>
+        <h3>On-device detection</h3>
+        <p>A custom-trained YOLOv8n INT8 model runs entirely on your phone's CPU. No image is uploaded to any server, ever.</p>
+      </article>
+      <article class="card">
+        <div class="card-num">02</div>
+        <h3>Smoke and fire only</h3>
+        <p>Two-class model trained on a focused fire and smoke dataset. No noisy person-or-vehicle classes. The alert means what it says.</p>
+      </article>
+      <article class="card">
+        <div class="card-num">03</div>
+        <h3>SMS alert with GPS</h3>
+        <p>On detection, the app can send an SMS to your emergency contact with the phone's GPS location. The alert reaches someone even when you are not looking at the screen.</p>
+      </article>
+      <article class="card">
+        <div class="card-num">04</div>
+        <h3>Two-tier privacy</h3>
+        <p>Camera, AI, and alert log work without sign-in. Only cloud sync of alert history needs a Firebase account.</p>
+      </article>
+      <article class="card">
+        <div class="card-num">05</div>
+        <h3>Phone alone is enough</h3>
+        <p>The app is useful with no rover, no extra camera, no extra battery. Open it, point it, get a verdict, close it. The Bluetooth rover is an optional add-on.</p>
+      </article>
+      <article class="card">
+        <div class="card-num">06</div>
+        <h3>Free, no subscription</h3>
+        <p>Single APK download. The only paid cost is your own Semaphore credits for SMS, if you turn that feature on.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="how" class="how">
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div>
+          <h4>Open the app and grant camera access.</h4>
+          <p>The first run is one tap. No account needed to start detecting.</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div>
+          <h4>Point the camera at the area you want to watch.</h4>
+          <p>The live view runs the YOLOv8n model on each frame. A box and confidence label appear when fire or smoke is detected.</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div>
+          <h4>Get the alert, on screen or by SMS.</h4>
+          <p>The on-screen alert always fires. If you set an emergency contact and Semaphore API key in Settings, an SMS with the GPS pin is also sent.</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">4</span>
+        <div>
+          <h4>Check the alert log and chart when you want.</h4>
+          <p>Each detection is timestamped and saved locally. Sign in to sync the log to Firebase and see it on a second device.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="cta">
+    <h2>Ready to try it on your phone?</h2>
+    <p>APK works on Android 8 and up. Camera, AI, and SMS alert features work without an account.</p>
+    <a class="btn btn-primary btn-lg" href="https://example.com/aquascout-download">Download the APK</a>
+    <p class="meta">Or get it on Google Play (link will be live after the Play Store listing is approved).</p>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div>
+    <span class="foot-brand">AQUASCOUT</span>
+    <span class="foot-meta">On-device fire and smoke detection for Android.</span>
+  </div>
+  <nav>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="mailto:contact@example.com">Contact</a>
+  </nav>
+</footer>
+
+</body>
+</html>
