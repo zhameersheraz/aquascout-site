@@ -121,17 +121,15 @@ button { font-family: inherit; }
 .nav-toggle.open span:nth-child(2) { opacity: 0; }
 .nav-toggle.open span:nth-child(3) { top: 15px; transform: rotate(-45deg); }
 
-/* When the page is on the hero (scrolled to top), switch the nav to a
-   solid dark pill so it reads correctly over both the body bg and the
-   dark hero. The JavaScript toggles the `.nav-on-dark` class on body
-   when the hero is in view. */
+/* The nav stays white at all times - it sits cleanly over both the dark
+   hero and the light body bg. No more color switching. */
 .nav-on-dark .nav {
-  background: #0a0a0a;
-  border-color: rgba(255, 255, 255, 0.10);
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.10);
 }
-.nav-on-dark .nav-links a { color: rgba(255, 255, 255, 0.7); }
-.nav-on-dark .nav-links a:hover { color: #fff; }
-.nav-on-dark .nav-toggle span { background: #fff; }
+.nav-on-dark .nav-links a { color: var(--ink-2); }
+.nav-on-dark .nav-links a:hover { color: var(--ink); }
+.nav-on-dark .nav-toggle span { background: var(--ink); }
 
 /* =====================================================================
    BUTTONS
@@ -175,15 +173,17 @@ button { font-family: inherit; }
   border-color: rgba(0, 0, 0, 0.16);
 }
 
-/* On the dark hero, the ghost button is white-on-dark */
+/* On the dark hero, the ghost button stays light with a soft white
+   overlay so it reads against the dark hero while still looking like a
+   secondary action next to the dark primary CTA. */
 .nav-on-dark .btn-pill-ghost {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  border-color: rgba(0, 0, 0, 0.12);
 }
 .nav-on-dark .btn-pill-ghost:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.24);
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.18);
 }
 
 .btn-pill-lg { padding: 14px 26px; font-size: 15px; }
