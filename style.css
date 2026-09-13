@@ -76,12 +76,12 @@ button { font-family: inherit; }
   max-width: var(--max);
   margin: 12px auto 0;
   padding: 10px 14px 10px 18px;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.88);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 999px;
-  box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 8px 32px rgba(0,0,0,0.06);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 4px 16px rgba(0,0,0,0.06);
   transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
 }
 .brand { display: flex; align-items: center; }
@@ -753,12 +753,19 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
 .cta p {
   color: var(--ink-2);
   max-width: 36em;
-  margin: 0 auto 28px;
+  margin: 0 auto 32px;
+}
+.cta .btn-pill { margin-bottom: 28px; }
+.cta-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--line-2);
+  margin: 24px auto;
 }
 .meta {
   font-size: 14px;
   color: var(--muted);
-  margin: 14px 0 0;
+  margin: 0;
 }
 
 /* =====================================================================
