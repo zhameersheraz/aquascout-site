@@ -56,6 +56,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 img, svg { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
@@ -222,14 +223,14 @@ button { font-family: inherit; }
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(255,107,63,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 80% 80%, rgba(255,107,63,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 25% 35%, rgba(255,107,63,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 70% at 80% 75%, rgba(255,80,40,0.06) 0%, transparent 60%),
     url('/hero-bg.png');
   background-size: cover, cover, cover;
   background-position: center;
-  opacity: 0.40;
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 75%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 0%, #000 75%, transparent 100%);
+  opacity: 0.18;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -515,6 +516,8 @@ button { font-family: inherit; }
   border-top: 1px solid var(--line);
   overflow: hidden;
   padding: 14px 0;
+  width: 100%;
+  max-width: 100vw;
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
 }
@@ -753,10 +756,9 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
   margin: 0 auto 28px;
 }
 .meta {
-  font-size: 12.5px;
+  font-size: 14px;
   color: var(--muted);
   margin: 14px 0 0;
-  font-family: var(--font-mono);
 }
 
 /* =====================================================================
@@ -822,4 +824,14 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
   .grid { grid-template-columns: 1fr; }
   .screens-head h2, .features h2, .how h2, .cta h2 { font-size: clamp(24px, 7vw, 32px); }
   .hero-title { font-size: clamp(34px, 10vw, 50px); }
+  .marquee-track { gap: 20px; animation-duration: 30s; }
+  .marquee-item { font-size: 12px; }
+  .card-feature-flame { padding: 22px; min-height: 0; }
+  .ship-card, .card { padding: 20px 18px; }
+}
+
+@media (max-width: 480px) {
+  .hero-inner { padding: 64px 18px 48px; }
+  .hero-eyebrow { font-size: 11px; padding: 5px 12px 5px 8px; }
+  .nav { margin: 8px; padding: 6px 8px 6px 12px; }
 }
