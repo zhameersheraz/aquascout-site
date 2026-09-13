@@ -15,7 +15,7 @@
 
 <header class="nav">
   <a class="brand" href="/">
-    <img class="logo" src="/logo_light.png" alt="AQUASCOUT" />
+    <img class="logo" src="/mark.png" alt="AQUASCOUT" />
   </a>
   <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
     <span></span><span></span><span></span>
@@ -31,6 +31,7 @@
 <main>
 
   <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-text">
       <p class="eyebrow">Android · On-device AI</p>
       <h1>Fire and smoke detection on the phone you already own.</h1>
@@ -86,10 +87,11 @@
               <span class="rval">0.91</span>
             </div>
           </div>
-          <div class="phone-tabbar">
-            <button class="tab active"><svg class="ti" viewBox="0 0 16 16" width="14" height="14"><circle cx="8" cy="8" r="3.5" fill="currentColor"/></svg><span>Live</span></button>
+          <div class="phone-tabbar phone-tabbar-5">
+            <button class="tab active"><svg class="ti" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 9 L8 4 L13 9 L13 14 L10 14 L10 10 L6 10 L6 14 L3 14 Z" fill="currentColor"/></svg><span>Home</span></button>
+            <button class="tab"><svg class="ti" viewBox="0 0 16 16" width="14" height="14"><circle cx="8" cy="8" r="3.5" fill="currentColor"/></svg><span>Live</span></button>
             <button class="tab"><svg class="ti" viewBox="0 0 16 16" width="14" height="14"><rect x="2" y="3" width="12" height="2" rx="0.5" fill="currentColor"/><rect x="2" y="7" width="12" height="2" rx="0.5" fill="currentColor"/><rect x="2" y="11" width="12" height="2" rx="0.5" fill="currentColor"/></svg><span>Alerts</span></button>
-            <button class="tab"><svg class="ti" viewBox="0 0 16 16" width="14" height="14"><rect x="2" y="2" width="5" height="5" rx="0.5" fill="currentColor"/><rect x="9" y="2" width="5" height="5" rx="0.5" fill="currentColor"/><rect x="2" y="9" width="5" height="5" rx="0.5" fill="currentColor"/><rect x="9" y="9" width="5" height="5" rx="0.5" fill="currentColor"/></svg><span>Stats</span></button>
+            <button class="tab"><svg class="ti" viewBox="0 0 16 16" width="14" height="14"><rect x="2" y="9" width="2" height="5" fill="currentColor"/><rect x="5" y="6" width="2" height="8" fill="currentColor"/><rect x="8" y="3" width="2" height="11" fill="currentColor"/><rect x="11" y="7" width="2" height="7" fill="currentColor"/></svg><span>Stats</span></button>
             <button class="tab"><svg class="ti" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="2"/><path d="M8 1.5v2M8 12.5v2M14.5 8h-2M3.5 8h-2M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4M12.6 12.6l-1.4-1.4M4.8 4.8 3.4 3.4"/></svg><span>Settings</span></button>
           </div>
         </div>
@@ -99,32 +101,43 @@
 
   <section id="screens" class="screens">
     <div class="screens-head">
-      <p class="eyebrow">The app</p>
-      <h2>What ships in v1.43</h2>
+      <p class="eyebrow">v1.48 · September 2026</p>
+      <h2>What ships in the latest build</h2>
     </div>
+
     <div class="ship-grid">
       <article class="ship-card">
-        <div class="ship-tag">Live</div>
-        <h3>Real-time camera AI</h3>
-        <p>Point the camera at a scene. YOLOv8n INT8 runs on-device, draws bounding boxes on fire and smoke, and shows the confidence score per detection.</p>
+        <div class="ship-tag">Dashboard</div>
+        <h3>Five-tab navigation</h3>
+        <p>Home, Live, Alerts, Stats, and Settings sit in a single bottom bar. One tap returns to the dashboard from any screen.</p>
+      </article>
+      <article class="ship-card">
+        <div class="ship-tag">Bluetooth</div>
+        <h3>Rover status card</h3>
+        <p>Dashboard shows the current Bluetooth state in real time: OFFLINE, LINKING, SCANNING, or LINKED. Tap to drive the rover.</p>
+      </article>
+      <article class="ship-card">
+        <div class="ship-tag">Stats</div>
+        <h3>Weekly alert chart</h3>
+        <p>New Stats screen with a custom 7-day bar chart of smoke and fire detections, plus a live total count from the last seven days.</p>
       </article>
       <article class="ship-card">
         <div class="ship-tag">Report Fire</div>
-        <h3>Manual alert button</h3>
-        <p>Hold a red button for 3 seconds to send an SMS alert to your emergency contact with the phone's GPS coordinates. Works even when the AI misses.</p>
+        <h3>Faster emergency hold</h3>
+        <p>Manual alert hold-to-confirm dropped from 3 seconds to 1.5 seconds. The full-screen red button is still hard to trigger by accident.</p>
+      </article>
+      <article class="ship-card">
+        <div class="ship-tag">Cameras</div>
+        <h3>Tap-to-zoom preview</h3>
+        <p>Tap the FRONT or REAR camera tile on the dashboard to open a full-screen preview, ready for the ESP32-CAM stream hookup.</p>
       </article>
       <article class="ship-card">
         <div class="ship-tag">Settings</div>
-        <h3>Emergency contact and SMS</h3>
-        <p>Set a phone number, paste a Semaphore API key, toggle auto-SMS on detection, tune the confidence threshold. SMS is debounced 30 seconds.</p>
-      </article>
-      <article class="ship-card">
-        <div class="ship-tag">Dashboard</div>
-        <h3>System status and rover</h3>
-        <p>Alerts count, model mAP50, current FPS, cloud sync status. Front and rear camera placeholders, rover control, and the model info card.</p>
+        <h3>Theme without losing place</h3>
+        <p>Switching dark and light mode no longer scrolls the settings page back to the top. Your scroll position survives the recreate.</p>
       </article>
     </div>
-    <p class="ship-note">The 4-card grid above is what you can do on the phone right now. A bottom tab bar and a dedicated Stats screen are planned for the next build.</p>
+    <p class="ship-note">The build is versionCode 18, versionName 1.48. APK on this site ships from the GitHub release.</p>
   </section>
 
   <section id="features" class="features">
@@ -160,10 +173,11 @@
         <h3>Manual alert button</h3>
         <p>See or smell smoke? Tap the red button on the Live screen to send an alert without waiting for the AI. Both paths go to the same alert system.</p>
       </article>
-      <article class="card">
+      <article class="card card-feature-flame">
         <div class="card-num">07</div>
         <h3>Free, no subscription</h3>
         <p>Single APK download. The only paid cost is your own Semaphore credits for SMS, if you turn that feature on.</p>
+        <img class="card-flame" src="/flame-3d.png" alt="" />
       </article>
     </div>
   </section>
