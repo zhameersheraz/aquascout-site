@@ -121,11 +121,12 @@ button { font-family: inherit; }
 .nav-toggle.open span:nth-child(2) { opacity: 0; }
 .nav-toggle.open span:nth-child(3) { top: 15px; transform: rotate(-45deg); }
 
-/* When the page is on the hero (scrolled to top), switch the nav to dark
-   glass so it reads against the dark hero. The JavaScript toggles the
-   `.nav-on-dark` class on body when the hero is in view. */
+/* When the page is on the hero (scrolled to top), switch the nav to a
+   solid dark pill so it reads correctly over both the body bg and the
+   dark hero. The JavaScript toggles the `.nav-on-dark` class on body
+   when the hero is in view. */
 .nav-on-dark .nav {
-  background: rgba(15, 15, 15, 0.55);
+  background: #0a0a0a;
   border-color: rgba(255, 255, 255, 0.10);
 }
 .nav-on-dark .nav-links a { color: rgba(255, 255, 255, 0.7); }
