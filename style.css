@@ -76,13 +76,11 @@ button { font-family: inherit; }
   max-width: var(--max);
   margin: 12px auto 0;
   padding: 10px 14px 10px 18px;
-  background: rgba(255, 255, 255, 0.88);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
+  background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 999px;
-  box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 4px 16px rgba(0,0,0,0.06);
-  transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+  box-shadow: 0 1px 0 rgba(255,255,255,1) inset, 0 4px 16px rgba(0,0,0,0.06);
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease), color 0.3s var(--ease);
 }
 .brand { display: flex; align-items: center; }
 .logo { height: 28px; width: auto; }
@@ -809,24 +807,26 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
     position: absolute;
     top: calc(100% + 10px);
     right: 12px; left: 12px;
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--line);
-    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
     padding: 8px;
     flex-direction: column;
     align-items: stretch;
-    gap: 4px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+    gap: 2px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.14);
     opacity: 0; visibility: hidden;
     transform: translateY(-6px);
     transition: opacity 0.18s var(--ease), visibility 0.18s var(--ease), transform 0.18s var(--ease);
   }
   .nav-links.open { opacity: 1; visibility: visible; transform: translateY(0); }
-  .nav-links a { padding: 10px 12px; border-radius: 8px; }
+  .nav-links a { padding: 12px 14px; border-radius: 10px; font-size: 14.5px; }
   .nav-links a:hover { background: rgba(0,0,0,0.04); }
   .nav .btn { display: none; }
   .nav-toggle { display: block; }
+  .nav-on-dark .nav-links { background: #ffffff; }
+  .nav-on-dark .nav-links a { color: var(--ink-2); }
+  .nav-on-dark .nav-links a:hover { background: rgba(0,0,0,0.04); color: var(--ink); }
 
   .grid { grid-template-columns: 1fr; }
   .screens-head h2, .features h2, .how h2, .cta h2 { font-size: clamp(24px, 7vw, 32px); }
