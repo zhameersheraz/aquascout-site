@@ -40,7 +40,10 @@ Monochrome with a single signal colour.
 
 - Three.js is loaded from a CDN. If it fails to load, the prototype stage shows a plain message rather than a blank canvas.
 - `viewfinder.js` and the 3D loop both respect `prefers-reduced-motion`. The viewfinder renders one static locked frame; the 3D scene stops animating but stays fully interactive.
-- `hero-bg.png` and `flame-3d.png` are no longer referenced. They are kept in the repo but nothing loads them.
+
+## Assets
+
+The whole site ships about 257 KB. Decorative background art and the old light and dark wordmark variants were removed in the redesign because nothing referenced them. Total payload is `mark.png` plus the five favicon sizes.
 
 ## License
 
