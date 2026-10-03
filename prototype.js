@@ -100,6 +100,8 @@
     lens:    mat(LENS,     { rough: 0.16, metal: 0.4 }),
     sensor:  mat(SENSOR,   { rough: 0.5,  metal: 0.2 }),
     tank:    mat(0x9AA6AE,  { rough: 0.35, metal: 0.1, opacity: 0.34 }),
+    batt:    mat(0x232C33,  { rough: 0.7,  metal: 0.15 }),
+    wire:    mat(0x39454E,  { rough: 0.55, metal: 0.05 }),
     dark:    mat(0x1A2228,  { rough: 0.85 }),
     ground:  mat(0x0E1316,  { rough: 1, metal: 0 })
   };
@@ -132,69 +134,135 @@
   grid.position.y = 0.002;
   scene.add(grid);
 
-  /* ---------- rover ---------- */
+  /* ---------- rover ----------
+     Matches the LAFVIN 2WD Smart Robot Car V2.0 kit: a two-layer black
+     acrylic sandwich on yellow standoffs, two driven wheels at the rear,
+     one swivel caster at the front. Built by us on top of that: the mast,
+     two ESP32-CAM heads, the water tank, pump and nozzle.                */
+
   var rover = new THREE.Group();
   scene.add(rover);
 
-  // chassis: lower plate + upper deck
-  var base = box(3.0, 0.20, 1.9, M.plate, 0, 0.52, 0, rover);
-  var deck = box(2.5, 0.10, 1.5, M.plateLt, 0, 0.66, 0, rover);
-  box(2.72, 0.06, 0.12, M.dark, 0, 0.60, 0.78, rover);   // front rail
-  box(2.72, 0.06, 0.12, M.dark, 0, 0.60, -0.78, rover);  // rear rail
+  var BASE_Y = 0.46, DECK_Y = 0.70, STANDBY = 0.24;
 
-  // wheels
+  // lower acrylic plate
+  box(3.05, 0.07, 1.95, M.plate, 0, BASE_Y, 0, rover);
+  // upper acrylic plate, slightly inset, held clear on standoffs
+  box(2.72, 0.07, 1.70, M.plate, 0, DECK_Y, 0, rover);
+  // yellow standoffs between the plates
+  (function () {
+    var sx = 1.22, sz = 0.74;
+    for (var a = -1; a <= 1; a += 2) {
+      for (var b = -1; b <= 1; b += 2) {
+        cyl(0.045, 0.045, STANDBY, M.hub,
+          a * sx, BASE_Y + STANDBY / 2 + 0.035, b * sz, rover, 10);
+      }
+    }
+  })();
+  // front and rear bumper rails
+  box(3.05, 0.10, 0.10, M.plateLt, 0, BASE_Y + 0.06, 0.99, rover);
+  box(3.05, 0.10, 0.10, M.plateLt, 0, BASE_Y + 0.06, -0.99, rover);
+
+  /* Wheels: two driven at the rear, one caster at the front. */
   var wheels = [];
-  (function () {
-    var wx = 1.02, wz = 0.98, wr = 0.40;
-    var spots = [[wx, wz], [wx, -wz], [-wx, wz], [-wx, -wz]];
-    for (var i = 0; i < 4; i++) {
-      var g = new THREE.Group();
-      g.position.set(spots[i][0], wr, spots[i][1]);
-      var t = cyl(wr, wr, 0.30, M.rubber, 0, 0, 0, g, 24);
-      t.rotation.z = Math.PI / 2;
-      var hub = cyl(wr * 0.42, wr * 0.42, 0.32, M.hub, 0, 0, 0, g, 18);
-      hub.rotation.z = Math.PI / 2;
-      // tread notches, so rotation is visible
-      for (var k = 0; k < 10; k++) {
-        var a = (k / 10) * Math.PI * 2;
-        var n = box(0.06, 0.05, 0.26, M.dark,
-          0, Math.cos(a) * wr * 0.99, Math.sin(a) * wr * 0.99, g);
-        n.rotation.x = -a;
-      }
-      rover.add(g);
-      wheels.push({ g: g, side: spots[i][1] > 0 ? 1 : -1, front: spots[i][0] > 0 });
-    }
-  })();
+  var WR = 0.40, WZ = 1.00, WX = 1.02;
 
-  // suspension arms
-  (function () {
-    var wx = 1.02, wz = 0.98;
-    for (var s = -1; s <= 1; s += 2) {
-      for (var f = -1; f <= 1; f += 2) {
-        var arm = box(0.55, 0.07, 0.07, M.dark, f * 0.72, 0.52, s * wz, rover);
-        arm.rotation.z = f * 0.16;
-      }
-    }
-  })();
+  function driveWheel(x, z, side) {
+    var g = new THREE.Group();
+    g.position.set(x, WR, z);
 
-  // electronics bay
-  box(1.05, 0.07, 0.86, M.board, -0.45, 0.75, 0, rover);      // protoboard
-  var uno = box(0.66, 0.06, 0.52, M.dark, 0.42, 0.75, 0.28, rover);
-  box(0.5, 0.02, 0.14, M.hub, 0.42, 0.79, 0.34, rover);      // USB port
-  var jdy = box(0.30, 0.05, 0.24, M.plateLt, -0.30, 0.80, -0.44, rover);
-  cyl(0.03, 0.03, 0.30, M.sensor, -0.30, 0.95, -0.44, rover, 10);   // BLE antenna
+    // tyre
+    var tyre = cyl(WR, WR, 0.30, M.rubber, 0, 0, 0, g, 30);
+    tyre.rotation.z = Math.PI / 2;
+    // dished hub, recessed so the tyre reads as the outer edge
+    var hub = cyl(WR * 0.54, WR * 0.54, 0.32, M.hub, 0, 0, 0, g, 20);
+    hub.rotation.z = Math.PI / 2;
+    // a single spoke, enough to read rotation without becoming a fan of bars
+    box(0.33, WR * 1.16, 0.07, M.plateLt, 0, 0, 0, g);
+    // gear-motor can + bracket, inboard
+    var can = cyl(0.12, 0.12, 0.24, M.hub, -side * 0.22, 0.02, 0, g, 14);
+    can.rotation.z = Math.PI / 2;
+    box(0.045, 0.30, 0.18, M.plateLt, -side * 0.33, 0, 0, g);   // NEMA bracket
 
-  // HC-SR04 ultrasonic on the front rail
+    rover.add(g);
+    wheels.push({ g: g, side: side, spin: 0 });
+  }
+  driveWheel(-WX, WZ, 1);
+  driveWheel(-WX, -WZ, -1);
+
+  /* Front swivel caster, exactly like the kit. */
+  var caster = new THREE.Group();
+  caster.position.set(WX, 0.30, 0);
+  box(0.10, 0.26, 0.10, M.plateLt, 0, 0.13, 0, caster);          // strut
+  var ball = new THREE.Mesh(new THREE.SphereGeometry(0.14, 18, 14), M.hub);
+  ball.position.set(0, -0.04, 0);
+  ball.castShadow = true;
+  caster.add(ball);
+  var ballYoke = new THREE.Group();
+  ballYoke.add(caster);
+  ballYoke.position.set(WX, 0.30, 0);
+  caster.position.set(0, 0, 0);
+  rover.add(ballYoke);
+
+  /* ---------- electronics on the upper plate ---------- */
+
+  // 4xAA battery holder across the back
+  var batt = box(0.62, 0.26, 0.30, M.batt, 0.72, DECK_Y + 0.18, -0.52, rover);
+  for (var c = 0; c < 4; c++) {
+    cyl(0.055, 0.055, 0.27, M.plateLt,
+      0.50 + c * 0.145, DECK_Y + 0.18, -0.52, rover, 12);
+  }
+
+  // L298N driver board, the big one with the heatsink
+  box(0.70, 0.10, 0.56, M.board, -0.86, DECK_Y + 0.09, 0.18, rover);
+  box(0.34, 0.05, 0.20, M.hub, -0.86, DECK_Y + 0.17, 0.18, rover);   // heatsink
+  cyl(0.04, 0.04, 0.06, M.sensor, -0.62, DECK_Y + 0.18, 0.18, rover, 10);  // trim pot
+
+  // Arduino UNO
+  box(0.68, 0.06, 0.54, M.dark, -0.10, DECK_Y + 0.08, 0.10, rover);
+  box(0.50, 0.03, 0.15, M.hub, -0.10, DECK_Y + 0.12, 0.18, rover);   // USB-B
+
+  // JDY-16 BLE module with its antenna whip
+  box(0.32, 0.05, 0.26, M.plateLt, -0.10, DECK_Y + 0.13, -0.52, rover);
+  cyl(0.022, 0.022, 0.34, M.sensor, 0.02, DECK_Y + 0.28, -0.52, rover, 8);
+
+  // IR receiver for the LAFVIN handset
+  box(0.14, 0.05, 0.10, M.dark, 0.36, DECK_Y + 0.08, 0.52, rover);
+  for (var ir = 0; ir < 3; ir++) {
+    cyl(0.018, 0.018, 0.04, M.sensor,
+      0.31 + ir * 0.05, DECK_Y + 0.12, 0.52, rover, 8);
+  }
+
+  // HC-SR04 on a front bracket
   var sonic = new THREE.Group();
-  sonic.position.set(0.86, 0.72, 0);
-  box(0.16, 0.10, 0.22, M.dark, 0, 0, 0, sonic);
-  var t1 = cyl(0.055, 0.055, 0.06, M.sensor, -0.05, 0.07, 0, sonic, 14);
-  var t2 = cyl(0.055, 0.055, 0.06, M.sensor, 0.05, 0.07, 0, sonic, 14);
+  sonic.position.set(1.24, DECK_Y + 0.10, 0);
+  box(0.07, 0.16, 0.24, M.plateLt, 0, 0.08, 0, sonic);          // bracket
+  box(0.14, 0.12, 0.23, M.dark, 0.08, 0.14, 0, sonic);
+  cyl(0.055, 0.055, 0.05, M.sensor, 0.08, 0.21, -0.055, sonic, 14);
+  cyl(0.055, 0.055, 0.05, M.sensor, 0.08, 0.21, 0.055, sonic, 14);
   rover.add(sonic);
 
+  /* ---------- wiring harness ---------- */
+  function wire(pts, r) {
+    var curve = new THREE.CatmullRomCurve3(pts.map(function (p) {
+      return new THREE.Vector3(p[0], p[1], p[2]);
+    }));
+    var g = new THREE.TubeGeometry(curve, 24, r || 0.018, 6, false);
+    var m = new THREE.Mesh(g, M.wire);
+    m.castShadow = true;
+    rover.add(m);
+    return m;
+  }
+  wire([[-0.86, DECK_Y + 0.14, 0.18], [-0.55, DECK_Y + 0.20, 0.30],
+        [-0.10, DECK_Y + 0.14, 0.16], [0.40, DECK_Y + 0.20, 0.30]]);   // L298N to UNO
+  wire([[-0.10, DECK_Y + 0.14, -0.52], [0.20, DECK_Y + 0.22, -0.30],
+        [0.72, DECK_Y + 0.22, -0.46]], 0.016);                          // UNO to battery
+  wire([[1.24, DECK_Y + 0.16, 0], [0.90, DECK_Y + 0.26, 0.24],
+        [0.20, DECK_Y + 0.16, 0.10]], 0.015);                            // servo to UNO
+
   // mast + two ESP32-CAM heads
-  var mast = cyl(0.05, 0.05, 1.05, M.plateLt, 0, 1.24, 0, rover, 12);
-  box(0.5, 0.05, 0.05, M.plateLt, 0, 1.72, 0, rover);        // crossbar
+  var mast = cyl(0.05, 0.05, 1.02, M.plateLt, 0, DECK_Y + 0.51, 0, rover, 12);
+  box(0.54, 0.05, 0.05, M.plateLt, 0, 1.70, 0, rover);         // crossbar
 
   var camLeds = [];
   function camHead(x, z) {
@@ -216,22 +284,26 @@
   camHead(0, 0.30);   // front
   camHead(0, -0.30);  // rear
 
-  // water tank + pump + nozzle
-  var tank = cyl(0.26, 0.26, 0.44, M.tank, -0.86, 0.92, -0.32, rover, 24);
-  cyl(0.10, 0.10, 0.10, M.sensor, -0.86, 1.18, -0.32, rover, 14);  // cap
-  var pump = box(0.30, 0.22, 0.26, M.dark, -0.86, 0.80, 0.28, rover);
-  cyl(0.06, 0.06, 0.5, M.plateLt, -0.5, 0.90, 0.28, rover, 12).rotation.z = Math.PI / 2; // hose
+  // water tank + pump + nozzle, on the upper plate
+  var tank = cyl(0.24, 0.24, 0.42, M.tank, 0.90, DECK_Y + 0.24, 0.10, rover, 24);
+  cyl(0.09, 0.09, 0.09, M.sensor, 0.90, DECK_Y + 0.49, 0.10, rover, 14);   // cap
+  var pump = box(0.28, 0.20, 0.24, M.dark, 0.90, DECK_Y + 0.13, -0.42, rover);
+  // hose from the tank down to the pump
+  var hose = cyl(0.045, 0.045, 0.34, M.wire, 0.90, DECK_Y + 0.13, -0.18, rover, 10);
+  hose.rotation.x = Math.PI / 2;
+  // feed line running forward to the nozzle
+  cyl(0.035, 0.035, 1.05, M.wire, 1.22, DECK_Y + 0.10, 0, rover, 10).rotation.z = Math.PI / 2;
 
   var nozzle = new THREE.Group();
-  nozzle.position.set(1.28, 0.78, 0);
-  var nz = cyl(0.05, 0.09, 0.26, M.plateLt, 0, 0, 0, nozzle, 14);
+  nozzle.position.set(1.40, DECK_Y + 0.06, 0);
+  var nz = cyl(0.045, 0.085, 0.24, M.plateLt, 0.10, -0.04, 0, nozzle, 14);
   nz.rotation.z = -Math.PI / 2;
   rover.add(nozzle);
 
   // water jet
-  var jetGeo = new THREE.ConeGeometry(0.16, 1.5, 18, 1, true);
+  var jetGeo = new THREE.ConeGeometry(0.15, 1.4, 18, 1, true);
   jetGeo.rotateZ(-Math.PI / 2);
-  jetGeo.translate(0.75, 0, 0);
+  jetGeo.translate(0.70, -0.04, 0);
   var jet = new THREE.Mesh(jetGeo, new THREE.MeshBasicMaterial({
     color: WATER, transparent: true, opacity: 0, side: THREE.DoubleSide, depthWrite: false
   }));
@@ -257,15 +329,20 @@
   /* ---------- hotspots ----------
      Each anchor carries a screen-space offset. Without them the chips stack
      on top of each other, because the parts of a rover are physically close.  */
+  // Deck parts sit within a small screen area, so their labels are laid out as
+  // two vertical columns well clear of the model, connected by leader lines.
   var HOTSPOTS = [
-    { p: new THREE.Vector3(0, 1.80, 0.30),  t: "ESP32-CAM, front", dx: -14, dy: -30 },
-    { p: new THREE.Vector3(0, 1.80, -0.30), t: "ESP32-CAM, rear",  dx: 14,  dy: 24 },
-    { p: new THREE.Vector3(0.42, 0.82, 0.28), t: "Arduino UNO",    dx: -6,  dy: 34 },
-    { p: new THREE.Vector3(-0.30, 0.86, -0.44), t: "JDY-16 BLE",  dx: 68,  dy: 2 },
-    { p: new THREE.Vector3(0.86, 0.82, 0), t: "HC-SR04",          dx: 74,  dy: -16 },
-    { p: new THREE.Vector3(-0.86, 0.96, -0.32), t: "Water tank",  dx: -80, dy: -2 },
-    { p: new THREE.Vector3(-0.86, 0.84, 0.28),  t: "Pump",        dx: -74, dy: 26 },
-    { p: new THREE.Vector3(1.02, 0.42, 0.98),  t: "Drive wheels",    dx: 0,   dy: 34 }
+    { p: new THREE.Vector3(0, 1.70, 0.30),   t: "ESP32-CAM, front", dx: -30,  dy: -52 },
+    { p: new THREE.Vector3(0, 1.70, -0.30),  t: "ESP32-CAM, rear",  dx: 30,   dy: -52 },
+    { p: new THREE.Vector3(-0.86, DECK_Y + 0.14, 0.18),  t: "L298N driver", dx: -150, dy: -74 },
+    { p: new THREE.Vector3(-0.10, DECK_Y + 0.16, -0.52), t: "JDY-16 BLE", dx: -152, dy: -34 },
+    { p: new THREE.Vector3(-0.10, DECK_Y + 0.12, 0.10),  t: "Arduino UNO", dx: -150, dy: 6 },
+    { p: new THREE.Vector3(-WX, WR, WZ), t: "Drive wheels", dx: -148, dy: 46 },
+    { p: new THREE.Vector3(1.24, DECK_Y + 0.24, 0),      t: "HC-SR04",     dx: 152,  dy: -104 },
+    { p: new THREE.Vector3(0.90, DECK_Y + 0.40, 0.10),   t: "Water tank",  dx: 154,  dy: -48 },
+    { p: new THREE.Vector3(0.72, DECK_Y + 0.30, -0.52),  t: "4xAA holder", dx: 152,  dy: 8 },
+    { p: new THREE.Vector3(0.90, DECK_Y + 0.14, -0.42),  t: "Pump",        dx: 150,  dy: 64 },
+    { p: new THREE.Vector3(WX, 0.30, 0), t: "Front caster", dx: 60, dy: 88 }
   ];
   var hsLayer = document.getElementById("hotspots");
   var hsEls = HOTSPOTS.map(function (h) {
@@ -283,6 +360,7 @@
   var keys = {};
   var state = {
     pump: false, cam: true, link: true, alarm: false,
+    vL: 0, vR: 0,
     speed: 0, heading: 0, x: 0, z: 0, dist: 0, log: []
   };
 
@@ -394,6 +472,9 @@
   btnReset.addEventListener("click", function () {
     keys = {};
     state.x = 0; state.z = 0; state.heading = 0; state.speed = 0; state.dist = 0; state.alarm = false;
+    state.vL = 0; state.vR = 0;
+    wheels.forEach(function (w) { w.spin = 0; w.g.rotation.x = 0; });
+    ballYoke.rotation.y = 0;
     rover.position.set(0, 0, 0);
     rover.rotation.y = 0;
     setPump(false, true);
@@ -418,15 +499,23 @@
 
   var dpBtns = Array.prototype.slice.call(document.querySelectorAll(".dp"));
   dpBtns.forEach(function (b) {
-    var on = function (e) { e.preventDefault(); keys[b.dataset.key] = true; syncDpad(); };
-    var off = function (e) { e.preventDefault(); keys[b.dataset.key] = false; syncDpad(); };
+    // Go through the same MAP the keyboard uses. The buttons carry the
+    // readable key letter, but the drive model reads the canonical name,
+    // so translating here keeps both input paths identical.
+    var code = MAP[b.dataset.key];
+    if (!code) return;
+    var on = function (e) { e.preventDefault(); keys[code] = true; syncDpad(); };
+    var off = function (e) { e.preventDefault(); keys[code] = false; syncDpad(); };
     b.addEventListener("pointerdown", on);
     b.addEventListener("pointerup", off);
     b.addEventListener("pointerleave", off);
     b.addEventListener("pointercancel", off);
   });
   function syncDpad() {
-    dpBtns.forEach(function (b) { b.classList.toggle("on", !!keys[b.dataset.key]); });
+    dpBtns.forEach(function (b) {
+      var code = MAP[b.dataset.key];
+      b.classList.toggle("on", !!(code && keys[code]));
+    });
   }
 
   /* ---------- resize ---------- */
@@ -440,10 +529,19 @@
   window.addEventListener("resize", resize);
 
   /* ---------- loop ---------- */
-  var MAX_V = 1.6;          // m/s at full throttle
-  var TURN = 1.9;           // rad/s
-  var wheelSpin = 0;
+  var MAX_V   = 1.5;     // m/s at full throttle
+  var MAX_W   = 3.0;     // rad/s wheel speed
+  var WHEEL_R = WR;      // 0.40
+  var TRACK   = WZ * 2;  // 2.0 m between the driven wheels
+  var ACCEL   = 2.6;
+  var DRAG    = 2.4;
 
+  // Differential drive, same model as a real two-wheel chassis:
+  //   v = (vR + vL) / 2      forward speed
+  //   w = (vR - vL) / track  turn rate
+  // Steering mixes into throttle rather than adding a separate spin, which is
+  // what made the old build read like a hovercraft: the body turned but all
+  // four wheels kept the same speed.
   function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
 
   function tick(now) {
@@ -460,38 +558,66 @@
       if (tween.t >= 1) tween = null;
     }
 
-    // drive
     var throttle = (keys.f ? 1 : 0) - (keys.r ? 1 : 0);
-    var steer = (keys.rr ? 1 : 0) - (keys.l ? 1 : 0);
+    var steer    = (keys.rr ? 1 : 0) - (keys.l ? 1 : 0);
 
     if (state.link) {
-      state.speed += throttle * 2.4 * dt;
-      state.speed -= state.speed * 2.1 * dt;         // drag
-      if (Math.abs(state.speed) < 0.002) state.speed = 0;
+      // Wanted wheel speeds.
+      // steer is +1 for a right turn. A right turn must run the RIGHT (outside)
+      // wheel faster, so the outside term is added to vR.
+      var wantL = throttle * MAX_W - steer * MAX_W * 0.85;
+      var wantR = throttle * MAX_W + steer * MAX_W * 0.85;
+
+      // motor response: spin up, then roll off drag
+      state.vL += (wantL - state.vL) * Math.min(1, ACCEL * dt);
+      state.vR += (wantR - state.vR) * Math.min(1, ACCEL * dt);
+      state.vL -= state.vL * DRAG * dt * 0.35;
+      state.vR -= state.vR * DRAG * dt * 0.35;
+      if (Math.abs(state.vL) < 0.01) state.vL = 0;
+      if (Math.abs(state.vR) < 0.01) state.vR = 0;
+
+      // clamp so a hard turn cannot exceed full throttle
+      var cap = MAX_W * 1.35;
+      state.vL = Math.max(-cap, Math.min(cap, state.vL));
+      state.vR = Math.max(-cap, Math.min(cap, state.vR));
     } else {
-      state.speed = 0;
+      state.vL = 0; state.vR = 0;
     }
-    state.speed = Math.max(-MAX_V * 0.6, Math.min(MAX_V, state.speed));
 
-    if (steer) state.heading += steer * TURN * dt * (state.speed === 0 ? 1 : 0.6);
+    // Body motion derived from the two wheels.
+    //
+    // Frame note: the chassis is built with its length along local X (nose at
+    // +X, right side at +Z). Three.js maps local +X to world (cos h, 0, -sin h),
+    // so forward is (cos h, 0, -sin h) and a positive rotation.y swings the nose
+    // toward -Z, which is the rover's LEFT. A right turn therefore has to
+    // decrease heading, hence the negation on omega.
+    var v = (state.vR + state.vL) / 2 / WHEEL_R;         // m/s
+    var omega = (state.vR - state.vL) / TRACK;          // rad/s
+    v = Math.max(-MAX_V * 0.6, Math.min(MAX_V, v));
+    state.speed = v;
+    state.heading -= omega * dt;
 
-    state.x += Math.sin(state.heading) * state.speed * dt;
-    state.z += Math.cos(state.heading) * state.speed * dt;
+    state.x += Math.cos(state.heading) * v * dt;
+    state.z += -Math.sin(state.heading) * v * dt;
 
     // keep it on the bench
     var lim = 6.2;
-    if (Math.abs(state.x) > lim) { state.x = Math.sign(state.x) * lim; state.speed = 0; }
-    if (Math.abs(state.z) > lim) { state.z = Math.sign(state.z) * lim; state.speed = 0; }
+    if (Math.abs(state.x) > lim) { state.x = Math.sign(state.x) * lim; state.vL = state.vR = 0; }
+    if (Math.abs(state.z) > lim) { state.z = Math.sign(state.z) * lim; state.vL = state.vR = 0; }
 
     rover.position.set(state.x, 0, state.z);
     rover.rotation.y = state.heading;
 
-    // wheels
-    var d = state.speed * dt / 0.40;
-    wheelSpin -= d;
-    wheels.forEach(function (w) {
-      w.g.rotation.x = wheelSpin;
-    });
+    // each wheel turns at its own rate
+    for (var w = 0; w < wheels.length; w++) {
+      var wh = wheels[w];
+      var rate = wh.side > 0 ? state.vR : state.vL;
+      wh.spin -= (rate / WHEEL_R) * dt;
+      wh.g.rotation.x = wh.spin;
+    }
+
+    // the caster swivels to follow the body, trailing slightly
+    ballYoke.rotation.y = omega * 0.12;
 
     // water jet
     var wantJet = state.pump ? 0.42 : 0;
@@ -522,13 +648,29 @@
         v.applyMatrix4(rover.matrixWorld);
         v.project(camera);
         var vis = v.z < 1;
-        hsEls[i].classList.toggle("show", vis);
-        hsEls[i].style.left = ((v.x * 0.5 + 0.5) * stage.clientWidth) + "px";
-        hsEls[i].style.top = ((-v.y * 0.5 + 0.5) * stage.clientHeight) + "px";
-        var lead = hsEls[i].querySelector(".hs-lead");
-        var len = Math.sqrt(h.dx * h.dx + h.dy * h.dy);
+        var el = hsEls[i];
+        el.classList.toggle("show", vis);
+        el.style.left = ((v.x * 0.5 + 0.5) * stage.clientWidth) + "px";
+        el.style.top = ((-v.y * 0.5 + 0.5) * stage.clientHeight) + "px";
+
+        // Leader runs from the anchor to the chip.
+        var h2 = HOTSPOTS[i];
+        var len = Math.sqrt(h2.dx * h2.dx + h2.dy * h2.dy);
+        var lead = el.querySelector(".hs-lead");
         lead.style.width = len + "px";
-        lead.style.transform = "rotate(" + (Math.atan2(h.dy, h.dx) * 180 / Math.PI) + "deg)";
+        lead.style.transform = "rotate(" + (Math.atan2(h2.dy, h2.dx) * 180 / Math.PI) + "deg";
+
+        // Chip sits at the END of the leader and grows away from the model,
+        // so the left column extends left and the right column extends right.
+        var chip = el.querySelector(".hs-chip");
+        if (h2.dx < 0) {
+          chip.style.left = "auto";
+          chip.style.right = (-h2.dx) + "px";
+        } else {
+          chip.style.right = "auto";
+          chip.style.left = h2.dx + "px";
+        }
+        chip.style.top = (h2.dy - 9) + "px";
       }
     } else {
       for (var j = 0; j < hsEls.length; j++) hsEls[j].classList.remove("show");

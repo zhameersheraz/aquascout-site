@@ -134,15 +134,11 @@
 }
 .hs-chip{
   position:absolute;
-  top:-9px;
   font-family:var(--mono); font-size:10px; letter-spacing:.05em;
   color:var(--ink); background:var(--ground);
   padding:3px 8px; border-radius:2px;
   white-space:nowrap;
 }
-/* chips sit to the right of the leader by default; flip when the part is on
-   the left of the model so the label never runs off the stage */
-.hs[data-side="left"] .hs-chip{ right:0; }
 
 /* ── Panel ─────────────────────────────────────────────── */
 
@@ -164,8 +160,13 @@
 }
 .panel-title{
   font-size:26px; font-weight:700;
-  margin:0 0 24px;
+  margin:0 0 6px;
   font-stretch:92%;
+}
+.panel-sub{
+  margin:0 0 24px;
+  font-size:12.5px; line-height:1.5;
+  color:#5F6C75;
 }
 
 .ro-label{
