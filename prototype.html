@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prototype — AQUASCOUT rover</title>
+<meta name="description" content="Interactive 3D model of the AQUASCOUT LAFVIN 2WD rover. Orbit it, drive it, arm the pump." />
+<meta name="theme-color" content="#101519" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..110,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/prototype.css" />
+</head>
+<body class="proto-page">
+
+<header class="topbar topbar-dark">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/" aria-label="AQUASCOUT home">
+      <img class="brand-mark" src="/mark.png" alt="" width="28" height="28" />
+      <span class="brand-word">AQUASCOUT</span>
+    </a>
+    <nav class="topnav" id="topnav">
+      <a href="/#measures">Results</a>
+      <a href="/#does">What it does</a>
+      <a href="/prototype.html" aria-current="page">Prototype</a>
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+    <a class="btn-paper btn-paper-sm" href="/">Back to site</a>
+    <button class="burger burger-dark" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="topnav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main class="proto-main">
+
+  <!-- ── Stage ───────────────────────────────────────────── -->
+  <section class="stage-wrap">
+    <div class="stage-bar">
+      <div class="seg" role="group" aria-label="Camera preset">
+        <button class="seg-btn is-on" data-view="orbit">Three-quarter</button>
+        <button class="seg-btn" data-view="front">Front</button>
+        <button class="seg-btn" data-view="top">Top</button>
+        <button class="seg-btn" data-view="drive">Driver</button>
+      </div>
+      <label class="chk">
+        <input type="checkbox" id="labelsToggle" checked />
+        <span>Labels</span>
+      </label>
+    </div>
+
+    <div class="stage" id="stage">
+      <canvas id="gl" aria-label="Interactive 3D model of the AQUASCOUT rover"></canvas>
+      <div class="hotspots" id="hotspots" aria-hidden="true"></div>
+      <div class="stage-hud">
+        <span class="hud-key">Drag to orbit &middot; scroll to zoom</span>
+        <span class="hud-val" id="hudState">IDLE</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Panel ───────────────────────────────────────────── -->
+  <aside class="panel">
+    <p class="panel-kicker">Live demonstration</p>
+    <h1 class="panel-title">Drive the rover</h1>
+
+    <div class="readout-block">
+      <span class="ro-label">Wheel telemetry</span>
+      <div class="ro-big"><span id="speed">0.00</span><span class="ro-unit">m/s</span></div>
+      <div class="ro-bar"><div class="ro-bar-fill" id="speedBar"></div></div>
+      <span class="ro-note">Left and right wheels are driven independently.</span>
+    </div>
+
+    <div class="panel-group">
+      <span class="ro-label">Drive</span>
+      <div class="dpad" id="dpad">
+        <button class="dp dp-up"    data-key="w" aria-label="Forward">
+          <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></svg>
+        </button>
+        <button class="dp dp-left"  data-key="a" aria-label="Turn left">
+          <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8H3M7.5 3.5L3 8l4.5 4.5"/></svg>
+        </button>
+        <button class="dp dp-right" data-key="d" aria-label="Turn right">
+          <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M8.5 3.5L13 8l-4.5 4.5"/></svg>
+        </button>
+        <button class="dp dp-down"  data-key="s" aria-label="Reverse">
+          <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v10M3.5 8.5L8 13l4.5-4.5"/></svg>
+        </button>
+      </div>
+      <span class="ro-note">Use W A S D, or the arrow keys.</span>
+    </div>
+
+    <div class="panel-group">
+      <span class="ro-label">Response hardware</span>
+      <div class="switches">
+        <button class="sw" id="swPump" aria-pressed="false">
+          <span class="sw-led"></span>
+          <span class="sw-txt"><b>Water pump</b><small id="pumpState">Off</small></span>
+        </button>
+        <button class="sw" id="swCam" aria-pressed="true">
+          <span class="sw-led is-on"></span>
+          <span class="sw-txt"><b>Cameras</b><small id="camState">Streaming</small></span>
+        </button>
+        <button class="sw" id="swScan" aria-pressed="true">
+          <span class="sw-led is-on"></span>
+          <span class="sw-txt"><b>Detection link</b><small id="scanState">Connected</small></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="panel-actions">
+      <button class="btn-signal" id="btnAlarm">Simulate alert</button>
+      <button class="btn-ghost" id="btnReset">Reset</button>
+    </div>
+
+    <div class="panel-log">
+      <span class="ro-label">Event log</span>
+      <ul id="log"></ul>
+    </div>
+  </aside>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="/nav.js"></script>
+<script src="/prototype.js"></script>
+</body>
+</html>
