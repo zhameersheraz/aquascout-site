@@ -621,12 +621,91 @@
   phHold.addEventListener("pointerleave", holdEnd);
   phHold.addEventListener("pointercancel", holdEnd);
 
-  phPump.addEventListener("click", function () { setPump(!state.pump); });
+  phPump.addEventListener("click", function () {
+    setPump(!state.pump);
+    // Set here too, not only in the loop, so the button is correct on the
+    // same tick as the tap rather than one frame later.
+    phPump.setAttribute("aria-pressed", state.pump ? "true" : "false");
+  });
 
   document.getElementById("phoneToggle").addEventListener("change", function (e) {
     phoneOn = e.target.checked;
     phone.hidden = !phoneOn;
   });
+
+  /* ---------- moving the phone ----------
+     The phone sits over the canvas because the viewfinder is a scissored
+     region of it, so it cannot live in the sidebar. That made its position
+     fixed and wrong for anyone whose screen or taste does not match the
+     default corner, so it drags. Position is remembered per browser. */
+
+  var PHONE_POS_KEY = "aquascout.phone.pos";
+  var dragging = null;
+
+  function clampToStage(x, y) {
+    var pw = phone.offsetWidth, ph = phone.offsetHeight;
+    return {
+      x: Math.max(6, Math.min(x, stage.clientWidth - pw - 6)),
+      y: Math.max(6, Math.min(y, stage.clientHeight - ph - 6))
+    };
+  }
+  function setPhonePos(x, y, save) {
+    var p = clampToStage(x, y);
+    phone.style.left = p.x + "px";
+    phone.style.top = p.y + "px";
+    if (save) {
+      try { localStorage.setItem(PHONE_POS_KEY, p.x + "," + p.y); } catch (e) {}
+    }
+    return p;
+  }
+  function reClampPhone() {
+    if (phone.hidden || !phone.style.left) return;
+    setPhonePos(parseFloat(phone.style.left), parseFloat(phone.style.top), false);
+  }
+  function resetPhonePos() {
+    try { localStorage.removeItem(PHONE_POS_KEY); } catch (e) {}
+    phone.style.left = "";
+    phone.style.top = "";
+  }
+
+  // Grab anywhere that is not a control, so the hold button and D-pad keep
+  // working while the chrome around them moves the phone.
+  phone.addEventListener("pointerdown", function (e) {
+    if (e.target.closest("button, input, label, a, select")) return;
+    var r = phone.getBoundingClientRect();
+    var s = stage.getBoundingClientRect();
+    dragging = { dx: e.clientX - r.left, dy: e.clientY - r.top };
+    try { phone.setPointerCapture(e.pointerId); } catch (err) {}
+    phone.classList.add("dragging");
+    e.preventDefault();
+  });
+  phone.addEventListener("pointermove", function (e) {
+    if (!dragging) return;
+    var s = stage.getBoundingClientRect();
+    setPhonePos(e.clientX - dragging.dx - s.left, e.clientY - dragging.dy - s.top, false);
+    e.preventDefault();
+  });
+  function endDrag() {
+    if (!dragging) return;
+    dragging = null;
+    phone.classList.remove("dragging");
+    try {
+      localStorage.setItem(PHONE_POS_KEY,
+        phone.style.left.replace("px", "") + "," + phone.style.top.replace("px", ""));
+    } catch (e) {}
+  }
+  phone.addEventListener("pointerup", endDrag);
+  phone.addEventListener("pointercancel", endDrag);
+  phone.addEventListener("dblclick", resetPhonePos);
+
+  // restore last position
+  try {
+    var saved = localStorage.getItem(PHONE_POS_KEY);
+    if (saved) {
+      var a = saved.split(",");
+      setPhonePos(parseFloat(a[0]), parseFloat(a[1]), false);
+    }
+  } catch (e) {}
 
   var _wp = new THREE.Vector3(), _pp = new THREE.Vector3();
   var _ep = new THREE.Vector3(), _rt = new THREE.Vector3(), _q = new THREE.Quaternion();
@@ -692,6 +771,7 @@
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
+    reClampPhone();   // a saved position can sit outside a shrunken stage
   }
   window.addEventListener("resize", resize);
 

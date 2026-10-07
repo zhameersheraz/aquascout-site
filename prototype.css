@@ -315,7 +315,13 @@
   box-shadow:0 18px 44px rgba(0,0,0,.5), 0 0 0 4px rgba(255,255,255,.02);
   overflow:hidden;
   transition:opacity .22s, transform .22s;
+  /* The user can drag it anywhere in the stage. touch-action stops a touch
+     drag from scrolling the page instead of moving the phone. */
+  touch-action:none;
+  cursor:grab;
 }
+.phone.dragging{ cursor:grabbing; box-shadow:0 24px 54px rgba(0,0,0,.62), 0 0 0 4px rgba(217,79,4,.28); }
+.phone button{ cursor:pointer; }
 .phone[hidden]{ display:none; }
 .ph-statusbar, .ph-head, .ph-chips, .ph-body, .ph-foot{ background:#0A0E11; }
 
