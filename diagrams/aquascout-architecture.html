@@ -16,7 +16,30 @@
     font-family:"IBM Plex Sans",system-ui,sans-serif;
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:1240px; margin:0 auto; padding:40px 24px 56px}
+  .wrap{max-width:1240px; margin:0 auto; padding:24px 24px 56px}
+  .topline{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; flex-wrap:wrap;
+    padding-bottom:20px; margin-bottom:28px;
+    border-bottom:1px solid var(--rule);
+  }
+  .home{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    font-size:14px; font-weight:500; color:var(--ink);
+    text-decoration:none;
+    border:1px solid var(--rule-solid); border-radius:6px;
+    padding:8px 14px 8px 11px;
+    transition:border-color .18s, background .18s;
+  }
+  .home:hover{ border-color:var(--ink); background:var(--paper-2); }
+  .home svg{ transition:transform .18s; }
+  .home:hover svg{ transform:translateX(-3px); }
+  .home:focus-visible{ outline:2px solid var(--link); outline-offset:2px; }
+  .topline-note{
+    font-family:"IBM Plex Mono",monospace; font-size:11px;
+    color:var(--soft); letter-spacing:.04em;
+  }
   .eyebrow{
     font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:500;
     letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
@@ -27,7 +50,9 @@
     letter-spacing:-.015em; line-height:1.08; margin:0 0 12px;
   }
   .sub{ margin:0 0 32px; font-size:16px; line-height:1.55; color:var(--muted); max-width:62ch }
-  svg{ display:block; width:100%; height:auto; overflow:visible }
+  /* Scoped to .chart on purpose: a bare svg{width:100%} also caught the small
+     inline icons in the page chrome and blew them up to full width. */
+  .chart{ display:block; width:100%; height:auto; overflow:visible }
   .foot{
     margin-top:28px; padding-top:16px; border-top:1px solid var(--rule);
     font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--soft);
@@ -39,6 +64,14 @@
 <body>
 <div class="wrap">
 
+  <div class="topline">
+    <a class="home" href="/">
+      <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8H3M7.5 3.5L3 8l4.5 4.5"/></svg>
+      Back to site
+    </a>
+    <span class="topline-note">Figure 1 of 1</span>
+  </div>
+
   <p class="eyebrow">System architecture</p>
   <h1>AQUASCOUT: what leaves the phone, and what does not</h1>
   <p class="sub">
@@ -47,7 +80,7 @@
     response unit, not a requirement for the alert to fire.
   </p>
 
-<svg viewBox="0 0 1200 880" role="img" aria-labelledby="arch-title arch-desc" xmlns="http://www.w3.org/2000/svg">
+<svg class="chart" viewBox="0 0 1200 880" role="img" aria-labelledby="arch-title arch-desc" xmlns="http://www.w3.org/2000/svg">
   <title id="arch-title">AQUASCOUT system architecture</title>
   <desc id="arch-desc">The camera feeds a YOLOv8n model inside the device boundary. From the model, a label and confidence go to the alert log, a label and GPS position go out by SMS to the emergency contact, and D-pad commands go to an optional rover. Camera frames stop at the boundary and never reach either cloud service.</desc>
 

@@ -50,6 +50,10 @@
         <input type="checkbox" id="labelsToggle" checked />
         <span>Labels</span>
       </label>
+      <label class="chk">
+        <input type="checkbox" id="phoneToggle" checked />
+        <span>Phone</span>
+      </label>
     </div>
 
     <div class="stage" id="stage">
@@ -58,6 +62,74 @@
       <div class="stage-hud">
         <span class="hud-key">Drag to orbit &middot; scroll to zoom</span>
         <span class="hud-val" id="hudState">IDLE</span>
+      </div>
+
+      <!-- ── Phone: the app view that drives the rover ─────── -->
+      <!-- The screen rect is read every frame and rendered as a second
+           scissored viewport, so the feed is the real 3D scene seen from the
+           mast camera, not a video or a drawing. -->
+      <div class="phone" id="phone">
+        <div class="phone-screen" id="phoneScreen">
+          <div class="ph-det" id="phDet">
+            <span class="ph-det-tag" id="phDetTag">FIRE 0.92</span>
+          </div>
+          <div class="ph-scan" id="phScan"></div>
+          <div class="ph-corner tl"></div><div class="ph-corner tr"></div>
+          <div class="ph-corner bl"></div><div class="ph-corner br"></div>
+        </div>
+
+        <div class="ph-statusbar">
+          <span class="ph-time" id="phTime">00:00</span>
+          <span class="ph-right">
+            <svg viewBox="0 0 16 16" width="11" height="11" fill="currentColor" aria-hidden="true"><rect x="1" y="9" width="2.6" height="5"/><rect x="5" y="6" width="2.6" height="8"/><rect x="9" y="3" width="2.6" height="11"/><rect x="13" y="1" width="2" height="13" opacity=".35"/></svg>
+            <span>BLE</span>
+            <span class="ph-batt">82<i></i></span>
+          </span>
+        </div>
+
+        <div class="ph-head">
+          <span class="ph-brand">AQUASCOUT</span>
+          <span class="ph-live"><i id="phLiveDot"></i><span id="phLiveTxt">ARMED</span></span>
+        </div>
+
+        <div class="ph-hud">
+          <span id="phHud">SCANNING</span>
+          <span class="ph-fps" id="phFps">2.8 fps</span>
+        </div>
+
+        <div class="ph-chips">
+          <span class="ph-chip" id="phLinkChip">BLE LINK</span>
+          <span class="ph-chip" id="phGpsChip">GPS 7.31, 123.39</span>
+        </div>
+
+        <div class="ph-body">
+          <button class="ph-hold" id="phHold">
+            <span class="ph-hold-fill" id="phHoldFill"></span>
+            <span class="ph-hold-txt">HOLD TO ALERT</span>
+            <span class="ph-hold-sub">1.5 s</span>
+          </button>
+
+          <div class="ph-dpad" id="phDpad">
+            <button class="pd pd-up"    data-key="w" aria-label="Forward">
+              <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></svg>
+            </button>
+            <button class="pd pd-left"  data-key="a" aria-label="Left">
+              <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8H3M7.5 3.5L3 8l4.5 4.5"/></svg>
+            </button>
+            <button class="pd pd-right" data-key="d" aria-label="Right">
+              <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M8.5 3.5L13 8l-4.5 4.5"/></svg>
+            </button>
+            <button class="pd pd-down"  data-key="s" aria-label="Reverse">
+              <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v10M3.5 8.5L8 13l4.5-4.5"/></svg>
+            </button>
+          </div>
+
+          <button class="ph-pump" id="phPump" aria-pressed="false">
+            <i class="ph-pump-led"></i>PUMP
+          </button>
+        </div>
+
+        <p class="ph-foot">App interface. Rover controls are a prototype, not yet in the APK.</p>
       </div>
     </div>
   </section>

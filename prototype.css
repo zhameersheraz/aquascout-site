@@ -10,6 +10,9 @@
   border-bottom-color:#252E35;
 }
 .topbar-dark .brand-word{ color:var(--ground); }
+/* mark.png is black-on-transparent for the light ground. On the dark bar it
+   would read as a hole, so invert it to white rather than ship a second asset. */
+.topbar-dark .brand-mark{ filter:invert(1); }
 .topbar-dark .topnav a{ color:var(--feed-text); }
 .topbar-dark .topnav a:hover{ color:var(--ground); border-bottom-color:var(--ground); }
 .topbar-dark .topnav a[aria-current="page"]{ color:var(--ground); border-bottom-color:var(--signal); }
@@ -295,6 +298,156 @@
 .panel-log li b{ color:var(--feed-text); font-weight:500; flex:0 0 auto; }
 .panel-log li.hot b{ color:var(--signal-dim); }
 
+/* ── Phone: the app view ─────────────────────────────────
+   Sits inside .stage because the screen rect is fed to the renderer
+   as a scissored second viewport. Moving it out of the canvas would
+   break the feed. */
+
+.phone{
+  position:absolute; top:14px; left:14px;
+  width:238px;
+  display:flex; flex-direction:column;
+  /* Transparent on purpose. The viewfinder is a scissored region of the canvas
+     BEHIND this element, so any opaque background here would paint over the
+     feed. Only the chrome below the screen carries a fill. */
+  background:transparent;
+  border:1px solid #2A343C; border-radius:16px;
+  box-shadow:0 18px 44px rgba(0,0,0,.5), 0 0 0 4px rgba(255,255,255,.02);
+  overflow:hidden;
+  transition:opacity .22s, transform .22s;
+}
+.phone[hidden]{ display:none; }
+.ph-statusbar, .ph-head, .ph-chips, .ph-body, .ph-foot{ background:#0A0E11; }
+
+/* the viewfinder. No background here on purpose: the 3D pass clears
+   this rect and the stage gradient shows through as the camera image. */
+.phone-screen{
+  position:relative; width:100%; aspect-ratio:4/3;
+  background:transparent;
+  overflow:hidden;
+}
+.ph-corner{ position:absolute; width:13px; height:13px; border:1.5px solid rgba(232,236,239,.5); }
+.ph-corner.tl{ top:8px; left:8px; border-right:0; border-bottom:0; }
+.ph-corner.tr{ top:8px; right:8px; border-left:0; border-bottom:0; }
+.ph-corner.bl{ bottom:8px; left:8px; border-right:0; border-top:0; }
+.ph-corner.br{ bottom:8px; right:8px; border-left:0; border-top:0; }
+
+.ph-scan{
+  position:absolute; left:0; right:0; height:34%;
+  background:linear-gradient(180deg, rgba(217,79,4,0) 0%, rgba(217,79,4,.16) 100%);
+  border-bottom:1px solid rgba(240,169,126,.55);
+  opacity:0; transition:opacity .2s;
+}
+.phone.scanning .ph-scan{ opacity:1; animation:phscan 3.1s linear infinite; }
+@keyframes phscan{ 0%{ top:-34%; } 100%{ top:100%; } }
+
+.ph-det{ position:absolute; display:none; }
+.ph-det.on{ display:block; }
+.ph-det-box{
+  position:absolute; border:1.5px solid var(--signal);
+  box-shadow:0 0 0 1px rgba(10,14,17,.7);
+}
+.ph-det-tag{
+  position:absolute; bottom:100%; left:-1.5px;
+  background:var(--signal); color:#0A0E11;
+  font-family:var(--mono); font-size:9px; font-weight:600;
+  letter-spacing:.08em; padding:2px 5px; white-space:nowrap;
+}
+
+.ph-statusbar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:6px 11px 4px;
+  font-family:var(--mono); font-size:9.5px; color:var(--feed-text);
+}
+.ph-right{ display:flex; align-items:center; gap:5px; }
+.ph-batt{ position:relative; padding-right:13px; }
+.ph-batt i{
+  position:absolute; right:0; top:50%; transform:translateY(-50%);
+  width:8px; height:4.5px; border:1px solid var(--feed-text); border-radius:1px;
+}
+.ph-batt i::after{ content:""; position:absolute; inset:1px; background:var(--feed-text); border-radius:.5px; }
+
+.ph-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:5px 11px 7px; border-bottom:1px solid var(--feed-line);
+}
+.ph-brand{ font-family:var(--disp); font-weight:800; font-size:10.5px; letter-spacing:.1em; color:var(--ground); }
+.ph-live{ display:flex; align-items:center; gap:5px; font-family:var(--mono); font-size:8.5px; letter-spacing:.1em; color:var(--feed-text); }
+.ph-live i{ width:5px; height:5px; border-radius:50%; background:var(--feed-text); }
+.phone.armed .ph-live i{ background:var(--signal-dim); animation:phpulse 2s ease-in-out infinite; }
+.phone.alert .ph-live i{ background:var(--signal); }
+@keyframes phpulse{ 0%,100%{ opacity:1; } 50%{ opacity:.35; } }
+
+.ph-hud{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:6px 11px; border-bottom:1px solid var(--feed-line);
+  font-family:var(--mono); font-size:9px; letter-spacing:.1em;
+  color:var(--feed-text); background:#0B0F12;
+}
+.phone.alert .ph-hud{ color:var(--signal-dim); }
+.ph-fps{ color:#5F6C75; }
+
+.ph-chips{ display:flex; gap:5px; padding:8px 11px 0; }
+.ph-chip{
+  font-family:var(--mono); font-size:8px; letter-spacing:.06em;
+  color:var(--feed-text); background:rgba(147,161,171,.09);
+  border:1px solid var(--feed-line); border-radius:3px; padding:3px 6px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.phone.alert .ph-chip.warn{ color:var(--signal-dim); border-color:rgba(217,79,4,.45); background:rgba(217,79,4,.1); }
+
+.ph-body{ display:flex; align-items:center; gap:9px; padding:10px 11px 11px; }
+
+.ph-hold{
+  position:relative; overflow:hidden;
+  flex:1 1 auto; min-width:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+  padding:11px 6px;
+  background:rgba(217,79,4,.1); color:var(--signal-dim);
+  border:1px solid rgba(217,79,4,.4); border-radius:6px;
+  cursor:pointer; touch-action:none;
+  transition:background .15s, border-color .15s;
+}
+.ph-hold-fill{
+  position:absolute; left:0; bottom:0; top:0; width:0%;
+  background:rgba(217,79,4,.34); pointer-events:none;
+}
+.ph-hold-txt{ position:relative; font-family:var(--mono); font-size:8.5px; font-weight:600; letter-spacing:.08em; white-space:nowrap; }
+.ph-hold-sub{ position:relative; font-family:var(--mono); font-size:7px; letter-spacing:.04em; color:#9A6446; white-space:nowrap; }
+.ph-hold.pressing{ border-color:var(--signal); background:rgba(217,79,4,.18); }
+.ph-hold.done{ background:var(--signal); border-color:var(--signal); }
+.ph-hold.done .ph-hold-txt{ color:#0A0E11; }
+
+.ph-dpad{ display:grid; grid-template-columns:repeat(3,26px); grid-template-rows:repeat(3,26px); flex:0 0 auto; }
+.pd{
+  display:grid; place-items:center;
+  background:rgba(147,161,171,.07); color:var(--feed-text);
+  border:1px solid var(--feed-line); border-radius:4px;
+  cursor:pointer; touch-action:none; transition:background .12s, color .12s;
+}
+.pd-up   { grid-area:1/2; } .pd-left{ grid-area:2/1; }
+.pd-down { grid-area:2/2; } .pd-right{ grid-area:2/3; }
+.pd.on{ background:var(--signal); border-color:var(--signal); color:#0A0E11; }
+
+.ph-pump{
+  flex:0 0 auto; align-self:stretch;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+  padding:0 9px;
+  background:rgba(147,161,171,.07); color:var(--feed-text);
+  border:1px solid var(--feed-line); border-radius:6px;
+  font-family:var(--mono); font-size:8px; letter-spacing:.08em;
+  cursor:pointer; transition:background .12s, color .12s, border-color .12s;
+}
+.ph-pump-led{ width:6px; height:6px; border-radius:50%; background:#3A464F; transition:background .15s, box-shadow .15s; }
+.ph-pump[aria-pressed="true"]{ color:var(--signal-dim); border-color:rgba(217,79,4,.45); background:rgba(217,79,4,.1); }
+.ph-pump[aria-pressed="true"] .ph-pump-led{ background:var(--signal); box-shadow:0 0 7px rgba(217,79,4,.85); }
+
+.ph-foot{
+  margin:0; padding:0 11px 9px;
+  font-family:var(--mono); font-size:7.5px; line-height:1.45;
+  letter-spacing:.03em; color:#4E5A63;
+}
+
 /* ── Responsive ────────────────────────────────────────── */
 
 @media (max-width:1080px){
@@ -311,4 +464,30 @@
   .stage-bar{ padding:12px 16px; }
   .seg-btn{ padding:6px 10px; font-size:10px; }
   .ro-big{ font-size:38px; }
+
+  .phone{ width:150px; top:10px; left:10px; border-radius:12px; }
+  .ph-statusbar{ padding:5px 8px 3px; font-size:8px; }
+  .ph-head{ padding:4px 8px 6px; }
+  .ph-brand{ font-size:8.5px; }
+  .ph-hud{ padding:5px 8px; font-size:7.5px; }
+  .ph-chips{ display:none; }
+  .ph-body{ padding:7px; gap:6px; flex-wrap:wrap; }
+  /* Side by side left the hold button about 34px wide at this width, which
+     clipped "HOLD TO ALERT" mid-word. Give it its own row instead. */
+  .ph-hold{ order:1; flex:1 0 100%; padding:9px 4px; }
+  .ph-dpad{ order:2; }
+  .ph-pump{ order:3; margin-left:auto; align-self:center; padding:0 12px; height:44px; }
+  .ph-hold-txt{ font-size:7px; letter-spacing:.04em; }
+  .ph-hold-sub{ font-size:6.5px; }
+  .ph-dpad{ grid-template-columns:repeat(3,20px); grid-template-rows:repeat(3,20px); }
+  .ph-pump{ padding:0 5px; font-size:6.5px; gap:4px; }
+  .ph-foot{ display:none; }
+  .ph-det-tag{ font-size:7.5px; padding:1px 4px; }
+}
+
+@media (max-height:640px){
+  /* Short desktop windows: the phone would swallow the model. */
+  .phone{ width:170px; top:10px; left:10px; }
+  .ph-foot{ display:none; }
+  .ph-chips{ display:none; }
 }

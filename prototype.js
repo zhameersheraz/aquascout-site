@@ -326,6 +326,19 @@
   flame.position.set(2.7, 1.10, 0);
   scene.add(flame);
 
+  // A smouldering plume over the same drum. It is faint by design: the app's
+  // honest caveat is that smoke is the easier of the two classes to score, so a
+  // scene with only a hard fire would flatter the detector.
+  var smoke = new THREE.Mesh(
+    new THREE.ConeGeometry(0.26, 1.05, 10, 1, true),
+    new THREE.MeshBasicMaterial({
+      color: 0x6E7C86, transparent: true, opacity: 0.10,
+      depthWrite: false, side: THREE.DoubleSide
+    })
+  );
+  smoke.position.set(2.7, 1.28, 0);
+  scene.add(smoke);
+
   /* ---------- hotspots ----------
      Each anchor carries a screen-space offset. Without them the chips stack
      on top of each other, because the parts of a rover are physically close.  */
@@ -449,7 +462,10 @@
   swCam.addEventListener("click", function () { setCam(!state.cam); });
   swScan.addEventListener("click", function () { setLink(!state.link); });
 
-  btnAlarm.addEventListener("click", function () {
+  /* ---------- the alert itself ----------
+     Shared by the panel button and the phone's hold button, so both raise the
+     same event instead of drifting apart. */
+  function raiseAlert() {
     if (state.alarm) return;
     state.alarm = true;
     elHud.textContent = "FIRE DETECTED";
@@ -467,7 +483,9 @@
         flame.material.opacity = 0;
       }, 6500);
     }
-  });
+  }
+
+  btnAlarm.addEventListener("click", raiseAlert);
 
   btnReset.addEventListener("click", function () {
     keys = {};
@@ -497,7 +515,9 @@
   });
   window.addEventListener("blur", function () { keys = {}; syncDpad(); });
 
-  var dpBtns = Array.prototype.slice.call(document.querySelectorAll(".dp"));
+  // Both the side panel and the phone use the same canonical key codes, so the
+  // two control surfaces are literally the same input path.
+  var dpBtns = Array.prototype.slice.call(document.querySelectorAll(".dp, .pd"));
   dpBtns.forEach(function (b) {
     // Go through the same MAP the keyboard uses. The buttons carry the
     // readable key letter, but the drive model reads the canonical name,
@@ -516,6 +536,153 @@
       var code = MAP[b.dataset.key];
       b.classList.toggle("on", !!(code && keys[code]));
     });
+  }
+
+  /* ---------- the phone ----------
+     The screen is a second viewport into the SAME scene, cut out of the main
+     canvas with the scissor test. So the feed moves when the rover turns, and
+     the detection box is projected from the real plume position rather than
+     animated by hand. A recorded video or a CSS mock could not do either. */
+
+  var phone    = document.getElementById("phone");
+  var phScreen = document.getElementById("phoneScreen");
+  var phDet    = document.getElementById("phDet");
+  var phDetBox = null;
+  var phTime   = document.getElementById("phTime");
+  var phHud    = document.getElementById("phHud");
+  var phLiveTxt= document.getElementById("phLiveTxt");
+  var phGps    = document.getElementById("phGpsChip");
+  var phLinkChip = document.getElementById("phLinkChip");
+  var phHold   = document.getElementById("phHold");
+  var phHoldFill= document.getElementById("phHoldFill");
+  var phPump   = document.getElementById("phPump");
+  var phoneOn  = true;
+
+  // The mast camera. Local +X is the nose, so rotating -90 about Y points the
+  // camera's -Z down the rover's nose. A small negative X tilt drops it onto
+  // the drum sitting 2.7 m ahead.
+  var camCam = new THREE.PerspectiveCamera(62, 4 / 3, 0.05, 90);
+  camCam.rotation.x = -0.13;
+  var camMount = new THREE.Object3D();
+  camMount.position.set(0.10, 1.70, 0.30);
+  camMount.rotation.y = -Math.PI / 2;
+  camMount.add(camCam);
+  rover.add(camMount);
+
+  // The mast camera must not see its own chassis. Everything outside the rover
+  // gets layer 1; the phone renders only layer 1, the orbit camera only layer 0.
+  (function () {
+    var insideRover = [];
+    rover.traverse(function (o) { insideRover.push(o); });
+    scene.traverse(function (o) {
+      if (insideRover.indexOf(o) === -1) o.layers.enable(1);
+    });
+    camCam.layers.set(1);
+  })();
+
+  // The plume is a sensor-view element, not scenery. Left in the orbit camera
+  // it sat as a grey cone across the product shot, so it gets its own layer:
+  // the mast camera sees it, the orbit camera does not. The detection box then
+  // still wraps a real, moving 3D target.
+  smoke.layers.set(2);
+  camCam.layers.enable(2);
+
+  // Hold-to-alert, the same 1500 ms the app uses.
+  var HOLD_MS = 1500;
+  var holdT0 = 0, holdTimer = null;
+  function holdStart(e) {
+    if (e) e.preventDefault();
+    if (holdTimer) return;
+    holdT0 = performance.now();
+    phHold.classList.add("pressing");
+    holdTimer = setInterval(function () {
+      var p = Math.min(1, (performance.now() - holdT0) / HOLD_MS);
+      phHoldFill.style.width = (p * 100).toFixed(0) + "%";
+      if (p >= 1) {
+        holdEnd();
+        phHold.classList.add("done");
+        setTimeout(function () {
+          phHold.classList.remove("done");
+          phHoldFill.style.width = "0%";
+        }, 900);
+        raiseAlert();
+      }
+    }, 33);
+  }
+  function holdEnd() {
+    if (!holdTimer) return;
+    clearInterval(holdTimer);
+    holdTimer = null;
+    phHold.classList.remove("pressing");
+    phHoldFill.style.width = "0%";
+  }
+  phHold.addEventListener("pointerdown", holdStart);
+  phHold.addEventListener("pointerup", holdEnd);
+  phHold.addEventListener("pointerleave", holdEnd);
+  phHold.addEventListener("pointercancel", holdEnd);
+
+  phPump.addEventListener("click", function () { setPump(!state.pump); });
+
+  document.getElementById("phoneToggle").addEventListener("change", function (e) {
+    phoneOn = e.target.checked;
+    phone.hidden = !phoneOn;
+  });
+
+  var _wp = new THREE.Vector3(), _pp = new THREE.Vector3();
+  var _ep = new THREE.Vector3(), _rt = new THREE.Vector3(), _q = new THREE.Quaternion();
+
+  function updatePhoneDet() {
+    smoke.getWorldPosition(_wp);
+    _pp.copy(_wp).project(camCam);
+    var r = phScreen.getBoundingClientRect();
+
+    // Half-size in screen pixels, measured by projecting a point one radius to
+    // the camera's right and one to its up. Scale-aware, so the box shrinks as
+    // the rover recedes. Measuring only the right vector silently produced a
+    // zero-height box, because that vector has no vertical component at all.
+    var q = camCam.getWorldQuaternion(_q);
+    _ep.copy(_wp).add(_rt.set(1, 0, 0).applyQuaternion(q).multiplyScalar(0.20)).project(camCam);
+    var hx = Math.abs(_ep.x - _pp.x) * 0.5 * r.width;
+    _ep.copy(_wp).add(_rt.set(0, 1, 0).applyQuaternion(q).multiplyScalar(0.50)).project(camCam);
+    var hy = Math.abs(_ep.y - _pp.y) * 0.5 * r.height;
+
+    var cx = (_pp.x * 0.5 + 0.5) * r.width;
+    var cy = (-_pp.y * 0.5 + 0.5) * r.height;
+
+    var visible = _pp.z < 1 && cx > -40 && cx < r.width + 40 && cy > -40 && cy < r.height + 40;
+    phDet.classList.toggle("on", visible);
+    if (!visible) return;
+
+    if (!phDetBox) {
+      phDetBox = document.createElement("span");
+      phDetBox.className = "ph-det-box";
+      phDet.appendChild(phDetBox);
+    }
+    phDetBox.style.left = (cx - hx) + "px";
+    phDetBox.style.top = (cy - hy) + "px";
+    phDetBox.style.width = (hx * 2) + "px";
+    phDetBox.style.height = (hy * 2) + "px";
+    document.getElementById("phDetTag").textContent =
+      state.alarm ? "FIRE 0.92" : "SMOKE 0.71";
+  }
+
+  function renderPhone() {
+    if (!phoneOn || phone.hidden) return;
+    var r = phScreen.getBoundingClientRect();
+    var c = canvas.getBoundingClientRect();
+    if (!r.width || !r.height) return;
+
+    camCam.aspect = r.width / r.height;
+    camCam.updateProjectionMatrix();
+
+    var x = r.left - c.left;
+    var y = c.bottom - r.bottom;      // WebGL origin is bottom-left
+    renderer.setViewport(x, y, r.width, r.height);
+    renderer.setScissor(x, y, r.width, r.height);
+    renderer.setScissorTest(true);
+    renderer.render(scene, camCam);
+    renderer.setScissorTest(false);
+    renderer.setViewport(0, 0, c.width, c.height);   // restore for the next frame
   }
 
   /* ---------- resize ---------- */
@@ -636,6 +803,18 @@
       flame.scale.set(s, 1 + Math.sin(now / 95) * 0.2, s);
     }
 
+    // smoke plume over the drum
+    var wantSm = state.alarm ? 0.20 : 0.075;
+    smoke.material.opacity += (wantSm - smoke.material.opacity) * Math.min(1, dt * 4);
+    if (!REDUCED) {
+      smoke.scale.set(
+        1 + Math.sin(now / 900) * 0.09,
+        1 + Math.sin(now / 1300) * 0.14,
+        1 + Math.cos(now / 1050) * 0.09
+      );
+      smoke.rotation.y += dt * 0.12;
+    }
+
     // readouts
     elSpeed.textContent = state.speed.toFixed(2);
     elSpeedBar.style.width = (Math.abs(state.speed) / MAX_V * 100).toFixed(1) + "%";
@@ -678,6 +857,23 @@
 
     controls.update();
     renderer.render(scene, camera);
+
+    // phone overlay: second pass, cut out of the same canvas
+    phone.classList.toggle("scanning", !state.alarm);
+    phone.classList.toggle("armed", state.link && !state.alarm);
+    phone.classList.toggle("alert", state.alarm);
+    if (phoneOn && !phone.hidden) {
+      phHud.textContent = state.alarm ? "FIRE" : (state.cam ? "SCANNING" : "CAMERA OFF");
+      phLiveTxt.textContent = state.alarm ? "ALERT SENT" : (state.link ? "ARMED" : "NO LINK");
+      phLinkChip.textContent = state.link ? "BLE LINK" : "BLE LOST";
+      phLinkChip.classList.toggle("warn", !state.link);
+      phGps.textContent = "GPS 7.31, 123.39";
+      phPump.setAttribute("aria-pressed", state.pump ? "true" : "false");
+      var t = new Date();
+      phTime.textContent = ("0" + t.getHours()).slice(-2) + ":" + ("0" + t.getMinutes()).slice(-2);
+      updatePhoneDet();
+      renderPhone();
+    }
   }
 
   resize();
