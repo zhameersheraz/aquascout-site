@@ -315,6 +315,15 @@ h1,h2,h3,h4{
   letter-spacing:-.01em;
 }
 .def dd{ margin:0; font-size:16px; color:var(--ink-soft); max-width:62ch; }
+.def dd a{
+  color:var(--ink); font-weight:500;
+  text-decoration:none;
+  border-bottom:1px solid var(--signal);
+  transition:border-color .18s, color .18s;
+}
+.def dd a:hover{ color:var(--signal); }
+.def dd a svg{ vertical-align:-2px; transition:transform .18s; }
+.def dd a:hover svg{ transform:translateX(3px); }
 
 /* ── Prototype band (inverted) ──────────────────────────── */
 
