@@ -213,7 +213,7 @@
       0.50 + c * 0.145, DECK_Y + 0.18, -0.52, rover, 12);
   }
 
-  // L298N driver board, the big one with the heatsink
+  // motor driver board, the big one with the heatsink
   box(0.70, 0.10, 0.56, M.board, -0.86, DECK_Y + 0.09, 0.18, rover);
   box(0.34, 0.05, 0.20, M.hub, -0.86, DECK_Y + 0.17, 0.18, rover);   // heatsink
   cyl(0.04, 0.04, 0.06, M.sensor, -0.62, DECK_Y + 0.18, 0.18, rover, 10);  // trim pot
@@ -254,7 +254,7 @@
     return m;
   }
   wire([[-0.86, DECK_Y + 0.14, 0.18], [-0.55, DECK_Y + 0.20, 0.30],
-        [-0.10, DECK_Y + 0.14, 0.16], [0.40, DECK_Y + 0.20, 0.30]]);   // L298N to UNO
+        [-0.10, DECK_Y + 0.14, 0.16], [0.40, DECK_Y + 0.20, 0.30]]);   // driver to UNO
   wire([[-0.10, DECK_Y + 0.14, -0.52], [0.20, DECK_Y + 0.22, -0.30],
         [0.72, DECK_Y + 0.22, -0.46]], 0.016);                          // UNO to battery
   wire([[1.24, DECK_Y + 0.16, 0], [0.90, DECK_Y + 0.26, 0.24],
@@ -347,7 +347,7 @@
   var HOTSPOTS = [
     { p: new THREE.Vector3(0, 1.70, 0.30),   t: "ESP32-CAM, front", dx: -30,  dy: -52 },
     { p: new THREE.Vector3(0, 1.70, -0.30),  t: "ESP32-CAM, rear",  dx: 30,   dy: -52 },
-    { p: new THREE.Vector3(-0.86, DECK_Y + 0.14, 0.18),  t: "L298N driver", dx: -150, dy: -74 },
+    { p: new THREE.Vector3(-0.86, DECK_Y + 0.14, 0.18),  t: "Motor driver", dx: -150, dy: -74 },
     { p: new THREE.Vector3(-0.10, DECK_Y + 0.16, -0.52), t: "JDY-16 BLE", dx: -152, dy: -34 },
     { p: new THREE.Vector3(-0.10, DECK_Y + 0.12, 0.10),  t: "Arduino UNO", dx: -150, dy: 6 },
     { p: new THREE.Vector3(-WX, WR, WZ), t: "Drive wheels", dx: -148, dy: 46 },
