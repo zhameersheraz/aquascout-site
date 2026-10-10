@@ -37,7 +37,7 @@
     this.phase = "track";      // start locked, see "idle" below
     this.phaseT = 0;
     this.conf = 0.9;
-    this.fps = 2.8;
+    this.fps = 2.0;
     this.fpsAcc = 0;
     this.fpsFrames = 0;
     this.frames = 0;
@@ -222,7 +222,7 @@
     // bottom bar
     var by = h - 18;
     c.fillStyle = "#93A1AB";
-    c.fillText("2.8 FPS", 18, by);
+    c.fillText("2.0 FPS", 18, by);
 
     if (this.phase === "track" || this.phase === "acquire") {
       var txt = this.label.toUpperCase() + "  " + this.conf.toFixed(2);
