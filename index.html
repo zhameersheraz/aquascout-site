@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AQUASCOUT — Fire and smoke detection that runs on your phone</title>
-<meta name="description" content="A custom YOLOv8n model detects fire and smoke on the phone camera at 2.8 frames per second. No image leaves the device. SMS alert with GPS to your emergency contact." />
+<meta name="description" content="A custom YOLOv8n model detects fire and smoke on the phone camera at 2.0 frames per second. No image leaves the device. SMS alert with GPS to your emergency contact." />
 <meta name="theme-color" content="#101519" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
@@ -98,8 +98,8 @@
         <h2>Measured, not promised</h2>
         <p>
           These are our numbers, from the held-out D-Fire test split of 4,306
-          images and from 35 clips shot on a mid-range phone. They are the first thing we
-          will defend, so they are the first thing on this page.
+          images and from the phone itself. They are the first thing we will
+          defend, so they are the first thing on this page.
         </p>
       </header>
 
@@ -110,20 +110,20 @@
           <span class="readout-note">Smoke 0.806 &middot; fire 0.689</span>
         </div>
         <div class="readout reveal" style="--d:0.10s">
-          <span class="readout-num">28<span class="readout-of">/35</span></span>
-          <span class="readout-key">clips caught</span>
-          <span class="readout-note">80% recall on real phone footage</span>
+          <span class="readout-num">4,306</span>
+          <span class="readout-key">held-out images</span>
+          <span class="readout-note">Never seen in training</span>
         </div>
         <div class="readout reveal" style="--d:0.16s">
-          <span class="readout-num">2.8</span>
+          <span class="readout-num">2.0</span>
           <span class="readout-key">frames / sec</span>
           <span class="readout-note">On-device, no network needed</span>
         </div>
       </div>
 
       <p class="measure-foot reveal">
-        The honest caveat: candles, cigarettes and steam still score high enough to
-        trigger. Raising the threshold is the next build.
+        The honest caveat: candles, cigarettes and steam scored high enough to
+        trigger on an earlier build and still need re-testing. The sensitivity threshold is now adjustable in Settings.
       </p>
     </div>
   </section>
