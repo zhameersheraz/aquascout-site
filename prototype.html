@@ -124,8 +124,10 @@
             </button>
           </div>
 
-          <button class="ph-pump" id="phPump" aria-pressed="false">
+          <button class="ph-pump" id="phPump" type="button" data-planned="1" disabled
+                  aria-disabled="true" title="Planned. No pump hardware and no command in the BLE protocol yet.">
             <i class="ph-pump-led"></i>PUMP
+            <span class="ph-pump-sub">PLANNED</span>
           </button>
         </div>
 
@@ -169,9 +171,10 @@
     <div class="panel-group">
       <span class="ro-label">Response hardware</span>
       <div class="switches">
-        <button class="sw" id="swPump" aria-pressed="false">
+        <button class="sw" id="swPump" type="button" disabled aria-disabled="true"
+                  title="Planned. No pump hardware and no command in the BLE protocol yet.">
           <span class="sw-led"></span>
-          <span class="sw-txt"><b>Water pump</b><small id="pumpState">Off</small></span>
+          <span class="sw-txt"><b>Water pump</b><small id="pumpState">Planned, not built</small></span>
         </button>
         <button class="sw" id="swCam" aria-pressed="true">
           <span class="sw-led is-on"></span>

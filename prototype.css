@@ -448,6 +448,18 @@
 .ph-pump[aria-pressed="true"]{ color:var(--signal-dim); border-color:rgba(217,79,4,.45); background:rgba(217,79,4,.1); }
 .ph-pump[aria-pressed="true"] .ph-pump-led{ background:var(--signal); box-shadow:0 0 7px rgba(217,79,4,.85); }
 
+/* NOT YET BUILT. The pump has no hardware and no command in the BLE protocol
+   (BtBridge.java only defines F B L R S A, all drive). Pressing this used to
+   toggle an LED for show, which read as a working feature. It is dimmed and
+   made non-interactive instead, so it cannot be mistaken for one. */
+.ph-pump[data-planned]{
+  color:#4E5A63; border-style:dashed; border-color:#2B343B;
+  background:transparent; cursor:not-allowed;
+}
+.ph-pump[data-planned]:hover{ background:transparent; }
+.ph-pump[data-planned] .ph-pump-led{ background:#2B343B; box-shadow:none; }
+.ph-pump-sub{ font-size:6.5px; letter-spacing:.1em; color:#3A464F; }
+
 .ph-foot{
   margin:0; padding:0 11px 9px;
   font-family:var(--mono); font-size:7.5px; line-height:1.45;

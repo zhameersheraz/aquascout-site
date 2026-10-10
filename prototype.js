@@ -389,7 +389,6 @@
   var btnAlarm = document.getElementById("btnAlarm");
   var btnReset = document.getElementById("btnReset");
   var elLog = document.getElementById("log");
-  var pumpLed = swPump.querySelector(".sw-led");
   var camLed = swCam.querySelector(".sw-led");
   var scanLed = swScan.querySelector(".sw-led");
 
@@ -435,12 +434,12 @@
 
   /* ---------- toggles ---------- */
   function setPump(on, quiet) {
-    state.pump = on;
-    swPump.setAttribute("aria-pressed", on ? "true" : "false");
-    pumpLed.className = "sw-led" + (on ? " is-warn" : "");
-    elPumpState.textContent = on ? "Running" : "Off";
-    btnAlarm.classList.toggle("pumping", on);
-    if (!quiet) log(on ? "Pump armed, 12 V feed confirmed" : "Pump stopped");
+    // NOT IMPLEMENTED. The pump has no hardware and no byte in the BLE
+    // protocol, so this must never report a running pump or a confirmed
+    // voltage. It previously logged "12 V feed confirmed", which was a
+    // fabricated measurement. Both switches that drive it are now disabled.
+    state.pump = false;
+    elPumpState.textContent = "Planned, not built";
   }
   function setCam(on) {
     state.cam = on;
@@ -458,7 +457,7 @@
     log(on ? "Detection link up, phone is the inference host" : "Detection link dropped");
   }
 
-  swPump.addEventListener("click", function () { setPump(!state.pump); });
+  // Pump switch is disabled in the markup. No listener, nothing to toggle.
   swCam.addEventListener("click", function () { setCam(!state.cam); });
   swScan.addEventListener("click", function () { setLink(!state.link); });
 
@@ -470,7 +469,9 @@
     state.alarm = true;
     elHud.textContent = "FIRE DETECTED";
     elHud.classList.add("alert");
-    setPump(true, true);
+    // No setPump call here. Raising an alert used to switch the pump on, which
+    // implied the app commands a pump during an alert. It does not, there is no
+    // pump and no pump command in the BLE protocol.
     log("smoke 0.91, GPS pin attached", true);
     log("SMS sent to emergency contact", true);
     log("Alert raised, 30 s debounce armed", true);
@@ -507,7 +508,7 @@
   document.addEventListener("keydown", function (e) {
     var k = e.key.toLowerCase();
     if (MAP[k]) { keys[MAP[k]] = true; syncDpad(); e.preventDefault(); }
-    if (k === "p") setPump(!state.pump);
+    // P used to toggle the pump. Removed, the pump does not exist.
   });
   document.addEventListener("keyup", function (e) {
     var k = e.key.toLowerCase();
@@ -621,12 +622,9 @@
   phHold.addEventListener("pointerleave", holdEnd);
   phHold.addEventListener("pointercancel", holdEnd);
 
-  phPump.addEventListener("click", function () {
-    setPump(!state.pump);
-    // Set here too, not only in the loop, so the button is correct on the
-    // same tick as the tap rather than one frame later.
-    phPump.setAttribute("aria-pressed", state.pump ? "true" : "false");
-  });
+  // The phone's pump button is disabled in the markup. Kept as a no-op so the
+  // animation loop below can keep referencing it without a null check.
+  phPump.addEventListener("click", function () { setPump(false, true); });
 
   document.getElementById("phoneToggle").addEventListener("change", function (e) {
     phoneOn = e.target.checked;
@@ -948,7 +946,7 @@
       phLinkChip.textContent = state.link ? "BLE LINK" : "BLE LOST";
       phLinkChip.classList.toggle("warn", !state.link);
       phGps.textContent = "GPS 7.31, 123.39";
-      phPump.setAttribute("aria-pressed", state.pump ? "true" : "false");
+      phPump.setAttribute("aria-pressed", "false");
       var t = new Date();
       phTime.textContent = ("0" + t.getHours()).slice(-2) + ":" + ("0" + t.getMinutes()).slice(-2);
       updatePhoneDet();
