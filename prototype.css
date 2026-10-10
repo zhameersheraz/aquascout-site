@@ -402,11 +402,17 @@
 }
 .phone.alert .ph-chip.warn{ color:var(--signal-dim); border-color:rgba(217,79,4,.45); background:rgba(217,79,4,.1); }
 
-.ph-body{ display:flex; align-items:center; gap:9px; padding:10px 11px 11px; }
+.ph-body{ display:flex; align-items:center; gap:9px; padding:10px 11px 11px; flex-wrap:wrap; }
 
+/* HOLD TO ALERT needs its own row at every phone width.
+   The phone is 190px. The d-pad alone is 78px, the pump ~46px, the two gaps
+   18px, and the container padding 22px. That leaves roughly 26px for a button
+   whose label reads "HOLD TO ALERT", which is why the text was being sliced
+   mid-word in the middle of its own label. Wrapping the body and giving the
+   hold button the full width is the only arrangement that fits. */
 .ph-hold{
   position:relative; overflow:hidden;
-  flex:1 1 auto; min-width:0;
+  order:1; flex:1 0 100%; min-width:0;
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
   padding:11px 6px;
   background:rgba(217,79,4,.1); color:var(--signal-dim);
@@ -424,7 +430,8 @@
 .ph-hold.done{ background:var(--signal); border-color:var(--signal); }
 .ph-hold.done .ph-hold-txt{ color:#0A0E11; }
 
-.ph-dpad{ display:grid; grid-template-columns:repeat(3,26px); grid-template-rows:repeat(3,26px); flex:0 0 auto; }
+.ph-dpad{ display:grid; grid-template-columns:repeat(3,26px); grid-template-rows:repeat(3,26px); flex:0 0 auto; order:2; }
+.ph-pump{ order:3; margin-left:auto; }
 .pd{
   display:grid; place-items:center;
   background:rgba(147,161,171,.07); color:var(--feed-text);
