@@ -3,171 +3,138 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Privacy — AQUASCOUT</title>
-<meta name="description" content="What AQUASCOUT stores, what it sends, and what it never uploads." />
-<meta name="theme-color" content="#E8ECEF" />
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..110,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/style.css" />
+<title>Privacy Policy — AQUASCOUT</title>
+<meta name="description" content="How AQUASCOUT handles your data. Camera frames never leave your phone." />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/style.css">
 <style>
-  .doc{ padding:clamp(40px,6vw,72px) 0 clamp(64px,9vw,110px); }
-  .doc-head{ max-width:60ch; margin-bottom:52px; }
-  .doc-head h1{ font-size:clamp(34px,5.4vw,58px); margin-bottom:18px; }
-  .doc-head p{ margin:0; font-size:17px; color:var(--ink-soft); line-height:1.6; }
-
-  .doc-body{ max-width:68ch; }
-  .doc-body h2{
-    font-size:clamp(20px,2.3vw,26px);
-    margin:52px 0 16px;
-    padding-top:22px;
-    border-top:1px solid var(--rule);
-  }
-  .doc-body h2:first-child{ margin-top:0; border-top:0; padding-top:0; }
-  .doc-body p{ margin:0 0 16px; font-size:16px; line-height:1.65; color:var(--ink-soft); }
-  .doc-body ul{ margin:0 0 16px; padding-left:20px; }
-  .doc-body li{ font-size:16px; line-height:1.62; color:var(--ink-soft); margin-bottom:8px; }
-  .doc-body strong{ color:var(--ink); font-weight:600; }
-
-  .never{
-    margin:28px 0;
-    border:1px solid var(--ink);
-    border-radius:var(--r);
-    overflow:hidden;
-  }
-  .never-hd{
-    background:var(--ink); color:var(--ground);
-    padding:11px 18px;
-    font-family:var(--mono); font-size:11px;
-    letter-spacing:.14em; text-transform:uppercase;
-  }
-  .never-bd{ padding:20px 18px; background:var(--surface-2); }
-  .never-bd p{ margin:0; font-size:16px; color:var(--ink); }
-
-  .doc-meta{
-    margin-top:56px; padding-top:22px;
-    border-top:1px solid var(--rule);
-    font-family:var(--mono); font-size:12px; color:var(--ink-faint);
-    display:flex; flex-wrap:wrap; gap:8px 24px;
-  }
-  .doc-back{ margin-top:34px; }
+  /* Page-specific. The shared stylesheet owns the nav, not the prose. */
+  body{background:#e8ecef;color:#101519;}
+  .wrap{max-width:760px;margin:0 auto;padding:24px 24px 80px}
+  .prose{font-size:16px;line-height:1.68;color:#39434c}
+  .prose h1{font-size:32px;line-height:1.2;margin:0 0 6px;letter-spacing:-.015em;color:#101519}
+  .prose h2{font-size:17px;margin:34px 0 10px;color:#101519;font-weight:650}
+  .prose p{margin:0 0 14px}
+  .prose ul{margin:0 0 14px;padding-left:22px}
+  .prose li{margin-bottom:7px}
+  .prose code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;
+    background:#f7f9fa;border:1px solid rgba(16,21,25,.12);border-radius:4px;padding:1px 5px}
+  .kicker{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+    letter-spacing:.24em;text-transform:uppercase;color:#646b71;margin:0 0 12px}
+  .meta{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;
+    color:#59646e;margin:0 0 30px;padding-bottom:18px;border-bottom:1px solid rgba(16,21,25,.12)}
+  .callout{border-left:3px solid #d94f04;background:rgba(217,79,4,.08);
+    padding:15px 18px;border-radius:0 8px 8px 0;margin:0 0 26px}
+  .callout p{margin:0;font-size:15px;color:#39434c}
+  .summary{border:1px solid rgba(16,21,25,.12);background:#f7f9fa;
+    border-radius:10px;padding:20px 22px;margin:0 0 34px}
+  .summary h2{margin:0 0 12px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;color:#646b71;font-weight:600}
+  table{border-collapse:collapse;width:100%;margin:0 0 18px;font-size:14.5px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid rgba(16,21,25,.12);vertical-align:top}
+  th{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:#646b71;font-weight:600}
+  td:first-child{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;white-space:nowrap}
+  td{color:#39434c;line-height:1.55}
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid rgba(16,21,25,.12);
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:#646b71}
+  @media (max-width:620px){.prose h1{font-size:26px}}
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<header class="topbar">
-  <div class="wrap topbar-inner">
-    <a class="brand" href="/" aria-label="AQUASCOUT home">
-      <img class="brand-mark" src="/mark.png" alt="" width="28" height="28" />
-      <span class="brand-word">AQUASCOUT</span>
-    </a>
-    <nav class="topnav" id="topnav">
-      <a href="/#measures">Results</a>
-      <a href="/#does">What it does</a>
-      <a href="/prototype">Prototype</a>
-      <a href="/privacy" aria-current="page">Privacy</a>
-    </nav>
-    <a class="btn-ink" href="/#get">Get the APK</a>
-    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="topnav">
-      <span></span><span></span>
-    </button>
+  <div class="topline" style="display:flex;justify-content:space-between;align-items:center;
+       gap:16px;flex-wrap:wrap;padding-bottom:18px;margin-bottom:30px;
+       border-bottom:1px solid rgba(16,21,25,.12)">
+    <a href="/" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;
+       font-weight:600;color:#101519;text-decoration:none;padding:8px 14px;
+       border:1px solid #c6cfd6;border-radius:6px;background:#f7f9fa">&larr; Back to site</a>
+    <span style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;
+      letter-spacing:.18em;color:#646b71;text-transform:uppercase">Legal</span>
   </div>
-</header>
 
-<main class="doc">
-  <div class="wrap">
+  <p class="kicker">Privacy Policy</p>
+  <h1>AQUASCOUT</h1>
+  <p class="meta">Last updated 10 October 2026 &middot; version 1.51 &middot; package com.zhameersheraz.aquascout</p>
 
-    <header class="doc-head">
-      <p class="kicker"><span class="tick" aria-hidden="true"></span> Policy</p>
-      <h1>What we store, and what we don't</h1>
-      <p>
-        AQUASCOUT was built so the camera stays on the phone. This page lists
-        every place data can leave the device, in plain terms.
-      </p>
-    </header>
-
-    <div class="doc-body">
-
-      <h2>The one thing that never leaves</h2>
-      <p>
-        Camera frames are analysed by a 3.3&nbsp;MB model running on the phone's own
-        processor. Frames are not uploaded, not cached to a server, and not used
-        for training. If the phone is offline, detection still works.
-      </p>
-
-      <div class="never">
-        <div class="never-hd">No image ever leaves the device</div>
-        <div class="never-bd">
-          <p>Not to us, not to Firebase, not to anyone. Ever.</p>
-        </div>
-      </div>
-
-      <h2>What does leave the device</h2>
-      <ul>
-        <li><strong>Your alert log.</strong> If you sign in, detection times, labels and confidence scores sync to Firebase so you can read them on a second device. If you stay signed out, the log stays on the phone.</li>
-        <li><strong>An SMS.</strong> If you turn SMS on and enter an API key, a detection sends a message to the one number you typed, containing the label, the confidence and the phone's GPS position. That message goes through Semaphore.</li>
-        <li><strong>Your account.</strong> If you sign in, Firebase holds your email address and your user ID. We can see account emails, but not your alert data unless you are signed in and syncing it.</li>
-      </ul>
-
-      <h2>Location</h2>
-      <p>
-        The GPS position is added only to an outgoing alert SMS, and only at the
-        moment of sending. It is not stored on our servers and it is not written
-        into the synced alert log. Deny the location permission and alerts still
-        fire, just without coordinates.
-      </p>
-
-      <h2>Two known weaknesses in this build</h2>
-      <p>
-        We would rather list these than have you find them. Both are fixed in the
-        next release.
-      </p>
-      <ul>
-        <li><strong>The Semaphore API key is stored in plain app preferences.</strong> It is readable on a rooted or backed-up device. Move it to Android's encrypted storage before any public release.</li>
-        <li><strong>Android backup is currently enabled.</strong> App data can be extracted over USB with a debug tool. Disabling it is scheduled for the next build.</li>
-      </ul>
-
-      <h2>Getting rid of your data</h2>
-      <p>
-        Signing out clears the local session. To remove synced alert records for
-        good, delete the account in Profile; that drops your Firebase user path
-        and everything under it.
-      </p>
-
-      <h2>Contact</h2>
-      <p>
-        Questions go to
-        <a href="mailto:zhameersheraztampugao@gmail.com">zhameersheraztampugao@gmail.com</a>.
-      </p>
-
-      <div class="doc-meta">
-        <span>Applies to build 1.51</span>
-        <span>Last reviewed 4 October 2026</span>
-      </div>
-
-      <p class="doc-back"><a class="btn-line" href="/">Back to the site</a></p>
-    </div>
-
+  <div class="callout">
+    <p><b>The short version:</b> your camera video is analysed on your phone and
+    thrown away. It is never uploaded. The only things that can leave your device
+    are a detection label, a confidence number and your coordinates, and only if
+    you have turned on alerts and signed in.</p>
   </div>
-</main>
 
-<footer class="foot">
-  <div class="wrap foot-inner">
-    <div class="foot-l">
-      <span class="foot-brand">AQUASCOUT</span>
-      <span class="foot-sub">On-device fire and smoke detection for Android.</span>
-    </div>
-    <nav class="foot-nav">
-      <a href="/#measures">Results</a>
-      <a href="/prototype">Prototype</a>
-      <a href="/privacy">Privacy</a>
-      <a href="mailto:zhameersheraztampugao@gmail.com">Contact</a>
-    </nav>
+  <div class="summary">
+    <h2>What this app stores</h2>
+    <table>
+      <thead><tr><th>Data</th><th>Where it goes</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Camera frames</td><td>Nowhere. Held in memory, discarded after each check.</td><td>Detection runs entirely on the handset.</td></tr>
+        <tr><td>Alert records</td><td>Your own Firebase account, only if signed in.</td><td>So your history follows you to a new phone.</td></tr>
+        <tr><td>Your email</td><td>Google sign-in and Firebase Authentication.</td><td>Used to keep your alert history separate from other users.</td></tr>
+        <tr><td>Your coordinates</td><td>Outbound SMS to the contact you saved.</td><td>So whoever you alert knows where the fire is.</td></tr>
+        <tr><td>Emergency number, API key</td><td>This device only, in app storage.</td><td>Needed to send your alert. Never uploaded to us.</td></tr>
+        <tr><td>Theme, threshold, toggles</td><td>This device only.</td><td>Remembering your preferences.</td></tr>
+      </tbody>
+    </table>
   </div>
-</footer>
 
-<script src="/nav.js"></script>
+  <div class="prose">
+    <h2>What we do not do</h2>
+    <ul>
+      <li>We do not record or store video.</li>
+      <li>We do not sell, rent or share your data. There is no advertising SDK in this app.</li>
+      <li>We do not collect your contacts, your photos gallery or your microphone.</li>
+      <li>We do not track you across other apps or websites.</li>
+    </ul>
+
+    <h2>Why the app asks for permissions</h2>
+    <p>Each permission is used for one thing and nothing else. Android requires
+    us to explain this, and we would rather over-explain than leave you guessing.</p>
+    <ul>
+      <li><b>Camera</b> &mdash; to look for fire and smoke. Without it there is nothing to detect.</li>
+      <li><b>Location</b> &mdash; to attach your coordinates to the alert SMS. Optional; alerts still send without it.</li>
+      <li><b>Notifications</b> &mdash; to tell you a fire was found. Optional.</li>
+      <li><b>Bluetooth</b> &mdash; to control the optional rover. The app works fully with no rover.</li>
+      <li><b>Internet</b> &mdash; only for Google sign-in and syncing your alert history. Detection itself needs no network.</li>
+    </ul>
+
+    <h2>Third parties</h2>
+    <p>Two, and both are optional:</p>
+    <ul>
+      <li><b>Google Firebase</b> &mdash; sign-in and alert history, if you use it.</li>
+      <li><b>Semaphore</b> &mdash; SMS delivery, if you enter an API key. Your key goes
+      from your phone to Semaphore and back. It is not sent to us.</li>
+    </ul>
+
+    <h2>SMS alerts</h2>
+    <p>When an alert fires the app sends one text message to the emergency contact
+    you saved. The message contains what was detected, a confidence score and your
+    coordinates. A 30-second cooldown stops it sending repeatedly. Standard carrier
+    rates may apply to the message you receive.</p>
+
+    <h2>Deleting your data</h2>
+    <p>Alerts stored in your Firebase account are removed by deleting the account
+    from within the app, or by signing out and asking us. Everything held on the
+    device disappears when you uninstall the app or clear its storage.</p>
+
+    <h2>Children</h2>
+    <p>AQUASCOUT is not directed at children under 13 and collects no information
+    about them.</p>
+
+    <h2>Changes</h2>
+    <p>If this policy changes we will update the date at the top and ship the new
+    version with the change.</p>
+
+    <h2>Contact</h2>
+    <p>Questions go to <code>ampugao@gmail.com</code>.</p>
+  </div>
+
+  <footer>AQUASCOUT &middot; built by the Saint Columban College capstone team</footer>
+
+</div>
 </body>
 </html>
