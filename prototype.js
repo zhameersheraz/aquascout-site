@@ -439,7 +439,7 @@
     // voltage. It previously logged "12 V feed confirmed", which was a
     // fabricated measurement. Both switches that drive it are now disabled.
     state.pump = false;
-    elPumpState.textContent = "Planned, not built";
+    elPumpState.textContent = "In build plan, awaiting parts";
   }
   function setCam(on) {
     state.cam = on;

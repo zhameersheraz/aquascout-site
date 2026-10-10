@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AQUASCOUT — how it works, step by step</title>
+<meta name="description" content="A plain-language walkthrough of what AQUASCOUT does when it sees fire or smoke, in five steps." />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<style>
+  :root{
+    --paper:#e8ecef; --paper-2:#f7f9fa; --ink:#101519; --muted:#59646e;
+    --soft:#646b71; --rule:rgba(16,21,25,.12); --rule-solid:#c6cfd6;
+    --accent:#d94f04; --accent-tint:rgba(217,79,4,.08); --link:#2e5a72;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px; margin:0 auto; padding:24px 24px 64px}
+  .topline{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; flex-wrap:wrap;
+    padding-bottom:20px; margin-bottom:34px;
+    border-bottom:1px solid var(--rule);
+  }
+  .back{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:600; color:var(--ink);
+    text-decoration:none; padding:8px 14px;
+    border:1px solid var(--rule-solid); border-radius:6px;
+    background:var(--paper-2);
+  }
+  .back:hover{border-color:var(--soft)}
+  .figcount{font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11px; letter-spacing:.18em; color:var(--soft); text-transform:uppercase}
+
+  .kicker{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11px; letter-spacing:.24em; color:var(--soft);
+    text-transform:uppercase; margin:0 0 12px;
+  }
+  h1{font-size:38px; line-height:1.15; margin:0 0 14px; font-weight:700; letter-spacing:-.015em}
+  .lede{font-size:17px; line-height:1.6; color:var(--muted); margin:0 0 40px; max-width:64ch}
+
+  /* ── steps ─────────────────────────────── */
+  .steps{list-style:none; margin:0 0 44px; padding:0; counter-reset:s}
+  .step{
+    counter-increment:s; position:relative;
+    padding:0 0 0 74px; margin:0 0 30px;
+  }
+  .step:last-child{margin-bottom:0}
+  .step::before{
+    content:counter(s);
+    position:absolute; left:0; top:2px;
+    width:46px; height:46px; border-radius:50%;
+    display:grid; place-items:center;
+    background:var(--ink); color:var(--paper-2);
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:19px; font-weight:600;
+  }
+  .step.optional::before{background:var(--paper-2); color:var(--muted);
+    border:1px dashed var(--rule-solid)}
+  .step h2{font-size:19px; margin:8px 0 6px; font-weight:650; letter-spacing:-.005em}
+  .step p{margin:0; font-size:15px; line-height:1.62; color:var(--muted); max-width:62ch}
+  .step p + p{margin-top:8px}
+  .step code{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:.88em; background:var(--paper-2);
+    border:1px solid var(--rule); border-radius:4px; padding:1px 5px;
+  }
+  .tag{
+    display:inline-block; margin-left:8px; vertical-align:2px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:9.5px; letter-spacing:.16em; text-transform:uppercase;
+    padding:2px 7px; border-radius:3px;
+    border:1px solid var(--rule-solid); color:var(--soft);
+    background:var(--paper-2);
+  }
+  .tag.now{border-color:var(--accent); color:var(--accent); background:var(--accent-tint)}
+
+  /* ── phone mock ─────────────────────────── */
+  .demo{display:flex; gap:44px; flex-wrap:wrap; align-items:flex-start;
+    margin:0 0 44px; padding:32px 28px;
+    background:var(--paper-2); border:1px solid var(--rule); border-radius:10px}
+  .phone{
+    flex:0 0 auto; width:190px;
+    border:1px solid var(--rule-solid); border-radius:14px;
+    background:#0A0E11; padding:10px 10px 12px;
+  }
+  .screen{position:relative; aspect-ratio:3/4; border-radius:8px; overflow:hidden;
+    background:linear-gradient(170deg,#1b2229,#0d1216)}
+  /* Named .flameglow/.puff, NOT .fire/.smoke. An element carrying
+     both a modifier and a label class, e.g. class="lbl smoke", was matching
+     these rules too and inheriting width/height, which rendered the label as a
+     large filled block instead of a small pill. */
+  .flameglow{
+    position:absolute; left:50%; bottom:9%; transform:translateX(-50%);
+    width:60px; height:70px; border-radius:50% 50% 44% 44%;
+    background:radial-gradient(circle at 50% 72%, #ffcf6b, #d94f04 58%, #8a2f02 100%);
+    filter:blur(.4px);
+  }
+  .puff{
+    position:absolute; left:50%; top:22%; transform:translateX(-50%);
+    width:110px; height:58px; border-radius:50%;
+    background:radial-gradient(ellipse at 50% 60%, rgba(176,189,198,.42), rgba(176,189,198,0) 76%);
+  }
+  .bbox{
+    position:absolute; border:1.5px solid var(--accent); border-radius:3px;
+  }
+  .bbox.fire{left:38%; bottom:9%; width:26%; height:31%}
+  .bbox.smoke{left:22%; top:24%; width:56%; height:22%; border-color:#9aa9b3; border-style:dashed; border-width:1px}
+  .lbl{
+    position:absolute; font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:7.5px; letter-spacing:.08em; text-transform:uppercase;
+    padding:1px 4px; border-radius:2px; white-space:nowrap;
+  }
+  .lbl.fire{left:38%; bottom:calc(9% + 31%); background:var(--accent); color:#fff}
+  .lbl.smoke{left:50%; top:calc(24% - 12px); transform:translateX(-50%);
+    background:#9aa9b3; color:#0A0E11}
+  .hudbar{
+    position:absolute; left:0; right:0; top:0;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:6px 8px; font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:8px; letter-spacing:.1em; color:#cfd8dd;
+    background:linear-gradient(rgba(10,14,17,.85),rgba(10,14,17,0));
+  }
+  .hudbar b{color:#fff; font-weight:600}
+  .dot{display:inline-block; width:5px; height:5px; border-radius:50%;
+    background:var(--accent); margin-right:4px; vertical-align:1px}
+
+  .expl{ flex:1 1 300px; min-width:260px}
+  .expl h3{font-size:13px; letter-spacing:.2em; text-transform:uppercase;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    color:var(--soft); margin:0 0 14px; font-weight:600}
+  .expl ol{margin:0; padding-left:20px}
+  .expl li{font-size:14.5px; line-height:1.6; color:var(--muted); margin-bottom:10px}
+  .expl li b{color:var(--ink); font-weight:600}
+
+  /* ── callout ───────────────────────────── */
+  .note{
+    border-left:3px solid var(--accent);
+    background:var(--accent-tint);
+    padding:16px 20px; border-radius:0 8px 8px 0; margin:0 0 40px;
+  }
+  .note h3{margin:0 0 8px; font-size:15px; font-weight:650}
+  .note p{margin:0; font-size:14.5px; line-height:1.6; color:var(--muted)}
+
+  table{border-collapse:collapse; width:100%; margin:0 0 40px; font-size:14px}
+  th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--rule); vertical-align:top}
+  th{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--soft); font-weight:600}
+  td:first-child{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:13px; white-space:nowrap}
+  td{color:var(--muted); line-height:1.55}
+
+  footer{
+    margin-top:44px; padding-top:20px; border-top:1px solid var(--rule);
+    display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:10.5px; letter-spacing:.1em; color:var(--soft);
+  }
+  @media (max-width:620px){
+    h1{font-size:29px}
+    .demo{flex-direction:column; gap:26px}
+    .phone{width:170px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topline">
+    <a class="back" href="/">&larr; Back to site</a>
+    <span class="figcount">Plain-language guide</span>
+  </div>
+
+  <p class="kicker">How it works</p>
+  <h1>What happens when AQUASCOUT sees fire</h1>
+  <p class="lede">
+    Five steps, no jargon. Everything below runs on the phone itself. There is no
+    server doing the thinking, and the camera video never leaves the device.
+  </p>
+
+  <ol class="steps">
+    <li class="step">
+      <h2>The phone camera takes a picture</h2>
+      <p>
+        Point the phone at anything. The app grabs a single frame and shrinks it to
+        <code>640 &times; 640</code> so the next step has a fixed amount of work to do.
+      </p>
+    </li>
+
+    <li class="step">
+      <h2>The AI looks for flame and smoke</h2>
+      <p>
+        A small neural network called YOLOv8n reads that picture. It was trained on
+        17,221 photographs of real fires and smoke, and it answers one question per
+        region of the image: <em>is there fire here, is there smoke here, and how
+        sure am I?</em>
+      </p>
+      <p>
+        It runs at about <b>2 frames per second</b> on a mid-range phone. That is fast
+        enough to watch a room, and it is the same model that scores <code>0.748</code>
+        mAP50 on the 4,306-image D-Fire test split.
+      </p>
+    </li>
+
+    <li class="step">
+      <h2>Boxes are drawn on anything it found</h2>
+      <p>
+        Anything above the confidence floor gets a labelled rectangle. Above
+        <code>0.20</code> confidence the box appears. It is deliberately a low bar,
+        because for a fire alarm a false alarm is an inconvenience and a missed fire
+        is a disaster.
+      </p>
+    </li>
+
+    <li class="step">
+      <h2>The alert goes out with your location</h2>
+      <p>
+        The app reads your GPS position and sends one SMS to the emergency contact you
+        saved in Settings. The message says what was seen, how confident the model was,
+        and the coordinates. A 30-second cooldown stops it texting repeatedly.
+      </p>
+      <p>
+        You can also press and hold <b>REPORT FIRE</b> for 1.5 seconds to send the
+        same alert by hand, without waiting for the AI.
+      </p>
+    </li>
+
+    <li class="step optional">
+      <h2>The rover can carry water to the fire <span class="tag">awaiting parts</span></h2>
+      <p>
+        A separate Bluetooth rover can be driven from the app and carries two cameras
+        and a water pump. It is optional: <b>the alert in steps 1 to 4 works with no
+        rover connected at all.</b>
+      </p>
+      <p>
+        The pump and the cameras are in the build plan but the components have not
+        arrived, and the rover's motor driver failed, so no movement is claimed here.
+      </p>
+    </li>
+  </ol>
+
+  <!-- ── visual ─────────────────────────────── -->
+  <div class="demo">
+    <div class="phone">
+      <div class="screen">
+        <div class="hudbar"><span><span class="dot"></span>ALERT</span><span><b>2.0</b> fps</span></div>
+        <div class="puff"></div>
+        <div class="flameglow"></div>
+        <div class="bbox smoke"></div>
+        <div class="lbl smoke">smoke 0.81</div>
+        <div class="bbox fire"></div>
+        <div class="lbl fire">fire 0.86</div>
+      </div>
+    </div>
+
+    <div class="expl">
+      <h3>Reading the screen</h3>
+      <ol>
+        <li><b>Solid orange box</b> — the model is confident this is flame.</li>
+        <li><b>Dashed grey box</b> — smoke. Softer and wider than flame, so it is easier to confuse with fog or steam.</li>
+        <li><b>The percentage</b> — how sure the model is. It is a confidence score, not a physical measurement.</li>
+        <li><b>Frames per second</b> — how fast it is re-checking the scene. Lower is more laggy.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ── what leaves the phone ──────────────── -->
+  <div class="note">
+    <h3>What actually leaves the phone</h3>
+    <p>
+      A label, a confidence number and a set of coordinates. Never the video.
+      Camera frames are analysed on the device and discarded. If you are signed in,
+      an alert record is written to Firebase so your history follows you to a new
+      phone. That is the entire list.
+    </p>
+  </div>
+
+  <!-- ── glossary ───────────────────────────── -->
+  <table>
+    <thead>
+      <tr><th>Term</th><th>What it means here</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>mAP50</td><td>One number for "how good is this detector overall", measured on held-back photos the model never trained on. Higher is better. Ours is 0.748.</td></tr>
+      <tr><td>confidence</td><td>How sure the model is about one box. 0.86 means fairly sure, not certain.</td></tr>
+      <tr><td>quantization</td><td>Shrinking the model's numbers so the file is smaller and runs faster. We do it in a way that costs 0.039 mAP, measured.</td></tr>
+      <tr><td>FP32 / INT8</td><td>How many bits each number takes up. Fewer bits is a smaller file and faster maths.</td></tr>
+      <tr><td>cooldown</td><td>After sending an SMS the app waits 30 seconds before it is allowed to send another.</td></tr>
+      <tr><td>ESP32-CAM</td><td>A small camera board that would sit on the rover. Not connected yet.</td></tr>
+    </tbody>
+  </table>
+
+  <footer>
+    <span>AQUASCOUT &middot; build 1.51</span>
+    <span>mAP50 0.748 &middot; 4,306-image D-Fire test split &middot; ~2 fps on a mid-range Android device</span>
+  </footer>
+
+</div>
+</body>
+</html>
