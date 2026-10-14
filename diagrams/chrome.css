@@ -1,0 +1,130 @@
+/* ============================================================
+   diagrams/chrome.css
+   ------------------------------------------------------------
+   The two diagram pages carry their own <style> block and their
+   own .foot / .wrap rules. Loading style.css on top of that would
+   fight over body background, .wrap padding and .foot, so this
+   file defines the site header and footer under their own class
+   names instead. Same look as the main pages, zero cascade risk.
+   ============================================================ */
+
+:root{
+  --aq-bg:      #08080A;
+  --aq-text:    #F4F4F7;
+  --aq-text-2:  #A6A6B2;
+  --aq-line:    rgba(255,255,255,.085);
+  --aq-line-2:  rgba(255,255,255,.16);
+  --aq-ember:   #FF7A1A;
+  --aq-ember-lo:#E2570A;
+  --aq-mono:    "IBM Plex Mono", ui-monospace, monospace;
+  --aq-sans:    "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --aq-disp:    "Archivo", var(--aq-sans);
+  --aq-maxw:    1240px;
+}
+
+.aq-topbar{
+  position:sticky; top:0; z-index:60;
+  background:rgba(8,8,10,.72);
+  backdrop-filter:blur(16px) saturate(1.5);
+  -webkit-backdrop-filter:blur(16px) saturate(1.5);
+  border-bottom:1px solid var(--aq-line);
+}
+.aq-topbar-inner{
+  max-width:var(--aq-maxw); margin:0 auto;
+  padding:0 24px;
+  display:flex; align-items:center; gap:20px;
+  height:66px;
+}
+.aq-brand{
+  display:flex; align-items:center; gap:10px;
+  text-decoration:none; margin-right:auto;
+}
+.aq-brand img{ width:30px; height:30px; }
+.aq-brand span{
+  font-family:var(--aq-disp); font-weight:800;
+  font-size:15.5px; letter-spacing:.09em; color:var(--aq-text);
+}
+.aq-nav{ display:flex; gap:28px; }
+.aq-nav a{
+  text-decoration:none; font-size:14.5px; font-weight:500;
+  color:var(--aq-text-2);
+  padding:7px 0; border-bottom:1px solid transparent;
+  transition:color .18s, border-color .18s;
+}
+.aq-nav a:hover{ color:var(--aq-text); border-bottom-color:var(--aq-line-2); }
+.aq-nav a[aria-current="page"]{ color:var(--aq-text); border-bottom-color:var(--aq-ember); }
+
+.aq-cta{
+  display:inline-flex; align-items:center; justify-content:center;
+  text-decoration:none; font-family:var(--aq-sans);
+  font-size:14px; font-weight:600; white-space:nowrap;
+  padding:11px 20px; border-radius:6px;
+  background:linear-gradient(135deg,var(--aq-ember) 0%,var(--aq-ember-lo) 100%);
+  color:#1A0A02;
+  box-shadow:0 8px 24px -10px rgba(255,122,26,.75);
+  transition:transform .16s, background .16s;
+}
+.aq-cta:hover{ transform:translateY(-2px); background:linear-gradient(135deg,#FF8A34 0%,var(--aq-ember) 100%); }
+
+.aq-burger{
+  display:none;
+  width:40px; height:40px; position:relative;
+  background:none; border:1px solid var(--aq-line-2);
+  border-radius:6px; cursor:pointer; padding:0;
+}
+.aq-burger span{
+  position:absolute; left:11px; right:11px; height:1.5px;
+  background:var(--aq-text); transition:transform .22s, opacity .22s;
+}
+.aq-burger span:nth-child(1){ top:17px; }
+.aq-burger span:nth-child(2){ bottom:17px; }
+.aq-burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(3px) rotate(45deg); }
+.aq-burger[aria-expanded="true"] span:nth-child(2){ transform:translateY(-3px) rotate(-45deg); }
+
+.aq-foot{
+  margin-top:48px;
+  border-top:1px solid var(--aq-line);
+  background:linear-gradient(180deg,#08080A,#0B0B10);
+  padding:36px 0 44px;
+}
+.aq-foot-inner{
+  max-width:var(--aq-maxw); margin:0 auto; padding:0 24px;
+  display:flex; flex-wrap:wrap; gap:24px;
+  align-items:flex-start; justify-content:space-between;
+}
+.aq-foot-l{ max-width:40ch; }
+.aq-foot-brand{
+  display:flex; align-items:center; gap:9px;
+  font-family:var(--aq-disp); font-weight:800;
+  font-size:15px; letter-spacing:.09em; color:var(--aq-text);
+}
+.aq-foot-brand img{ width:22px; height:22px; }
+.aq-foot-sub{
+  display:block; margin-top:9px;
+  font-size:13.5px; line-height:1.55; color:var(--aq-text-2);
+}
+.aq-foot-nav{ display:flex; flex-wrap:wrap; gap:10px 26px; }
+.aq-foot-nav a{
+  font-size:14px; color:var(--aq-text-2); text-decoration:none;
+  border-bottom:1px solid transparent;
+  transition:color .18s, border-color .18s;
+}
+.aq-foot-nav a:hover{ color:var(--aq-text); border-bottom-color:var(--aq-ember); }
+
+@media (max-width:820px){
+  .aq-nav{
+    position:absolute; top:66px; left:0; right:0;
+    flex-direction:column; gap:0;
+    background:rgba(10,10,13,.97);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--aq-line);
+    padding:8px 24px 16px;
+    display:none;
+  }
+  .aq-nav.open{ display:flex; }
+  .aq-nav a{ padding:14px 0; border-bottom:1px solid var(--aq-line); }
+  .aq-cta{ display:none; }
+  .aq-burger{ display:block; }
+  .aq-foot-inner{ flex-direction:column; }
+}

@@ -155,7 +155,7 @@
     c.clearRect(0, 0, w, h);
 
     // feed base
-    c.fillStyle = "#0B0F12";
+    c.fillStyle = "#08080A";
     c.fillRect(0, 0, w, h);
 
     // a faint vertical falloff so it reads like a lens, not a flat panel
@@ -226,7 +226,7 @@
 
     if (this.phase === "track" || this.phase === "acquire") {
       var txt = this.label.toUpperCase() + "  " + this.conf.toFixed(2);
-      c.fillStyle = "#F0A97E";
+      c.fillStyle = "#FFB347";
       c.fillText(txt, w - 18 - c.measureText(txt).width, by);
     } else {
       c.fillStyle = "rgba(147,161,171,.4)";
@@ -259,7 +259,7 @@
     var strong = this.phase === "track";
 
     c.lineWidth = strong ? 1.6 : 1.2;
-    c.strokeStyle = strong ? "#F0A97E" : "rgba(240,169,126,.55)";
+    c.strokeStyle = strong ? "#FFB347" : "rgba(255,179,71,.55)";
 
     // TL
     c.beginPath();
@@ -283,9 +283,9 @@
       var lbl = this.label;
       c.font = "500 10px 'IBM Plex Mono', monospace";
       var tw = c.measureText(lbl).width;
-      c.fillStyle = "#F0A97E";
+      c.fillStyle = "#FFB347";
       c.fillRect(x, y - 20, tw + 14, 17);
-      c.fillStyle = "#0B0F12";
+      c.fillStyle = "#08080A";
       c.fillText(lbl, x + 7, y - 8);
     }
   };

@@ -2,48 +2,90 @@
 
 Marketing site for the [AQUASCOUT](https://aquascout.vercel.app) Android app. Static HTML, no build step, deployed on Vercel.
 
-The site leads with the thing that matters for this project: the detection model and its measured numbers. It then shows what the app does, and links to an interactive 3D model of the rover.
+The site leads with the thing that matters for this project: the detection model and its measured numbers. It then shows what the app does, how a frame becomes an alert, and a real signed APK to download.
 
 ## Pages
 
 | Page | What it is |
 |---|---|
-| `/` | Hero with a live simulated detection viewfinder, the three measured results, a four-row description of the app, and the download CTA |
+| `/` | Hero with a live simulated detection viewfinder, the three measured results, a four-card description of the app, how it works, and the APK download |
+| `/about.html` | What the project is, why it exists, how it was built, and an explicit list of what it does not do |
+| `/privacy.html` | What data is stored, what leaves the device, and why each permission is requested |
 | `/prototype.html` | Interactive 3D rover. Orbit it, drive it with WASD, toggle the pump and cameras, and simulate an alert. |
-| `/privacy.html` | What data is stored, what leaves the device, and the two known weaknesses in this build |
+| `/diagrams/aquascout-architecture.html` | The device trust boundary diagram |
+| `/diagrams/how-it-works.html` | Plain-language walkthrough of the five detection steps |
+
+Every page carries the same header and footer, so you can always get back. The current page is marked with `aria-current="page"`.
 
 ## Design
 
-Monochrome with a single signal colour.
+Near-black with an ember accent.
 
-- **Ground** `#E8ECEF` cold grey, **ink** `#101519` near-black with a blue cast
-- **Signal** `#D94F04` burnt orange. It appears only where something is detected or alerting. Never as decoration.
+- **Ground** `#08080A`, **card** `#131319`, **ink** `#F4F4F7`
+- **Ember** `#FF7A1A`, gold `#FFB347`. Ember means one thing: fire, or an alert raised because of fire. It is never decoration.
 - **Type**: Archivo for display, IBM Plex Sans for body, IBM Plex Mono for every number and label
+- The flowing wave lines and the flame are lifted from the app's own wordmark art
+
+### Token compatibility note
+
+`style.css` still exposes the original token names (`--ink`, `--ground`, `--signal`, ...) because `prototype.css` was written against them. **Their roles did not change**: `--ink` is the dark surface, `--ground` is the light surface, so `--ground` is what text is coloured with. Do not swap them to "fix" the naming.
+
+`diagrams/chrome.css` is separate on purpose. The two diagram pages carry their own `<style>` block and their own `.foot` and `.wrap` rules, so loading `style.css` there would fight over body background, wrapper padding and the footer. The shared header and footer live under `aq-*` class names there instead.
+
+## The APK
+
+`AQUASCOUT-1.51.apk` is the signed release build, copied straight from `app/build/outputs/apk/release/app-release.apk`.
+
+- Signed with `CN=AQUASCOUT, OU=Saint Columban College`, APK Signature Scheme v2
+- Same keystore as the Google Play internal testing upload
+- 39.3 MB, universal: arm64-v8a, armeabi-v7a, x86, x86_64
+- SHA-256 `8271022E41A29AD7409163F12503EBAC3B79F1A73D0B132B4A1D859A82E12823`
+
+It is a universal APK rather than per-ABI splits so that no classmate has to pick the right file. About 17 MB of the total is x86 and x86_64 native libraries, which no physical phone needs.
 
 ## Files
 
 | File | Role |
 |---|---|
 | `index.html` | Home page |
-| `prototype.html` | 3D rover page |
+| `about.html` | About the project |
 | `privacy.html` | Privacy policy |
+| `prototype.html` | 3D rover page |
+| `diagrams/*.html` | Standalone figures, each with its own inline stylesheet |
 | `style.css` | Shared tokens, layout, components |
+| `diagrams/chrome.css` | Header and footer for the diagram pages only |
 | `prototype.css` | 3D page: stage, control panel, hotspots |
 | `viewfinder.js` | The hero detection loop. Drifts a plume, acquires with converging corner brackets, tracks with a jittering confidence, then drops and re-acquires |
 | `nav.js` | Mobile menu and scroll reveal |
 | `prototype.js` | Three.js scene, rover assembly, drive physics, hotspots, event log |
-| `mark.png` | AQUASCOUT mark, transparent background |
-| `favicon-32.png`, `favicon-16.png`, `apple-touch-icon.png`, `android-chrome-192.png`, `android-chrome-512.png` | Browser, iOS, Android icons |
+| `mark-light.png`, `mark-ember.png` | AQUASCOUT compass mark, white and ember, cropped to its bounding box |
+| `favicon-16/32/48.png`, `apple-touch-icon.png`, `android-chrome-192/512.png`, `icon-512.png` | Browser, iOS and Android icons |
+| `og-image.png` | Link preview card, 1200x630 |
+| `site.webmanifest` | PWA manifest |
+| `AQUASCOUT-1.51.apk` | The installable release build |
 | `vercel.json` | Vercel config: clean URLs, security headers, cache policy |
+
+### Asset generation
+
+`mark-light.png` and the icon set are cut from the 1024px transparent source mark. The source is black, which is invisible on this ground, so the glyph's alpha channel is reused as the paint mask and the original RGB is discarded.
+
+Favicon sizes are split: 16px and 32px are full-bleed with almost no padding, because a rounded tile with a 72% glyph collapses into grey mush at 16px. 48px and up keep the rounded tile.
 
 ## Notes
 
 - Three.js is loaded from a CDN. If it fails to load, the prototype stage shows a plain message rather than a blank canvas.
-- `viewfinder.js` and the 3D loop both respect `prefers-reduced-motion`. The viewfinder renders one static locked frame; the 3D scene stops animating but stays fully interactive.
+- `viewfinder.js` and the 3D loop both respect `prefers-reduced-motion`.
+- `.hotspots` clips its overflow. Without it, the absolutely positioned hotspot labels push the document wider than the viewport and the page scrolls sideways on a phone.
 
-## Assets
+## Verifying a change
 
-The whole site ships about 257 KB. Decorative background art and the old light and dark wordmark variants were removed in the redesign because nothing referenced them. Total payload is `mark.png` plus the five favicon sizes.
+```bash
+py -3 -m http.server 8899 --bind 127.0.0.1     # from this folder
+```
+
+Chrome's old headless mode ignores `--window-size` for the layout viewport, so a narrow `--screenshot` silently crops a desktop render and looks like an overflow bug. Use `aqshots/shoot.js`, which drives CDP `Emulation.setDeviceMetricsOverride` and reports `scrollWidth` against `clientWidth`.
+
+Vercel rewrites `/about` to `about.html` via `cleanUrls`. Python's server does not, so local checks have to ask for the real filename.
 
 ## License
 

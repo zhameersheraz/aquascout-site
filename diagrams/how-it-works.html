@@ -8,11 +8,12 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/diagrams/chrome.css">
 <style>
   :root{
-    --paper:#e8ecef; --paper-2:#f7f9fa; --ink:#101519; --muted:#59646e;
-    --soft:#646b71; --rule:rgba(16,21,25,.12); --rule-solid:#c6cfd6;
-    --accent:#d94f04; --accent-tint:rgba(217,79,4,.08); --link:#2e5a72;
+    --paper:#08080A; --paper-2:#0E0E13; --ink:#F4F4F7; --muted:#A6A6B2;
+    --soft:#74747F; --rule:rgba(255,255,255,.085); --rule-solid:rgba(255,255,255,.16);
+    --accent:#FF7A1A; --accent-tint:rgba(255,122,26,.13); --link:#FFB347;
   }
   *{box-sizing:border-box}
   body{
@@ -100,7 +101,7 @@
   .flameglow{
     position:absolute; left:50%; bottom:9%; transform:translateX(-50%);
     width:60px; height:70px; border-radius:50% 50% 44% 44%;
-    background:radial-gradient(circle at 50% 72%, #ffcf6b, #d94f04 58%, #8a2f02 100%);
+    background:radial-gradient(circle at 50% 72%, #ffcf6b, #FF7A1A 58%, #8a2f02 100%);
     filter:blur(.4px);
   }
   .puff{
@@ -170,6 +171,25 @@
 </style>
 </head>
 <body>
+<header class="aq-topbar">
+  <div class="aq-topbar-inner">
+    <a class="aq-brand" href="/" aria-label="AQUASCOUT home">
+      <img src="/mark-light.png" alt="" width="30" height="30" />
+      <span>AQUASCOUT</span>
+    </a>
+    <nav class="aq-nav" id="aqnav">
+      <a href="/">Home</a>
+      <a href="/prototype">Prototype</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+    </nav>
+    <a class="aq-cta" href="/#get">Get the APK</a>
+    <button class="aq-burger" id="aqburger" aria-label="Menu" aria-expanded="false" aria-controls="aqnav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
 <div class="wrap">
 
   <div class="topline">
@@ -302,5 +322,36 @@
   </footer>
 
 </div>
+<footer class="aq-foot">
+  <div class="aq-foot-inner">
+    <div class="aq-foot-l">
+      <span class="aq-foot-brand"><img src="/mark-light.png" alt="" width="22" height="22" /> AQUASCOUT</span>
+      <span class="aq-foot-sub">On-device fire and smoke detection for Android. Built at Saint Columban College, Pagadian City.</span>
+    </div>
+    <nav class="aq-foot-nav">
+      <a href="/">Home</a>
+      <a href="/prototype">Prototype</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/diagrams/aquascout-architecture">Architecture</a>
+      <a href="/diagrams/how-it-works">How it works</a>
+      <a href="/#get">Download</a>
+    </nav>
+  </div>
+</footer>
+<script>
+// Same burger behaviour as nav.js, under the aq- ids this page uses.
+(function () {
+  var b = document.getElementById("aqburger"), n = document.getElementById("aqnav");
+  if (!b || !n) return;
+  b.addEventListener("click", function () {
+    var open = n.classList.toggle("open");
+    b.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  n.addEventListener("click", function (e) {
+    if (e.target.tagName === "A") { n.classList.remove("open"); b.setAttribute("aria-expanded", "false"); }
+  });
+})();
+</script>
 </body>
 </html>

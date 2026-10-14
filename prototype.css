@@ -6,17 +6,20 @@
 .proto-page{ background:var(--ink); color:var(--ground); overflow:hidden; }
 
 .topbar-dark{
-  background:rgba(16,21,25,.88);
-  border-bottom-color:#252E35;
+  background:rgba(8,8,10,.72);
+  backdrop-filter:blur(16px) saturate(1.5);
+  -webkit-backdrop-filter:blur(16px) saturate(1.5);
+  border-bottom-color:rgba(255,255,255,.085);
 }
 .topbar-dark .brand-word{ color:var(--ground); }
-/* mark.png is black-on-transparent for the light ground. On the dark bar it
-   would read as a hole, so invert it to white rather than ship a second asset. */
-.topbar-dark .brand-mark{ filter:invert(1); }
+/* The navbar mark is mark-light.png, already white for the dark ground.
+   The old invert() filter was for the black mark.png and would have turned
+   this one invisible. */
+.topbar-dark .brand-mark{ filter:none; }
 .topbar-dark .topnav a{ color:var(--feed-text); }
-.topbar-dark .topnav a:hover{ color:var(--ground); border-bottom-color:var(--ground); }
+.topbar-dark .topnav a:hover{ color:var(--ground); border-bottom-color:rgba(255,255,255,.16); }
 .topbar-dark .topnav a[aria-current="page"]{ color:var(--ground); border-bottom-color:var(--signal); }
-.burger-dark{ border-color:#2A343C; }
+.burger-dark{ border-color:rgba(255,255,255,.16); }
 .burger-dark span{ background:var(--ground); }
 
 .btn-paper-sm{ padding:8px 15px; font-size:13px; }
@@ -24,7 +27,7 @@
 .proto-main{
   display:grid;
   grid-template-columns:minmax(0,1fr) 372px;
-  height:calc(100vh - 62px);
+  height:calc(100vh - 66px);
   min-height:620px;
 }
 
@@ -114,7 +117,12 @@
 
 /* ── Hotspots ──────────────────────────────────────────── */
 
-.hotspots{ position:absolute; inset:0; pointer-events:none; }
+/* Hotspots: leader lines and labels point at parts of the model that can sit
+   near or past the stage edge. Without this clip their absolutely positioned
+   chips push the document's scrollWidth past the viewport and the whole page
+   scrolls sideways on a phone. Chips are decorative and pointer-events:none,
+   so clipping them costs nothing. */
+.hotspots{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
 .hs{
   position:absolute;
   width:0; height:0;
@@ -256,7 +264,8 @@
 .panel-actions{ display:flex; flex-direction:column; gap:8px; border-top:1px solid #252E35; padding-top:20px; }
 .btn-signal{
   width:100%;
-  background:var(--signal-dim); color:#12181C;
+  background:linear-gradient(135deg,var(--ember) 0%,var(--ember-lo) 100%);
+  color:#1A0A02;
   border:0; border-radius:var(--r);
   padding:14px;
   font-family:var(--sans); font-size:14.5px; font-weight:600;
@@ -264,7 +273,7 @@
   display:flex; align-items:center; justify-content:center; gap:9px;
   transition:background .16s, transform .12s;
 }
-.btn-signal:hover{ background:#FFBE96; }
+.btn-signal:hover{ background:linear-gradient(135deg,#FF8A34 0%,var(--ember) 100%); }
 .btn-signal:active{ transform:scale(.985); }
 .btn-signal.pumping{
   background:var(--signal); color:#fff;
@@ -320,7 +329,7 @@
   touch-action:none;
   cursor:grab;
 }
-.phone.dragging{ cursor:grabbing; box-shadow:0 24px 54px rgba(0,0,0,.62), 0 0 0 4px rgba(217,79,4,.28); }
+.phone.dragging{ cursor:grabbing; box-shadow:0 24px 54px rgba(0,0,0,.62), 0 0 0 4px rgba(255,122,26,.28); }
 .phone button{ cursor:pointer; }
 .phone[hidden]{ display:none; }
 .ph-statusbar, .ph-head, .ph-chips, .ph-body, .ph-foot{ background:#0A0E11; }
@@ -340,7 +349,7 @@
 
 .ph-scan{
   position:absolute; left:0; right:0; height:34%;
-  background:linear-gradient(180deg, rgba(217,79,4,0) 0%, rgba(217,79,4,.16) 100%);
+  background:linear-gradient(180deg, rgba(255,122,26,0) 0%, rgba(255,122,26,.16) 100%);
   border-bottom:1px solid rgba(240,169,126,.55);
   opacity:0; transition:opacity .2s;
 }
@@ -400,7 +409,7 @@
   border:1px solid var(--feed-line); border-radius:3px; padding:3px 6px;
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
-.phone.alert .ph-chip.warn{ color:var(--signal-dim); border-color:rgba(217,79,4,.45); background:rgba(217,79,4,.1); }
+.phone.alert .ph-chip.warn{ color:var(--signal-dim); border-color:rgba(255,122,26,.45); background:rgba(255,122,26,.1); }
 
 .ph-body{ display:flex; align-items:center; gap:9px; padding:10px 11px 11px; flex-wrap:wrap; }
 
@@ -415,18 +424,18 @@
   order:1; flex:1 0 100%; min-width:0;
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
   padding:11px 6px;
-  background:rgba(217,79,4,.1); color:var(--signal-dim);
-  border:1px solid rgba(217,79,4,.4); border-radius:6px;
+  background:rgba(255,122,26,.1); color:var(--signal-dim);
+  border:1px solid rgba(255,122,26,.4); border-radius:6px;
   cursor:pointer; touch-action:none;
   transition:background .15s, border-color .15s;
 }
 .ph-hold-fill{
   position:absolute; left:0; bottom:0; top:0; width:0%;
-  background:rgba(217,79,4,.34); pointer-events:none;
+  background:rgba(255,122,26,.34); pointer-events:none;
 }
 .ph-hold-txt{ position:relative; font-family:var(--mono); font-size:8.5px; font-weight:600; letter-spacing:.08em; white-space:nowrap; }
 .ph-hold-sub{ position:relative; font-family:var(--mono); font-size:7px; letter-spacing:.04em; color:#9A6446; white-space:nowrap; }
-.ph-hold.pressing{ border-color:var(--signal); background:rgba(217,79,4,.18); }
+.ph-hold.pressing{ border-color:var(--signal); background:rgba(255,122,26,.18); }
 .ph-hold.done{ background:var(--signal); border-color:var(--signal); }
 .ph-hold.done .ph-hold-txt{ color:#0A0E11; }
 
@@ -452,8 +461,8 @@
   cursor:pointer; transition:background .12s, color .12s, border-color .12s;
 }
 .ph-pump-led{ width:6px; height:6px; border-radius:50%; background:#3A464F; transition:background .15s, box-shadow .15s; }
-.ph-pump[aria-pressed="true"]{ color:var(--signal-dim); border-color:rgba(217,79,4,.45); background:rgba(217,79,4,.1); }
-.ph-pump[aria-pressed="true"] .ph-pump-led{ background:var(--signal); box-shadow:0 0 7px rgba(217,79,4,.85); }
+.ph-pump[aria-pressed="true"]{ color:var(--signal-dim); border-color:rgba(255,122,26,.45); background:rgba(255,122,26,.1); }
+.ph-pump[aria-pressed="true"] .ph-pump-led{ background:var(--signal); box-shadow:0 0 7px rgba(255,122,26,.85); }
 
 /* NOT YET BUILT. The pump has no hardware and no command in the BLE protocol
    (BtBridge.java only defines F B L R S A, all drive). Pressing this used to

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About — AQUASCOUT</title>
+<meta name="description" content="AQUASCOUT is a BSCS thesis project at Saint Columban College: on-device fire and smoke detection for Android, built on a custom YOLOv8n model." />
+<meta name="theme-color" content="#08080A" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AQUASCOUT" />
+<meta property="og:title" content="About AQUASCOUT" />
+<meta property="og:description" content="A BSCS thesis project at Saint Columban College, Pagadian City." />
+<meta property="og:image" content="/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/og-image.png" />
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..110,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/" aria-label="AQUASCOUT home">
+      <img class="brand-mark" src="/mark-light.png" alt="" width="30" height="30" />
+      <span class="brand-word">AQUASCOUT</span>
+    </a>
+
+    <nav class="topnav" id="topnav">
+      <a href="/#measures">Results</a>
+      <a href="/#how">How it works</a>
+      <a href="/prototype">Prototype</a>
+      <a href="/about" aria-current="page">About</a>
+      <a href="/privacy">Privacy</a>
+    </nav>
+
+    <a class="btn btn-ember" href="/#get">Get the APK</a>
+
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="topnav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="wrap page">
+    <div class="page-inner">
+
+      <header class="page-hd">
+        <p class="kicker"><span class="tick" aria-hidden="true"></span> About the project</p>
+        <h1>A fire alarm that is already in your pocket.</h1>
+        <p class="meta">BSCS thesis &middot; Saint Columban College, Pagadian City &middot; 2026</p>
+      </header>
+
+      <div class="prose">
+        <div class="callout">
+          <p><strong>The one-line version.</strong> Commercial smoke alarms cost money and
+          need batteries. AQUASCOUT uses the camera and the model runtime that are
+          already in the phone in your pocket, and spends them watching for flame and smoke.</p>
+        </div>
+
+        <h2>Why it exists</h2>
+        <p>
+          Household fire is usually detected by a device that has to be bought,
+          installed, tested and kept alive with a battery. In the Philippines most
+          of them are simply not there. Meanwhile almost every adult in the country
+          carries a phone with a camera, a capable CPU and a network connection.
+        </p>
+        <p>
+          That phone can do the watching. The hard part is not the alert, it is
+          deciding whether a frame actually contains fire, on hardware with no GPU,
+          no network round trip, and no appetite for a 300 MB model file.
+        </p>
+
+        <h2>How it was built</h2>
+        <p>
+          The model is YOLOv8n, quantised to dynamic INT8, which is what brings it
+          down to 3.3&nbsp;MB. It was trained and evaluated on
+          <a href="/diagrams/how-it-works">D-Fire</a>, a dataset of 21,527 real fire
+          and smoke photographs, with a held-out test split of 4,306 images that the
+          model never saw.
+        </p>
+        <p>
+          The reason D-Fire matters is that fire photographs are hard. In a typical
+          D-Fire frame a flame covers a median of only 0.54% of the image, and 64% of
+          all flames are under 1% of the frame. An alerting system that needs a big
+          obvious fire to work is not an alerting system.
+        </p>
+        <ul>
+          <li><strong>mAP50 of 0.748</strong> on the held-out split, smoke 0.806, fire 0.689</li>
+          <li><strong>2.0 frames per second</strong> on a mid-range handset, entirely on-device</li>
+          <li><strong>21,527 images</strong> total, 17,221 for training and 4,306 held out</li>
+        </ul>
+
+        <h2>What it does not do</h2>
+        <p>
+          We would rather state the limits here than have you find them.
+        </p>
+        <ul>
+          <li><strong>It does not predict a fire.</strong> It detects visible flame and smoke. The research literature is clear that the more desirable goal is sensing combustion products before they accumulate, not after.</li>
+          <li><strong>It does not see an overheating appliance that has not yet produced flame or smoke.</strong> That is a thermal problem, and a thermal sensor such as an MLX90640 would cover it. That is designed, not built.</li>
+          <li><strong>It cannot see through a blocked lens.</strong> Camera visibility is the whole input.</li>
+          <li><strong>It is not a certified life-safety device.</strong> Do not replace working smoke alarms with it.</li>
+        </ul>
+
+        <h2>The rover</h2>
+        <p>
+          The optional rover is a LAFVIN 2WD chassis carrying an Arduino, a JDY-16
+          radio link and two ESP32-CAM heads, so the phone can keep watch from a desk
+          while the camera sits in another room. You can
+          <a href="/prototype">drive the 3D model of it here</a>. The water pump in
+          that model is marked as not yet built, because it is not.
+        </p>
+
+        <h2>The team</h2>
+        <div class="team-grid">
+          <div class="member">
+            <h3>Tampugao</h3>
+            <p>Model, Android app, system design</p>
+          </div>
+          <div class="member">
+            <h3>Pe&ntilde;aranda</h3>
+            <p>Alerting, escalation, evaluation</p>
+          </div>
+          <div class="member">
+            <h3>Malolot</h3>
+            <p>Hardware integration, rover</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="prose" style="margin-top:46px">
+        <h2>Read next</h2>
+        <ul>
+          <li><a href="/#measures">The measured results</a>, and the caveat that comes with them</li>
+          <li><a href="/#how">How a frame becomes an alert</a></li>
+          <li><a href="/diagrams/aquascout-architecture">The architecture and the trust boundary</a></li>
+          <li><a href="/privacy">What the app stores, and what it never sends</a></li>
+          <li><a href="/#get">Download the APK</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <div class="foot-l">
+      <span class="foot-brand"><img src="/mark-light.png" alt="" width="22" height="22" /> AQUASCOUT</span>
+      <span class="foot-sub">On-device fire and smoke detection for Android. Built at Saint Columban College, Pagadian City.</span>
+    </div>
+    <nav class="foot-nav">
+      <a href="/#measures">Results</a>
+      <a href="/#how">How it works</a>
+      <a href="/prototype">Prototype</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/diagrams/aquascout-architecture">Architecture</a>
+      <a href="/#get">Download</a>
+      <a href="mailto:zhameersheraztampugao@gmail.com">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="/nav.js"></script>
+</body>
+</html>
