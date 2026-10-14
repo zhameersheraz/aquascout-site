@@ -10,6 +10,7 @@ The site leads with the thing that matters for this project: the detection model
 |---|---|
 | `/` | Hero with a live simulated detection viewfinder, the three measured results, a four-row description of the app, and the download CTA |
 | `/prototype.html` | Interactive 3D rover. Orbit it, drive it with WASD, toggle the pump and cameras, and simulate an alert. |
+| `/about.html` | Who built it, the measured numbers, how it works, and what it still gets wrong |
 | `/privacy.html` | What data is stored, what leaves the device, and the two known weaknesses in this build |
 
 ## Design
@@ -27,6 +28,7 @@ Monochrome with a single signal colour.
 | `index.html` | Home page |
 | `prototype.html` | 3D rover page |
 | `privacy.html` | Privacy policy |
+| `about.html` | About page |
 | `style.css` | Shared tokens, layout, components |
 | `prototype.css` | 3D page: stage, control panel, hotspots |
 | `viewfinder.js` | The hero detection loop. Drifts a plume, acquires with converging corner brackets, tracks with a jittering confidence, then drops and re-acquires |

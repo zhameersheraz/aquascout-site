@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About — AQUASCOUT</title>
+<meta name="description" content="Who built AQUASCOUT, what it is, how it works, and what it still gets wrong." />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/style.css">
+<style>
+  /* Page-specific. Same tokens as privacy.html: the shared stylesheet owns the
+     nav, not the prose. */
+  body{background:#e8ecef;color:#101519;}
+  .wrap{max-width:760px;margin:0 auto;padding:24px 24px 80px}
+  .prose{font-size:16px;line-height:1.68;color:#39434c}
+  .prose h1{font-size:32px;line-height:1.2;margin:0 0 6px;letter-spacing:-.015em;color:#101519}
+  .prose h2{font-size:17px;margin:34px 0 10px;color:#101519;font-weight:650}
+  .prose p{margin:0 0 14px}
+  .prose ul{margin:0 0 14px;padding-left:22px}
+  .prose li{margin-bottom:7px}
+  .prose a{color:#101519;text-decoration:underline;text-underline-offset:3px;
+    text-decoration-color:rgba(16,21,25,.35)}
+  .prose a:hover{text-decoration-color:#d94f04}
+  .prose code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;
+    background:#f7f9fa;border:1px solid rgba(16,21,25,.12);border-radius:4px;padding:1px 5px}
+  .kicker{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+    letter-spacing:.24em;text-transform:uppercase;color:#646b71;margin:0 0 12px}
+  .meta{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;
+    color:#59646e;margin:0 0 30px;padding-bottom:18px;border-bottom:1px solid rgba(16,21,25,.12)}
+  .callout{border-left:3px solid #d94f04;background:rgba(217,79,4,.08);
+    padding:15px 18px;border-radius:0 8px 8px 0;margin:0 0 26px}
+  .callout p{margin:0;font-size:15px;color:#39434c}
+  .summary{border:1px solid rgba(16,21,25,.12);background:#f7f9fa;
+    border-radius:10px;padding:20px 22px;margin:0 0 34px}
+  .summary h2{margin:0 0 12px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;color:#646b71;font-weight:600}
+  table{border-collapse:collapse;width:100%;margin:0 0 18px;font-size:14.5px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid rgba(16,21,25,.12);vertical-align:top}
+  th{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:#646b71;font-weight:600}
+  td:first-child{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;white-space:nowrap}
+  td{color:#39434c;line-height:1.55}
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid rgba(16,21,25,.12);
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:#646b71}
+  footer a{color:#646b71;text-decoration:underline;text-underline-offset:3px;
+    text-decoration-color:rgba(16,21,25,.25)}
+  footer a:hover{text-decoration-color:#d94f04}
+  @media (max-width:620px){.prose h1{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topline" style="display:flex;justify-content:space-between;align-items:center;
+       gap:16px;flex-wrap:wrap;padding-bottom:18px;margin-bottom:30px;
+       border-bottom:1px solid rgba(16,21,25,.12)">
+    <a href="/" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;
+       font-weight:600;color:#101519;text-decoration:none;padding:8px 14px;
+       border:1px solid #c6cfd6;border-radius:6px;background:#f7f9fa">&larr; Back to site</a>
+    <span style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;
+      letter-spacing:.18em;color:#646b71;text-transform:uppercase">About</span>
+  </div>
+
+  <p class="kicker">About</p>
+  <h1>AQUASCOUT</h1>
+  <p class="meta">Built by zham &middot; Saint Columban College &middot; package com.scc.aquascout</p>
+
+  <div class="callout">
+    <p><b>The short version:</b> a fire and smoke detector that runs entirely on an
+    Android phone. A 3.3&nbsp;MB YOLOv8n model watches the camera at about
+    2&nbsp;frames per second, entirely on-device. Nothing is uploaded. When it
+    fires, it texts one number you choose with your location attached.</p>
+  </div>
+
+  <h2>Who made this</h2>
+  <p>
+    I built it as a Computer Science undergraduate project at Saint Columban
+    College. The Android app is one half; this site and the
+    <a href="/prototype">3D rover prototype</a> are the other.
+  </p>
+  <p>
+    The reasoning was simple. Smoke detectors are expensive, and the useful ones
+    need mains power or a battery that dies in the worst month. A phone is
+    already in your hand, already charged, and already has a camera pointed at
+    the ceiling. The hard part was never the idea, it was making detection fast
+    enough and small enough to run on a handset without draining it.
+  </p>
+  <p>
+    <a href="https://github.com/zhameersheraz">github.com/zhameersheraz</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://zhameersheraz-portfolio.vercel.app/">portfolio</a>
+  </p>
+
+  <div class="summary">
+    <h2>The numbers we will defend</h2>
+    <table>
+      <tr><th>Measure</th><th>Result</th><th>Where it comes from</th></tr>
+      <tr><td>mAP50</td><td>0.748</td><td>Smoke 0.806, fire 0.689</td></tr>
+      <tr><td>Test images</td><td>4,306</td><td>Held-out D-Fire split, never seen in training</td></tr>
+      <tr><td>Speed</td><td>2.0 fps</td><td>On the phone, no network needed</td></tr>
+      <tr><td>Model size</td><td>3.3 MB</td><td>YOLOv8n, runs on Android 8+</td></tr>
+    </table>
+  </div>
+
+  <h2>How it works</h2>
+  <table>
+    <tr><th>Step</th><th>What happens</th></tr>
+    <tr><td>Detect</td><td>Two classes only, fire and smoke. A focused model does one job better than a general one.</td></tr>
+    <tr><td>Alert</td><td>SMS to one number you choose, with the phone's GPS pin. Any carrier, and nothing to install on the receiving end.</td></tr>
+    <tr><td>Store</td><td>Firebase keeps your alert log. It never sees your camera.</td></tr>
+    <tr><td>Override</td><td>Smell smoke before the camera sees it? Hold the red button for a second and a half.</td></tr>
+  </table>
+  <p>
+    The <a href="/diagrams/aquascout-architecture">architecture diagram</a> walks
+    through the trust boundary, which is the part worth understanding: frames are
+    read into a buffer, classified, and discarded. The only things that can leave
+    the device are a label, a confidence number and your coordinates.
+    <a href="/privacy">The privacy policy</a> covers the rest.
+  </p>
+
+  <h2>What it still gets wrong</h2>
+  <div class="callout">
+    <p>Candles, cigarettes and steam scored high enough to trigger on an earlier
+    build and still need re-testing. This is the failure mode that matters most
+    in a house, and it is not solved. The sensitivity threshold is adjustable in
+    Settings, which moves the tradeoff around rather than removing it.</p>
+  </div>
+  <p>
+    Everything here is measured on a held-out split, not on a real house. Real
+    rooms have moving shadows, changing light and steam that a static test set
+    does not. Treat these numbers as a floor, not a promise.
+  </p>
+  <ul>
+    <li>Two classes. No LPG, no chemical, no electrical arcing.</li>
+    <li>About 2 frames per second. A fast flame can start between frames.</li>
+    <li>The model is small on purpose. Accuracy is the price of that.</li>
+    <li>Static analysis only, no live debugging.</li>
+  </ul>
+
+  <footer>
+    <a href="/">&larr; back to site</a> &nbsp;&middot;&nbsp;
+    <a href="/privacy">privacy</a> &nbsp;&middot;&nbsp;
+    <a href="mailto:zhameersheraztampugao@gmail.com">zhameersheraztampugao@gmail.com</a>
+    <br /><br />
+    &copy; 2026 Saint Columban College. All rights reserved.
+  </footer>
+</div>
+</body>
+</html>
