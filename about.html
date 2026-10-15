@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>About — AQUASCOUT</title>
 <meta name="description" content="AQUASCOUT is a BSCS thesis project at Saint Columban College: on-device fire and smoke detection for Android, built on a custom YOLOv8n model." />
-<meta name="theme-color" content="#E8E8E5" />
+<meta name="theme-color" content="#08080A" />
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AQUASCOUT" />
@@ -15,15 +15,15 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="/og-image.png" />
 
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32-light.png" media="(prefers-color-scheme: light)" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16-light.png" media="(prefers-color-scheme: light)" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32-dark.png" media="(prefers-color-scheme: dark)" />
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16-dark.png" media="(prefers-color-scheme: dark)" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
@@ -31,7 +31,7 @@
 <header class="topbar">
   <div class="wrap topbar-inner">
     <a class="brand" href="/" aria-label="AQUASCOUT home">
-      <img class="brand-mark" src="/mark-ink.png" alt="" width="28" height="28" />
+      <img class="brand-mark" src="/mark-light.png" alt="" width="30" height="30" />
       <span class="brand-word">AQUASCOUT</span>
     </a>
 
@@ -42,7 +42,7 @@
       <a href="/privacy">Privacy</a>
     </nav>
 
-    <a class="btn btn-ink" href="/#get">Get the APK</a>
+    <a class="btn btn-ember" href="/#get">Get the APK</a>
 
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="topnav">
       <span></span><span></span>
@@ -126,23 +126,24 @@
         <h2>The team</h2>
         <div class="team-grid">
           <div class="member">
-            <div class="member-name">Tampugao</div>
-            <span class="member-role">Programmer &middot; model, app, system design</span>
+            <h3>Tampugao</h3>
+            <p>Programmer &middot; model, Android app, system design</p>
           </div>
           <div class="member">
-            <div class="member-name">Pe&ntilde;aranda</div>
-            <span class="member-role">Project manager &middot; alerting, escalation</span>
+            <h3>Pe&ntilde;aranda</h3>
+            <p>Project manager &middot; alerting, escalation</p>
           </div>
           <div class="member">
-            <div class="member-name">Balbarino</div>
-            <span class="member-role">Quality assurance &middot; testing, results verification</span>
+            <h3>Balbarino</h3>
+            <p>Quality assurance &middot; testing, results verification</p>
           </div>
         </div>
       </div>
 
-      <div class="prose read-next">
+      <div class="prose" style="margin-top:46px">
         <h2>Read next</h2>
         <ul>
+          <li><a href="/about">The measured numbers</a>, and the caveat that comes with them</li>
           <li><a href="/#how">How a frame becomes an alert</a></li>
           <li><a href="/diagrams/aquascout-architecture">The architecture and the trust boundary</a></li>
           <li><a href="/privacy">What the app stores, and what it never sends</a></li>
@@ -157,9 +158,8 @@
 <footer class="foot">
   <div class="wrap foot-inner">
     <div class="foot-l">
-      <span class="foot-brand"><img src="/mark-ink.png" alt="" width="22" height="22" /> AQUASCOUT</span>
+      <span class="foot-brand"><img src="/mark-light.png" alt="" width="22" height="22" /> AQUASCOUT</span>
       <span class="foot-sub">On-device fire and smoke detection for Android. Built at Saint Columban College, Pagadian City.</span>
-      <span class="foot-meta">BSCS thesis &middot; 2026</span>
     </div>
     <nav class="foot-nav">
       <a href="/#how">How it works</a>
