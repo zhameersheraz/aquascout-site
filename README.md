@@ -78,6 +78,10 @@ Four traps in favicon generation, all of which shipped once:
 - **Do not dilate at 16px.** The compass ring is one pixel wide there, so any widening, 8-neighbour `MaxFilter(3)` or a 4-neighbour cross, fills the ring interior and the icon becomes a solid blob. Measured ink: plain 7.8-9.0%, cross-dilated 40%. Plain wins.
 - **Small sizes use the compass alone**, cropped at row 600, which is where the bottom arc closes without dragging wave fragments in. Compass plus three wave lines cannot resolve at 16px.
 
+Favicons fill their box completely (fill 1.0). Chrome renders the 32px icon **downscaled to 16px** in the tab, so filling the source box is what makes the glyph read at the size the eye judges. Measured ink at true 16px tab size: fill 0.86 gives 14.8% and reads faint; fill 1.0 gives 20.7% and reads correctly. Do not dilute: one cross-dilation pass reaches 53.9% and fills the compass ring into a solid disc.
+
+Always evaluate a favicon by rendering it at 16x16 and then magnifying, not by looking at the 32px or 512px file. Judging weight from the large file is how a mark ends up looking far too thin in the tab.
+
 `apple-touch-icon.png` keeps its dark tile deliberately: iOS places it on the home screen over an unpredictable wallpaper, where a transparent mark can vanish.
 
 `app-dashboard.png` and `app-alerts.png` are real captures from the build, not mock-ups.
