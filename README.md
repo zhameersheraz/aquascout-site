@@ -8,7 +8,7 @@ The site leads with the detection loop, shows the real app on the phone, and end
 
 | Page | What it is |
 |---|---|
-| `/` | Hero with a live simulated detection viewfinder, what the app does, how a frame becomes an alert, two real device screenshots, and the APK download |
+| `/` | Hero with a live simulated detection viewfinder, what the app does, how a frame becomes an alert, two real device screenshots, and the APK download. No prototype band and no results band. |
 | `/about.html` | What the project is, why it exists, how it was built, and an explicit list of what it does not do |
 | `/privacy.html` | What data is stored, what leaves the device, and why each permission is requested |
 | `/prototype.html` | Interactive 3D rover. Orbit it, drive it with WASD, toggle the pump and cameras, and simulate an alert. |
@@ -82,6 +82,13 @@ Three things about the favicons that are easy to get wrong:
 - Three.js is loaded from a CDN. If it fails to load, the prototype stage shows a plain message rather than a blank canvas.
 - `viewfinder.js` and the 3D loop both respect `prefers-reduced-motion`.
 - `.hotspots` clips its overflow. Without it, the absolutely positioned hotspot labels push the document wider than the viewport and the page scrolls sideways on a phone.
+- `.screens` clips its overflow too. The ember glow behind the handsets extends 28% past each side by design, and at narrow widths that was pushing the document wide.
+- The nav collapses to the burger at **900px**, not 720px. Between 720 and 900 the five links plus the CTA do not fit beside the brand and the button hung off the right edge.
+- The mobile dropdown background is fully opaque. At `.97` plus a backdrop blur, the hero headline still read through between the links.
+
+### Checking responsiveness
+
+`aqshots/sweep.js` walks every page across 15 widths from 320 to 1440 and reports any page whose document is wider than its viewport, naming the offending element. Three spot widths are not enough - a layout can be clean at 390 and 1440 and still blow out at 320 or 768. Both overflow bugs above were invisible at the original three widths.
 
 ## Verifying a change
 

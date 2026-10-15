@@ -111,14 +111,17 @@
 }
 .aq-foot-nav a:hover{ color:var(--aq-text); border-bottom-color:var(--aq-ember); }
 
-@media (max-width:820px){
+/* 900, not 820: below this the four links plus the CTA stop fitting beside the
+   brand, matching the breakpoint style.css uses for the main pages. */
+@media (max-width:900px){
   .aq-nav{
     position:absolute; top:66px; left:0; right:0;
     flex-direction:column; gap:0;
-    background:rgba(10,10,13,.97);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
+    /* Opaque for the same reason as the main pages: a translucent dropdown let
+       the page headline read through between the links. */
+    background:#0A0A0D;
     border-bottom:1px solid var(--aq-line);
+    box-shadow:0 24px 40px -20px rgba(0,0,0,.9);
     padding:8px 24px 16px;
     display:none;
   }

@@ -528,7 +528,13 @@ h1,h2,h3,h4{
 
 /* ── App screens (real device captures) ───────────────── */
 
-.screens{ padding:clamp(56px,8vw,96px) 0; }
+.screens{
+  padding:clamp(56px,8vw,96px) 0;
+  /* Clips the ember glow behind the handsets. That glow deliberately extends
+     past the handset by 28% on each side; at narrow widths that pushed the
+     document wider than the viewport and the whole page scrolled sideways. */
+  overflow:hidden;
+}
 
 .screen-grid{
   display:grid;
@@ -811,24 +817,30 @@ td{ color:var(--text-2); line-height:1.55; }
   .steps{ grid-template-columns:minmax(0,1fr); }
 }
 
-@media (max-width:720px){
+/* Nav collapses to the burger EARLY, at 900px rather than 720px. Between 720
+   and 900 the five links plus the CTA genuinely do not fit beside the brand,
+   and the CTA hung off the right edge. Found by sweeping 320 to 1440. */
+@media (max-width:900px){
   .topnav{
     position:absolute; top:66px; left:0; right:0;
     flex-direction:column; gap:0;
-    background:rgba(10,10,13,.97);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
+    /* Fully opaque. At .97 plus a backdrop blur the hero headline still read
+       through between the links, which made the menu look broken. */
+    background:#0A0A0D;
     border-bottom:1px solid var(--line);
+    box-shadow:0 24px 40px -20px rgba(0,0,0,.9);
     padding:8px var(--gut) 16px;
     display:none;
   }
   .topnav.open{ display:flex; }
-  .topnav a{ padding:14px 0; border-bottom:1px solid var(--line-soft, var(--line)); }
+  .topnav a{ padding:14px 0; border-bottom:1px solid var(--line); }
   /* Only the top bar's button is dropped. The hero CTA is the whole point
      of the page and must survive on a phone. */
   .topbar .btn{ display:none; }
   .burger{ display:block; }
+}
 
+@media (max-width:720px){
   .readouts{ grid-template-columns:1fr; }
   .features{ grid-template-columns:1fr; }
   .hero-actions{ flex-direction:column; align-items:stretch; }
