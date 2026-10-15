@@ -34,8 +34,8 @@
     </a>
 
     <nav class="topnav" id="topnav">
-      <a href="#measures">Results</a>
       <a href="#how">How it works</a>
+      <a href="#screens">The app</a>
       <a href="/prototype">Prototype</a>
       <a href="/about">About</a>
       <a href="/privacy">Privacy</a>
@@ -105,44 +105,6 @@
         </figcaption>
       </figure>
 
-    </div>
-  </section>
-
-  <!-- ── MEASURED ────────────────────────────────────────── -->
-  <section id="measures" class="measures">
-    <div class="wrap">
-      <header class="sec-head reveal">
-        <p class="kicker kicker-mute"><span class="tick" aria-hidden="true"></span> Measured, not promised</p>
-        <h2>Numbers we can defend.</h2>
-        <p>
-          These are our numbers, from the held-out D-Fire test split of 4,306
-          images and from the phone itself. They are the first thing we will
-          defend, so they are the first thing on this page.
-        </p>
-      </header>
-
-      <div class="readouts">
-        <div class="readout reveal" style="--d:0.04s">
-          <span class="readout-num">0.748</span>
-          <span class="readout-key">mAP50</span>
-          <span class="readout-note">Smoke 0.806 &middot; fire 0.689</span>
-        </div>
-        <div class="readout reveal" style="--d:0.10s">
-          <span class="readout-num">4,306</span>
-          <span class="readout-key">held-out images</span>
-          <span class="readout-note">Never seen in training</span>
-        </div>
-        <div class="readout reveal" style="--d:0.16s">
-          <span class="readout-num">2.0</span>
-          <span class="readout-key">frames / sec</span>
-          <span class="readout-note">On-device, no network needed</span>
-        </div>
-      </div>
-
-      <p class="measure-foot reveal">
-        The honest caveat: candles, cigarettes and steam scored high enough to
-        trigger on an earlier build and still need re-testing. The sensitivity threshold is now adjustable in Settings.
-      </p>
     </div>
   </section>
 
@@ -235,6 +197,48 @@
     </div>
   </section>
 
+  <!-- ── APP SCREENS ─────────────────────────────────────── -->
+  <section id="screens" class="screens">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <p class="kicker kicker-mute"><span class="tick" aria-hidden="true"></span> On the phone</p>
+        <h2>The whole interface.</h2>
+        <p>
+          Two screens, taken from the build on this page. The detector runs on
+          the handset, so what you see is what the phone is doing, not a mock-up.
+        </p>
+      </header>
+
+      <div class="screen-grid">
+        <figure class="phone-shot reveal" style="--d:0.04s">
+          <div class="phone-shell">
+            <img src="/app-dashboard.png" alt="AQUASCOUT dashboard showing model accuracy, frame rate, camera status and the live detect button" width="864" height="1920" loading="lazy" />
+          </div>
+          <figcaption class="shot-cap">
+            <b>Dashboard</b>
+            Model accuracy and speed, camera status, and the two actions that matter
+          </figcaption>
+        </figure>
+
+        <figure class="phone-shot reveal" style="--d:0.12s">
+          <div class="phone-shell">
+            <img src="/app-alerts.png" alt="AQUASCOUT alerts list showing detected fire and smoke events with confidence scores and timestamps" width="864" height="1920" loading="lazy" />
+          </div>
+          <figcaption class="shot-cap">
+            <b>Alerts</b>
+            Every detection kept with its confidence, time and whether you reviewed it
+          </figcaption>
+        </figure>
+      </div>
+
+      <p class="measure-foot reveal">
+        The honest caveat: candles, cigarettes and steam scored high enough to
+        trigger on an earlier build and still need re-testing. The sensitivity
+        threshold is adjustable in Settings.
+      </p>
+    </div>
+  </section>
+
   <!-- ── PROTOTYPE ───────────────────────────────────────── -->
   <section class="proto-band">
     <div class="wrap proto-inner">
@@ -296,15 +300,11 @@
         </ul>
 
         <p class="play-note">
-          This is the same signed build that is in Google Play internal testing.
-          Install the file directly, or join the Play test track from your
-          classmate and install from the store. Installing from a browser will ask
-          you to allow installs from that browser the first time.
-        </p>
-
-        <p class="sha">
-          <b>SHA-256</b> &nbsp;8271022E41A29AD7409163F12503EBAC3B79F1A73D0B132B4A1D859A82E12823<br />
-          <b>Signed by</b> &nbsp;CN=AQUASCOUT, OU=Saint Columban College &middot; APK Signature Scheme v2
+          This is the same signed build that is in Google Play internal testing,
+          so it is the app your classmates are testing. Install the file
+          directly, or join the Play test track and install from the store.
+          Installing from a browser will ask you once, the first time, to allow
+          installs from it.
         </p>
       </div>
     </div>
@@ -319,8 +319,8 @@
       <span class="foot-sub">On-device fire and smoke detection for Android. Built at Saint Columban College, Pagadian City.</span>
     </div>
     <nav class="foot-nav">
-      <a href="#measures">Results</a>
       <a href="#how">How it works</a>
+      <a href="#screens">The app</a>
       <a href="/prototype">Prototype</a>
       <a href="/about">About</a>
       <a href="/privacy">Privacy</a>

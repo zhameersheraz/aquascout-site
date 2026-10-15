@@ -526,6 +526,65 @@ h1,h2,h3,h4{
 .proto-svg .part circle{ fill:none; stroke:var(--text-3); stroke-width:1.4; }
 .proto-svg .part circle{ fill:var(--ember); stroke:none; opacity:.55; }
 
+/* ── App screens (real device captures) ───────────────── */
+
+.screens{ padding:clamp(56px,8vw,96px) 0; }
+
+.screen-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(24px,4vw,56px);
+  /* Pulled in from the page width. At full width two 290px phones drift to
+     opposite edges and read as unrelated, not as a pair. */
+  max-width:760px;
+  margin-inline:auto;
+  justify-items:center;
+  align-items:start;
+}
+.screen-grid > *{ min-width:0; }
+
+.phone-shot{
+  position:relative;
+  width:min(290px,100%);
+  isolation:isolate;
+}
+/* Ember pool behind the handset so the shot sits in the palette instead of
+   floating on flat black. */
+.phone-shot::before{
+  content:"";
+  position:absolute; z-index:-1;
+  left:-28%; right:-28%; top:6%; bottom:2%;
+  background:radial-gradient(50% 50% at 50% 46%, rgba(255,122,26,.24), transparent 70%);
+  pointer-events:none;
+}
+.phone-shell{
+  border-radius:30px;
+  padding:9px;
+  background:linear-gradient(160deg,#2C2C36 0%,#131319 55%,#0C0C10 100%);
+  border:1px solid rgba(255,255,255,.13);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.10) inset,
+    0 44px 80px -38px rgba(0,0,0,.95),
+    0 0 90px -34px rgba(255,122,26,.45);
+}
+.phone-shell img{
+  width:100%; height:auto; display:block;
+  border-radius:22px;
+}
+.shot-cap{
+  margin:16px 0 0;
+  text-align:center;
+  font-family:var(--mono);
+  font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--text-3);
+}
+.shot-cap b{ display:block; color:var(--text-2); font-weight:600; margin-bottom:4px; letter-spacing:.1em; }
+
+@media (max-width:760px){
+  .screen-grid{ grid-template-columns:1fr; gap:36px; }
+  .phone-shot{ width:min(250px,78%); }
+}
+
 /* ── Download ──────────────────────────────────────────── */
 
 .get{ padding:clamp(64px,9vw,116px) 0 clamp(70px,9vw,120px); }
@@ -533,12 +592,15 @@ h1,h2,h3,h4{
 .get-card{
   position:relative;
   overflow:hidden;
+  /* Narrower than the page wrap. Stretched to 1200px the copy sits in the left
+     third and the right half reads as an empty mistake. */
+  max-width:780px;
   background:
     linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,0)),
     var(--bg-card);
   border:1px solid var(--line-strong);
   border-radius:16px;
-  padding:clamp(28px,4vw,52px);
+  padding:clamp(28px,4vw,48px);
 }
 .get-card::before{
   content:"";
@@ -572,6 +634,7 @@ h1,h2,h3,h4{
   word-break:break-all;
 }
 .sha b{ color:var(--text-2); font-weight:600; }
+
 
 .play-note{
   margin:20px 0 0; padding:14px 18px;

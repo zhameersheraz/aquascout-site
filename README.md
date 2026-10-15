@@ -1,14 +1,14 @@
-﻿# AQUASCOUT website
+# AQUASCOUT website
 
 Marketing site for the [AQUASCOUT](https://aquascout.vercel.app) Android app. Static HTML, no build step, deployed on Vercel.
 
-The site leads with the thing that matters for this project: the detection model and its measured numbers. It then shows what the app does, how a frame becomes an alert, and a real signed APK to download.
+The site leads with the detection loop, shows the real app on the phone, and ends on a real signed APK to download. The measured numbers live on the About page rather than in their own homepage section.
 
 ## Pages
 
 | Page | What it is |
 |---|---|
-| `/` | Hero with a live simulated detection viewfinder, the three measured results, a four-card description of the app, how it works, and the APK download |
+| `/` | Hero with a live simulated detection viewfinder, what the app does, how a frame becomes an alert, two real device screenshots, and the APK download |
 | `/about.html` | What the project is, why it exists, how it was built, and an explicit list of what it does not do |
 | `/privacy.html` | What data is stored, what leaves the device, and why each permission is requested |
 | `/prototype.html` | Interactive 3D rover. Orbit it, drive it with WASD, toggle the pump and cameras, and simulate an alert. |
@@ -69,7 +69,13 @@ It is a universal APK rather than per-ABI splits so that no classmate has to pic
 
 `mark-light.png` and the icon set are cut from the 1024px transparent source mark. The source is black, which is invisible on this ground, so the glyph's alpha channel is reused as the paint mask and the original RGB is discarded.
 
-Favicon sizes are split: 16px and 32px are full-bleed with almost no padding, because a rounded tile with a 72% glyph collapses into grey mush at 16px. 48px and up keep the rounded tile.
+Three things about the favicons that are easy to get wrong:
+
+- **Icons must be fully opaque.** An earlier set was built with `img.paste(g, pos, g)`, which applies the mark's alpha twice, and LANCZOS then left edge pixels at alpha 193-220. The browser composites those against the tab colour, so the tab showed a washed-out grey smear. Every icon is now composited with `Image.alpha_composite` and has its alpha forced to 255.
+- **Scale the glyph to the TILE, not to the source.** An earlier version resized to a fraction of the source image size and pasted it into a px-sized canvas. At 16px the mark landed near `-230px` and almost none of it was inside the tile, so the shipped favicons were effectively blank squares.
+- **Small sizes use the compass alone.** The mark is a compass plus three wave lines; at 16px those collapse. The compass is cropped at row 600, which is where the bottom arc closes without dragging wave fragments in.
+
+`app-dashboard.png` and `app-alerts.png` are real captures from the build, not mock-ups.
 
 ## Notes
 
