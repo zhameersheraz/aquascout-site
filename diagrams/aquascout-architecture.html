@@ -3,21 +3,22 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#08080A" />
+<meta name="theme-color" content="#E8E8E5" />
 <title>AQUASCOUT system architecture</title>
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32-light.png" media="(prefers-color-scheme: light)" />
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16-light.png" media="(prefers-color-scheme: light)" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32-dark.png" media="(prefers-color-scheme: dark)" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16-dark.png" media="(prefers-color-scheme: dark)" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/diagrams/chrome.css">
 <style>
   :root{
-    --paper:#08080A; --paper-2:#0E0E13; --ink:#F4F4F7; --muted:#A6A6B2;
-    --soft:#74747F; --rule:rgba(255,255,255,.085); --rule-solid:rgba(255,255,255,.16);
-    --accent:#FF7A1A; --accent-tint:rgba(255,122,26,.13); --link:#FFB347;
+    --paper:#E8E8E5; --paper-2:#DEDEDA; --ink:#121214; --muted:#4E4E56;
+    --soft:#86868F; --rule:rgba(18,18,20,.085); --rule-solid:rgba(18,18,20,.16);
+    --accent:#D8410F; --accent-tint:rgba(216,65,15,.13); --link:#A8330A;
   }
   *{box-sizing:border-box}
   body{
@@ -55,7 +56,7 @@
     margin:0 0 10px;
   }
   h1{
-    font-family:"Archivo",sans-serif; font-weight:800; font-size:40px;
+    font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:40px;
     letter-spacing:-.015em; line-height:1.08; margin:0 0 12px;
   }
   .sub{ margin:0 0 32px; font-size:16px; line-height:1.55; color:var(--muted); max-width:62ch }
@@ -68,13 +69,13 @@
     display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
   }
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..110,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 </head>
 <body>
 <header class="aq-topbar">
   <div class="aq-topbar-inner">
     <a class="aq-brand" href="/" aria-label="AQUASCOUT home">
-      <img src="/mark-light.png" alt="" width="30" height="30" />
+      <img src="/mark-ink.png" alt="" width="28" height="28" />
       <span>AQUASCOUT</span>
     </a>
     <nav class="aq-nav" id="aqnav">
@@ -116,221 +117,221 @@
 
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#A6A6B2"/>
+      <polygon points="0 0, 8 3, 0 6" fill="#4E4E56"/>
     </marker>
     <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#FF7A1A"/>
+      <polygon points="0 0, 8 3, 0 6" fill="#D8410F"/>
     </marker>
     <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#FFB347"/>
+      <polygon points="0 0, 8 3, 0 6" fill="#A8330A"/>
     </marker>
   </defs>
 
-  <rect width="1200" height="880" fill="#08080A"/>
+  <rect width="1200" height="880" fill="#E8E8E5"/>
 
   <!-- ══ ZONES ══════════════════════════════════════════════ -->
   <rect x="48" y="140" width="512" height="392" rx="8"
-        fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.10)" stroke-width="0.8"/>
+        fill="rgba(18,18,20,0.02)" stroke="rgba(18,18,20,0.10)" stroke-width="0.8"/>
   <rect x="656" y="140" width="496" height="392" rx="8"
-        fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.10)" stroke-width="0.8"/>
+        fill="rgba(18,18,20,0.02)" stroke="rgba(18,18,20,0.10)" stroke-width="0.8"/>
   <rect x="48" y="580" width="1104" height="180" rx="8"
-        fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.10)"
+        fill="rgba(18,18,20,0.02)" stroke="rgba(18,18,20,0.10)"
         stroke-width="0.8" stroke-dasharray="4,4"/>
 
   <!-- zone label masks -->
-  <rect x="64" y="148" width="176" height="13" rx="2" fill="#08080A"/>
+  <rect x="64" y="148" width="176" height="13" rx="2" fill="#E8E8E5"/>
   <text x="68" y="158" font-family="'IBM Plex Mono',monospace" font-size="9" font-weight="500"
-        fill="rgba(255,255,255,0.45)" letter-spacing="0.14em">ON DEVICE</text>
+        fill="rgba(18,18,20,0.45)" letter-spacing="0.14em">ON DEVICE</text>
 
-  <rect x="672" y="148" width="220" height="13" rx="2" fill="#08080A"/>
+  <rect x="672" y="148" width="220" height="13" rx="2" fill="#E8E8E5"/>
   <text x="676" y="158" font-family="'IBM Plex Mono',monospace" font-size="9" font-weight="500"
-        fill="rgba(255,255,255,0.45)" letter-spacing="0.14em">LEAVES THE DEVICE</text>
+        fill="rgba(18,18,20,0.45)" letter-spacing="0.14em">LEAVES THE DEVICE</text>
 
-  <rect x="64" y="588" width="240" height="13" rx="2" fill="#08080A"/>
+  <rect x="64" y="588" width="240" height="13" rx="2" fill="#E8E8E5"/>
   <text x="68" y="598" font-family="'IBM Plex Mono',monospace" font-size="9" font-weight="500"
-        fill="rgba(255,255,255,0.45)" letter-spacing="0.14em">OPTIONAL FIELD UNIT</text>
+        fill="rgba(18,18,20,0.45)" letter-spacing="0.14em">OPTIONAL FIELD UNIT</text>
 
   <!-- ══ CONNECTORS (drawn before boxes) ═════════════════════ -->
 
   <!-- 1. camera -> model, straight (shared y) -->
   <line x1="256" y1="280" x2="330" y2="280"
-        stroke="#A6A6B2" stroke-width="1.2" marker-end="url(#arrow)"/>
+        stroke="#4E4E56" stroke-width="1.2" marker-end="url(#arrow)"/>
 
   <!-- 2. model -> alert log (HTTPS to Firebase) -->
   <path d="M 432,224 V 176 Q 432,168 440,168 H 772 Q 780,168 780,176 V 184"
-        fill="none" stroke="#FFB347" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        fill="none" stroke="#A8330A" stroke-width="1.2" marker-end="url(#arrow-link)"/>
 
   <!-- 3. model -> SMS alert -->
   <path d="M 384,336 V 428 Q 384,436 392,436 H 682"
-        fill="none" stroke="#FFB347" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        fill="none" stroke="#A8330A" stroke-width="1.2" marker-end="url(#arrow-link)"/>
 
   <!-- 4. SMS -> emergency contact -->
   <path d="M 872,436 H 1012 Q 1020,436 1020,428 V 408"
-        fill="none" stroke="#FFB347" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        fill="none" stroke="#A8330A" stroke-width="1.2" marker-end="url(#arrow-link)"/>
 
   <!-- 5. model -> rover (dashed: optional, in progress) -->
   <path d="M 480,336 V 564 Q 480,572 472,572 H 232 Q 224,572 224,580 V 616"
-        fill="none" stroke="#74747F" stroke-width="1" stroke-dasharray="4,3"
+        fill="none" stroke="#86868F" stroke-width="1" stroke-dasharray="4,3"
         marker-end="url(#arrow)"/>
 
   <!-- 6. FORBIDDEN: frames stop at the boundary -->
   <line x1="168" y1="320" x2="168" y2="512"
-        stroke="#FF7A1A" stroke-width="1.2" stroke-dasharray="5,4"/>
+        stroke="#D8410F" stroke-width="1.2" stroke-dasharray="5,4"/>
 
   <!-- ══ ARROW LABELS (mask + 8px gap above the stroke) ══════ -->
 
-  <rect x="276" y="260" width="44" height="12" rx="2" fill="#08080A"/>
+  <rect x="276" y="260" width="44" height="12" rx="2" fill="#E8E8E5"/>
   <text x="298" y="269" font-family="'IBM Plex Mono',monospace" font-size="8"
-        fill="#74747F" text-anchor="middle" letter-spacing="0.06em">FRAME</text>
+        fill="#86868F" text-anchor="middle" letter-spacing="0.06em">FRAME</text>
 
-  <rect x="556" y="148" width="100" height="12" rx="2" fill="#08080A"/>
+  <rect x="556" y="148" width="100" height="12" rx="2" fill="#E8E8E5"/>
   <text x="606" y="157" font-family="'IBM Plex Mono',monospace" font-size="8"
-        fill="#74747F" text-anchor="middle" letter-spacing="0.06em">LABEL + SCORE</text>
+        fill="#86868F" text-anchor="middle" letter-spacing="0.06em">LABEL + SCORE</text>
 
-  <rect x="500" y="416" width="72" height="12" rx="2" fill="#08080A"/>
+  <rect x="500" y="416" width="72" height="12" rx="2" fill="#E8E8E5"/>
   <text x="536" y="425" font-family="'IBM Plex Mono',monospace" font-size="8"
-        fill="#74747F" text-anchor="middle" letter-spacing="0.06em">LABEL + GPS</text>
+        fill="#86868F" text-anchor="middle" letter-spacing="0.06em">LABEL + GPS</text>
 
-  <rect x="898" y="416" width="80" height="12" rx="2" fill="#08080A"/>
+  <rect x="898" y="416" width="80" height="12" rx="2" fill="#E8E8E5"/>
   <text x="938" y="425" font-family="'IBM Plex Mono',monospace" font-size="8"
-        fill="#74747F" text-anchor="middle" letter-spacing="0.06em">SMS, 30S DEBOUNCE</text>
+        fill="#86868F" text-anchor="middle" letter-spacing="0.06em">SMS, 30S DEBOUNCE</text>
 
-  <rect x="292" y="552" width="128" height="12" rx="2" fill="#08080A"/>
+  <rect x="292" y="552" width="128" height="12" rx="2" fill="#E8E8E5"/>
   <text x="356" y="561" font-family="'IBM Plex Mono',monospace" font-size="8"
-        fill="#74747F" text-anchor="middle" letter-spacing="0.06em">D-PAD OVER BLE</text>
+        fill="#86868F" text-anchor="middle" letter-spacing="0.06em">D-PAD OVER BLE</text>
 
   <!-- forbidden label sits beside the vertical run, 12px to the right -->
-  <rect x="180" y="404" width="184" height="12" rx="2" fill="#08080A"/>
+  <rect x="180" y="404" width="184" height="12" rx="2" fill="#E8E8E5"/>
   <text x="188" y="413" font-family="'IBM Plex Mono',monospace" font-size="8"
-        fill="#FF7A1A" letter-spacing="0.06em">FRAMES STOP HERE</text>
+        fill="#D8410F" letter-spacing="0.06em">FRAMES STOP HERE</text>
 
   <!-- ══ STOP SYMBOL on the device boundary ═════════════════ -->
-  <line x1="48" y1="532" x2="560" y2="532" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
-  <circle cx="168" cy="532" r="12" fill="#08080A" stroke="#FF7A1A" stroke-width="1.6"/>
-  <path d="M 163,527 L 173,537 M 173,527 L 163,537" stroke="#FF7A1A" stroke-width="1.6" stroke-linecap="round"/>
+  <line x1="48" y1="532" x2="560" y2="532" stroke="rgba(18,18,20,0.22)" stroke-width="1"/>
+  <circle cx="168" cy="532" r="12" fill="#E8E8E5" stroke="#D8410F" stroke-width="1.6"/>
+  <path d="M 163,527 L 173,537 M 173,527 L 163,537" stroke="#D8410F" stroke-width="1.6" stroke-linecap="round"/>
 
   <!-- ══ NODES ═══════════════════════════════════════════════ -->
 
   <!-- Camera -->
-  <rect x="80" y="240" width="176" height="80" rx="6" fill="#08080A"/>
-  <rect x="80" y="240" width="176" height="80" rx="6" fill="rgba(255,255,255,0.10)"
-        stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
+  <rect x="80" y="240" width="176" height="80" rx="6" fill="#E8E8E5"/>
+  <rect x="80" y="240" width="176" height="80" rx="6" fill="rgba(18,18,20,0.10)"
+        stroke="rgba(18,18,20,0.30)" stroke-width="1"/>
   <rect x="92" y="252" width="44" height="13" rx="2" fill="none"
-        stroke="rgba(255,255,255,0.40)" stroke-width="0.8"/>
+        stroke="rgba(18,18,20,0.40)" stroke-width="0.8"/>
   <text x="114" y="261" font-family="'IBM Plex Mono',monospace" font-size="7"
-        fill="rgba(255,255,255,0.80)" text-anchor="middle" letter-spacing="0.08em">INPUT</text>
+        fill="rgba(18,18,20,0.80)" text-anchor="middle" letter-spacing="0.08em">INPUT</text>
   <text x="168" y="283" font-family="'IBM Plex Sans',sans-serif" font-size="12" font-weight="500"
-        fill="#F4F4F7" text-anchor="middle">Camera</text>
+        fill="#121214" text-anchor="middle">Camera</text>
   <text x="168" y="301" font-family="'IBM Plex Mono',monospace" font-size="9"
-        fill="#A6A6B2" text-anchor="middle">2.0 fps, 640x640</text>
+        fill="#4E4E56" text-anchor="middle">2.0 fps, 640x640</text>
 
   <!-- Model - FOCAL -->
-  <rect x="336" y="224" width="192" height="112" rx="6" fill="#08080A"/>
-  <rect x="336" y="224" width="192" height="112" rx="6" fill="rgba(255,122,26,0.08)"
-        stroke="#FF7A1A" stroke-width="1.6"/>
+  <rect x="336" y="224" width="192" height="112" rx="6" fill="#E8E8E5"/>
+  <rect x="336" y="224" width="192" height="112" rx="6" fill="rgba(216,65,15,0.08)"
+        stroke="#D8410F" stroke-width="1.6"/>
   <rect x="348" y="236" width="44" height="13" rx="2" fill="none"
-        stroke="rgba(255,122,26,0.55)" stroke-width="0.8"/>
+        stroke="rgba(216,65,15,0.55)" stroke-width="0.8"/>
   <text x="370" y="245" font-family="'IBM Plex Mono',monospace" font-size="7"
-        fill="#FF7A1A" text-anchor="middle" letter-spacing="0.08em">MODEL</text>
+        fill="#D8410F" text-anchor="middle" letter-spacing="0.08em">MODEL</text>
   <text x="432" y="270" font-family="'IBM Plex Sans',sans-serif" font-size="12" font-weight="500"
-        fill="#F4F4F7" text-anchor="middle">YOLOv8n dynamic INT8</text>
+        fill="#121214" text-anchor="middle">YOLOv8n dynamic INT8</text>
   <text x="432" y="288" font-family="'IBM Plex Mono',monospace" font-size="9"
-        fill="#A6A6B2" text-anchor="middle">3.2 MB, fire + smoke</text>
+        fill="#4E4E56" text-anchor="middle">3.2 MB, fire + smoke</text>
   <text x="432" y="314" font-family="'IBM Plex Mono',monospace" font-size="9"
-        fill="#FF7A1A" text-anchor="middle">mAP50 0.748</text>
+        fill="#D8410F" text-anchor="middle">mAP50 0.748</text>
 
   <!-- Alert log (Firebase) -->
-  <rect x="688" y="184" width="184" height="88" rx="6" fill="#08080A"/>
-  <rect x="688" y="184" width="184" height="88" rx="6" fill="#131319"
-        stroke="#F4F4F7" stroke-width="1"/>
+  <rect x="688" y="184" width="184" height="88" rx="6" fill="#E8E8E5"/>
+  <rect x="688" y="184" width="184" height="88" rx="6" fill="#DEDEDA"
+        stroke="#121214" stroke-width="1"/>
   <rect x="700" y="196" width="52" height="13" rx="2" fill="none"
-        stroke="rgba(255,255,255,0.40)" stroke-width="0.8"/>
+        stroke="rgba(18,18,20,0.40)" stroke-width="0.8"/>
   <text x="726" y="205" font-family="'IBM Plex Mono',monospace" font-size="7"
-        fill="rgba(255,255,255,0.80)" text-anchor="middle" letter-spacing="0.08em">CLOUD</text>
+        fill="rgba(18,18,20,0.80)" text-anchor="middle" letter-spacing="0.08em">CLOUD</text>
   <text x="780" y="226" font-family="'IBM Plex Sans',sans-serif" font-size="12" font-weight="500"
-        fill="#F4F4F7" text-anchor="middle">Alert log</text>
+        fill="#121214" text-anchor="middle">Alert log</text>
   <text x="780" y="244" font-family="'IBM Plex Mono',monospace" font-size="9"
-        fill="#A6A6B2" text-anchor="middle">Firebase, if signed in</text>
+        fill="#4E4E56" text-anchor="middle">Firebase, if signed in</text>
   <text x="780" y="260" font-family="'IBM Plex Mono',monospace" font-size="9"
-        fill="#74747F" text-anchor="middle">no frames stored</text>
+        fill="#86868F" text-anchor="middle">no frames stored</text>
 
   <!-- SMS -->
-  <rect x="688" y="392" width="184" height="88" rx="6" fill="#08080A"/>
-  <rect x="688" y="392" width="184" height="88" rx="6" fill="#131319"
-        stroke="#F4F4F7" stroke-width="1"/>
+  <rect x="688" y="392" width="184" height="88" rx="6" fill="#E8E8E5"/>
+  <rect x="688" y="392" width="184" height="88" rx="6" fill="#DEDEDA"
+        stroke="#121214" stroke-width="1"/>
   <rect x="700" y="404" width="52" height="13" rx="2" fill="none"
-        stroke="rgba(255,255,255,0.40)" stroke-width="0.8"/>
+        stroke="rgba(18,18,20,0.40)" stroke-width="0.8"/>
   <text x="726" y="413" font-family="'IBM Plex Mono',monospace" font-size="7"
-        fill="rgba(255,255,255,0.80)" text-anchor="middle" letter-spacing="0.08em">ALERT</text>
+        fill="rgba(18,18,20,0.80)" text-anchor="middle" letter-spacing="0.08em">ALERT</text>
   <text x="780" y="434" font-family="'IBM Plex Sans',sans-serif" font-size="12" font-weight="500"
-        fill="#F4F4F7" text-anchor="middle">SMS</text>
+        fill="#121214" text-anchor="middle">SMS</text>
   <text x="780" y="452" font-family="'IBM Plex Mono',monospace" font-size="9"
-        fill="#A6A6B2" text-anchor="middle">Semaphore API</text>
+        fill="#4E4E56" text-anchor="middle">Semaphore API</text>
   <text x="780" y="468" font-family="'IBM Plex Mono',monospace" font-size="9"
-        fill="#74747F" text-anchor="middle">optional, off by default</text>
+        fill="#86868F" text-anchor="middle">optional, off by default</text>
 
   <!-- Emergency contact -->
-  <rect x="920" y="308" width="200" height="96" rx="6" fill="#08080A"/>
-  <rect x="920" y="308" width="200" height="96" rx="6" fill="rgba(255,255,255,0.10)"
-        stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
+  <rect x="920" y="308" width="200" height="96" rx="6" fill="#E8E8E5"/>
+  <rect x="920" y="308" width="200" height="96" rx="6" fill="rgba(18,18,20,0.10)"
+        stroke="rgba(18,18,20,0.30)" stroke-width="1"/>
   <rect x="932" y="320" width="52" height="13" rx="2" fill="none"
-        stroke="rgba(255,255,255,0.40)" stroke-width="0.8"/>
+        stroke="rgba(18,18,20,0.40)" stroke-width="0.8"/>
   <text x="958" y="329" font-family="'IBM Plex Mono',monospace" font-size="7"
-        fill="rgba(255,255,255,0.80)" text-anchor="middle" letter-spacing="0.08em">ACTOR</text>
+        fill="rgba(18,18,20,0.80)" text-anchor="middle" letter-spacing="0.08em">ACTOR</text>
   <text x="1020" y="350" font-family="'IBM Plex Sans',sans-serif" font-size="12" font-weight="500"
-        fill="#F4F4F7" text-anchor="middle">Emergency contact</text>
+        fill="#121214" text-anchor="middle">Emergency contact</text>
   <text x="1020" y="368" font-family="'IBM Plex Mono',monospace" font-size="9"
-        fill="#A6A6B2" text-anchor="middle">one number, any carrier</text>
+        fill="#4E4E56" text-anchor="middle">one number, any carrier</text>
   <text x="1020" y="384" font-family="'IBM Plex Mono',monospace" font-size="9"
-        fill="#74747F" text-anchor="middle">no app needed</text>
+        fill="#86868F" text-anchor="middle">no app needed</text>
 
   <!-- Rover -->
-  <rect x="80" y="620" width="288" height="108" rx="6" fill="#08080A"/>
+  <rect x="80" y="620" width="288" height="108" rx="6" fill="#E8E8E5"/>
   <rect x="80" y="620" width="288" height="108" rx="6" fill="none"
-        stroke="rgba(255,255,255,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
+        stroke="rgba(18,18,20,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
   <rect x="92" y="632" width="84" height="13" rx="2" fill="none"
-        stroke="rgba(255,255,255,0.30)" stroke-width="0.8"/>
+        stroke="rgba(18,18,20,0.30)" stroke-width="0.8"/>
   <text x="134" y="641" font-family="'IBM Plex Mono',monospace" font-size="7"
-        fill="rgba(255,255,255,0.70)" text-anchor="middle" letter-spacing="0.08em">IN PROGRESS</text>
+        fill="rgba(18,18,20,0.70)" text-anchor="middle" letter-spacing="0.08em">IN PROGRESS</text>
   <text x="224" y="664" font-family="'IBM Plex Sans',sans-serif" font-size="12" font-weight="500"
-        fill="#F4F4F7" text-anchor="middle">LAFVIN 2WD rover</text>
+        fill="#121214" text-anchor="middle">LAFVIN 2WD rover</text>
   <text x="224" y="682" font-family="'IBM Plex Mono',monospace" font-size="9"
-        fill="#A6A6B2" text-anchor="middle">2 driven wheels + front caster</text>
+        fill="#4E4E56" text-anchor="middle">2 driven wheels + front caster</text>
   <text x="224" y="698" font-family="'IBM Plex Mono',monospace" font-size="9"
-        fill="#74747F" text-anchor="middle">Arduino UNO, JDY-16 BLE, HC-SR04</text>
+        fill="#86868F" text-anchor="middle">Arduino UNO, JDY-16 BLE, HC-SR04</text>
   <text x="224" y="714" font-family="'IBM Plex Mono',monospace" font-size="9"
-        fill="#74747F" text-anchor="middle">2 ESP32-CAM + water pump</text>
+        fill="#86868F" text-anchor="middle">2 ESP32-CAM + water pump</text>
 
   <!-- rover build-status note -->
-  <rect x="424" y="628" width="716" height="92" rx="6" fill="rgba(255,255,255,0.03)"
-        stroke="rgba(255,255,255,0.10)" stroke-width="0.8"/>
+  <rect x="424" y="628" width="716" height="92" rx="6" fill="rgba(18,18,20,0.03)"
+        stroke="rgba(18,18,20,0.10)" stroke-width="0.8"/>
   <text x="444" y="652" font-family="'IBM Plex Mono',monospace" font-size="9" font-weight="500"
-        fill="rgba(255,255,255,0.45)" letter-spacing="0.14em">RESPONSE UNIT STATUS</text>
+        fill="rgba(18,18,20,0.45)" letter-spacing="0.14em">RESPONSE UNIT STATUS</text>
   <text x="444" y="674" font-family="'IBM Plex Sans',sans-serif" font-size="12"
-        fill="#A6A6B2">Parts acquired and specified. Not wired: the motor driver failed and awaits</text>
+        fill="#4E4E56">Parts acquired and specified. Not wired: the motor driver failed and awaits</text>
   <text x="444" y="692" font-family="'IBM Plex Sans',sans-serif" font-size="12"
-        fill="#A6A6B2">replacement, so no actuation is claimed. The alert path works without it.</text>
+        fill="#4E4E56">replacement, so no actuation is claimed. The alert path works without it.</text>
 
   <!-- ══ LEGEND (horizontal strip) ═══════════════════════════ -->
-  <line x1="48" y1="812" x2="1152" y2="812" stroke="rgba(255,255,255,0.10)" stroke-width="0.8"/>
+  <line x1="48" y1="812" x2="1152" y2="812" stroke="rgba(18,18,20,0.10)" stroke-width="0.8"/>
   <text x="48" y="836" font-family="'IBM Plex Mono',monospace" font-size="9"
-        fill="#A6A6B2" letter-spacing="0.14em">LEGEND</text>
+        fill="#4E4E56" letter-spacing="0.14em">LEGEND</text>
 
-  <line x1="152" y1="832" x2="200" y2="832" stroke="#FFB347" stroke-width="1.2"
+  <line x1="152" y1="832" x2="200" y2="832" stroke="#A8330A" stroke-width="1.2"
         marker-end="url(#arrow-link)"/>
-  <text x="212" y="836" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#74747F">network call</text>
+  <text x="212" y="836" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#86868F">network call</text>
 
-  <line x1="332" y1="832" x2="380" y2="832" stroke="#74747F" stroke-width="1"
+  <line x1="332" y1="832" x2="380" y2="832" stroke="#86868F" stroke-width="1"
         stroke-dasharray="4,3" marker-end="url(#arrow)"/>
-  <text x="392" y="836" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#74747F">optional, not finished</text>
+  <text x="392" y="836" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#86868F">optional, not finished</text>
 
-  <circle cx="606" cy="832" r="9" fill="#08080A" stroke="#FF7A1A" stroke-width="1.4"/>
-  <path d="M 602,828 L 610,836 M 610,828 L 602,836" stroke="#FF7A1A" stroke-width="1.4" stroke-linecap="round"/>
-  <text x="622" y="836" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#74747F">blocked at the boundary</text>
+  <circle cx="606" cy="832" r="9" fill="#E8E8E5" stroke="#D8410F" stroke-width="1.4"/>
+  <path d="M 602,828 L 610,836 M 610,828 L 602,836" stroke="#D8410F" stroke-width="1.4" stroke-linecap="round"/>
+  <text x="622" y="836" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#86868F">blocked at the boundary</text>
 
-  <rect x="856" y="824" width="16" height="16" rx="3" fill="rgba(255,122,26,0.08)"
-        stroke="#FF7A1A" stroke-width="1.4"/>
-  <text x="884" y="836" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#74747F">focal, the thesis</text>
+  <rect x="856" y="824" width="16" height="16" rx="3" fill="rgba(216,65,15,0.08)"
+        stroke="#D8410F" stroke-width="1.4"/>
+  <text x="884" y="836" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#86868F">focal, the thesis</text>
 </svg>
 
   <div class="foot">
@@ -342,7 +343,7 @@
 <footer class="aq-foot">
   <div class="aq-foot-inner">
     <div class="aq-foot-l">
-      <span class="aq-foot-brand"><img src="/mark-light.png" alt="" width="22" height="22" /> AQUASCOUT</span>
+      <span class="aq-foot-brand"><img src="/mark-ink.png" alt="" width="22" height="22" /> AQUASCOUT</span>
       <span class="aq-foot-sub">On-device fire and smoke detection for Android. Built at Saint Columban College, Pagadian City.</span>
     </div>
     <nav class="aq-foot-nav">

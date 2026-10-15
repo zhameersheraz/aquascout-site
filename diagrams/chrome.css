@@ -1,80 +1,88 @@
 /* ============================================================
    diagrams/chrome.css
    ------------------------------------------------------------
-   The two diagram pages carry their own <style> block and their
-   own .foot / .wrap rules. Loading style.css on top of that would
-   fight over body background, .wrap padding and .foot, so this
-   file defines the site header and footer under their own class
-   names instead. Same look as the main pages, zero cascade risk.
+   The two diagram pages carry their own <style> block. Loading
+   style.css on top of that would fight over body background and
+   the shared header and footer, so this file declares the site
+   header and footer under their own aq-* names. Same look as the
+   main pages, zero cascade risk.
+
+   Field Record: paper ground, ink type, square corners, hairlines.
+   Vermilion is reserved for the accent states the diagram itself
+   depicts. The .phone and .screen classes are NOT declared here;
+   they stay dark in the page's own stylesheet, because the handset
+   really is dark.
    ============================================================ */
 
 :root{
-  --aq-bg:      #08080A;
-  --aq-text:    #F4F4F7;
-  --aq-text-2:  #A6A6B2;
-  --aq-line:    rgba(255,255,255,.085);
-  --aq-line-2:  rgba(255,255,255,.16);
-  --aq-ember:   #FF7A1A;
-  --aq-ember-lo:#E2570A;
-  --aq-mono:    "IBM Plex Mono", ui-monospace, monospace;
+  --aq-paper:   #E8E8E5;
+  --aq-paper-2: #DEDEDA;
+  --aq-ink:     #121214;
+  --aq-ink-2:   #4E4E56;
+  --aq-rule:    rgba(18,18,20,.16);
+  --aq-rule-2:  rgba(18,18,20,.08);
+  --aq-signal:  #D8410F;
+  --aq-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --aq-sans:    "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --aq-disp:    "Archivo", var(--aq-sans);
+  --aq-disp:    "Bricolage Grotesque", var(--aq-sans);
   --aq-maxw:    1240px;
 }
 
+body{ background:var(--aq-paper); }
+
 .aq-topbar{
   position:sticky; top:0; z-index:60;
-  background:rgba(8,8,10,.72);
-  backdrop-filter:blur(16px) saturate(1.5);
-  -webkit-backdrop-filter:blur(16px) saturate(1.5);
-  border-bottom:1px solid var(--aq-line);
+  background:rgba(232,232,229,.92);
+  -webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--aq-rule);
 }
 .aq-topbar-inner{
   max-width:var(--aq-maxw); margin:0 auto;
-  padding:0 24px;
-  display:flex; align-items:center; gap:20px;
-  height:66px;
+  padding:0 clamp(20px,5vw,64px);
+  display:flex; align-items:center; gap:28px;
+  height:68px;
 }
 .aq-brand{
   display:flex; align-items:center; gap:10px;
   text-decoration:none; margin-right:auto;
 }
-.aq-brand img{ width:30px; height:30px; }
+.aq-brand img{ width:28px; height:28px; }
 .aq-brand span{
   font-family:var(--aq-disp); font-weight:800;
-  font-size:15.5px; letter-spacing:.09em; color:var(--aq-text);
+  font-size:16px; letter-spacing:.01em; color:var(--aq-ink);
 }
 .aq-nav{ display:flex; gap:28px; }
 .aq-nav a{
   text-decoration:none; font-size:14.5px; font-weight:500;
-  color:var(--aq-text-2);
-  padding:7px 0; border-bottom:1px solid transparent;
+  color:var(--aq-ink-2);
+  padding-bottom:3px; border-bottom:1px solid transparent;
   transition:color .18s, border-color .18s;
 }
-.aq-nav a:hover{ color:var(--aq-text); border-bottom-color:var(--aq-line-2); }
-.aq-nav a[aria-current="page"]{ color:var(--aq-text); border-bottom-color:var(--aq-ember); }
+.aq-nav a:hover{ color:var(--aq-ink); border-bottom-color:var(--aq-rule); }
+.aq-nav a[aria-current="page"]{ color:var(--aq-ink); border-bottom-color:var(--aq-ink); }
 
+/* Square and ink, never a rounded vermilion pill. See the main
+   stylesheet rule 2 and rule 3. */
 .aq-cta{
   display:inline-flex; align-items:center; justify-content:center;
   text-decoration:none; font-family:var(--aq-sans);
-  font-size:14px; font-weight:600; white-space:nowrap;
-  padding:11px 20px; border-radius:6px;
-  background:linear-gradient(135deg,var(--aq-ember) 0%,var(--aq-ember-lo) 100%);
-  color:#1A0A02;
-  box-shadow:0 8px 24px -10px rgba(255,122,26,.75);
-  transition:transform .16s, background .16s;
+  font-size:14px; font-weight:500; white-space:nowrap;
+  padding:12px 22px; border:1px solid var(--aq-ink);
+  background:var(--aq-ink); color:var(--aq-paper);
+  transition:background .18s, color .18s;
 }
-.aq-cta:hover{ transform:translateY(-2px); background:linear-gradient(135deg,#FF8A34 0%,var(--aq-ember) 100%); }
+.aq-cta:hover{ background:transparent; color:var(--aq-ink); }
 
 .aq-burger{
   display:none;
   width:40px; height:40px; position:relative;
-  background:none; border:1px solid var(--aq-line-2);
-  border-radius:6px; cursor:pointer; padding:0;
+  background:transparent; border:1px solid var(--aq-rule);
+  cursor:pointer; padding:0;
 }
 .aq-burger span{
   position:absolute; left:11px; right:11px; height:1.5px;
-  background:var(--aq-text); transition:transform .22s, opacity .22s;
+  background:var(--aq-ink); transition:transform .2s, opacity .2s;
 }
 .aq-burger span:nth-child(1){ top:17px; }
 .aq-burger span:nth-child(2){ bottom:17px; }
@@ -82,51 +90,58 @@
 .aq-burger[aria-expanded="true"] span:nth-child(2){ transform:translateY(-3px) rotate(-45deg); }
 
 .aq-foot{
-  margin-top:48px;
-  border-top:1px solid var(--aq-line);
-  background:linear-gradient(180deg,#08080A,#0B0B10);
-  padding:36px 0 44px;
+  margin-top:clamp(48px,7vw,96px);
+  border-top:1px solid var(--aq-rule);
+  background:var(--aq-paper);
+  padding:clamp(36px,4vw,48px) 0 clamp(44px,5vw,56px);
 }
 .aq-foot-inner{
-  max-width:var(--aq-maxw); margin:0 auto; padding:0 24px;
+  max-width:var(--aq-maxw); margin:0 auto;
+  padding:0 clamp(20px,5vw,64px);
   display:flex; flex-wrap:wrap; gap:24px;
   align-items:flex-start; justify-content:space-between;
 }
-.aq-foot-l{ max-width:40ch; }
+.aq-foot-l{ max-width:46ch; }
 .aq-foot-brand{
-  display:flex; align-items:center; gap:9px;
+  display:flex; align-items:center; gap:10px;
   font-family:var(--aq-disp); font-weight:800;
-  font-size:15px; letter-spacing:.09em; color:var(--aq-text);
+  font-size:15px; letter-spacing:.01em; color:var(--aq-ink);
 }
 .aq-foot-brand img{ width:22px; height:22px; }
 .aq-foot-sub{
-  display:block; margin-top:9px;
-  font-size:13.5px; line-height:1.55; color:var(--aq-text-2);
+  display:block; margin-top:12px;
+  font-size:13.5px; line-height:1.6; color:var(--aq-ink-2);
+}
+.aq-foot-meta{
+  display:block; margin-top:20px;
+  font-family:var(--aq-mono); font-size:12px;
+  letter-spacing:.14em; text-transform:uppercase;
+  color:#86868F;
 }
 .aq-foot-nav{ display:flex; flex-wrap:wrap; gap:10px 26px; }
 .aq-foot-nav a{
-  font-size:14px; color:var(--aq-text-2); text-decoration:none;
-  border-bottom:1px solid transparent;
+  font-size:14px; color:var(--aq-ink-2); text-decoration:none;
+  border-bottom:1px solid var(--aq-rule);
   transition:color .18s, border-color .18s;
 }
-.aq-foot-nav a:hover{ color:var(--aq-text); border-bottom-color:var(--aq-ember); }
+.aq-foot-nav a:hover{ color:var(--aq-ink); border-bottom-color:var(--aq-ink); }
 
 /* 900, not 820: below this the four links plus the CTA stop fitting beside the
    brand, matching the breakpoint style.css uses for the main pages. */
 @media (max-width:900px){
+  .aq-topbar-inner{ position:relative; }
   .aq-nav{
-    position:absolute; top:66px; left:0; right:0;
+    position:absolute; top:68px; left:0; right:0;
     flex-direction:column; gap:0;
     /* Opaque for the same reason as the main pages: a translucent dropdown let
        the page headline read through between the links. */
-    background:#0A0A0D;
-    border-bottom:1px solid var(--aq-line);
-    box-shadow:0 24px 40px -20px rgba(0,0,0,.9);
-    padding:8px 24px 16px;
+    background:var(--aq-paper);
+    border-bottom:1px solid var(--aq-rule);
+    padding:8px clamp(20px,5vw,64px) 16px;
     display:none;
   }
   .aq-nav.open{ display:flex; }
-  .aq-nav a{ padding:14px 0; border-bottom:1px solid var(--aq-line); }
+  .aq-nav a{ padding:14px 0; border-bottom:1px solid var(--aq-rule); }
   .aq-cta{ display:none; }
   .aq-burger{ display:block; }
   .aq-foot-inner{ flex-direction:column; }

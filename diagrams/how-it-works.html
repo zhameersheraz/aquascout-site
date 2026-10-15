@@ -3,20 +3,23 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#08080A" />
+<meta name="theme-color" content="#E8E8E5" />
 <title>AQUASCOUT — how it works, step by step</title>
 <meta name="description" content="A plain-language walkthrough of what AQUASCOUT does when it sees fire or smoke, in five steps." />
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32-light.png" media="(prefers-color-scheme: light)" />
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16-light.png" media="(prefers-color-scheme: light)" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32-dark.png" media="(prefers-color-scheme: dark)" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16-dark.png" media="(prefers-color-scheme: dark)" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/diagrams/chrome.css">
 <style>
   :root{
-    --paper:#08080A; --paper-2:#0E0E13; --ink:#F4F4F7; --muted:#A6A6B2;
-    --soft:#74747F; --rule:rgba(255,255,255,.085); --rule-solid:rgba(255,255,255,.16);
-    --accent:#FF7A1A; --accent-tint:rgba(255,122,26,.13); --link:#FFB347;
+    --paper:#E8E8E5; --paper-2:#DEDEDA; --ink:#121214; --muted:#4E4E56;
+    --soft:#86868F; --rule:rgba(18,18,20,.085); --rule-solid:rgba(18,18,20,.16);
+    --accent:#D8410F; --accent-tint:rgba(216,65,15,.13); --link:#A8330A;
   }
   *{box-sizing:border-box}
   body{
@@ -47,7 +50,7 @@
     font-size:11px; letter-spacing:.24em; color:var(--soft);
     text-transform:uppercase; margin:0 0 12px;
   }
-  h1{font-size:38px; line-height:1.15; margin:0 0 14px; font-weight:700; letter-spacing:-.015em}
+  h1{font-family:"Bricolage Grotesque",sans-serif; font-size:clamp(34px,4.4vw,56px); line-height:.96; margin:0 0 14px; font-weight:800; letter-spacing:-.035em}
   .lede{font-size:17px; line-height:1.6; color:var(--muted); margin:0 0 40px; max-width:64ch}
 
   /* ── steps ─────────────────────────────── */
@@ -60,15 +63,15 @@
   .step::before{
     content:counter(s);
     position:absolute; left:0; top:2px;
-    width:46px; height:46px; border-radius:50%;
+    width:46px; height:46px; border-radius:0;
     display:grid; place-items:center;
-    background:var(--ink); color:var(--paper-2);
+    background:var(--ink); color:var(--paper);
     font-family:"IBM Plex Mono",ui-monospace,monospace;
     font-size:19px; font-weight:600;
   }
-  .step.optional::before{background:var(--paper-2); color:var(--muted);
+  .step.optional::before{background:transparent; color:var(--muted);
     border:1px dashed var(--rule-solid)}
-  .step h2{font-size:19px; margin:8px 0 6px; font-weight:650; letter-spacing:-.005em}
+  .step h2{font-family:"Bricolage Grotesque",sans-serif; font-size:20px; margin:8px 0 6px; font-weight:800; letter-spacing:-.015em}
   .step p{margin:0; font-size:15px; line-height:1.62; color:var(--muted); max-width:62ch}
   .step p + p{margin-top:8px}
   .step code{
@@ -104,19 +107,19 @@
   .flameglow{
     position:absolute; left:50%; bottom:9%; transform:translateX(-50%);
     width:60px; height:70px; border-radius:50% 50% 44% 44%;
-    background:radial-gradient(circle at 50% 72%, #ffcf6b, #FF7A1A 58%, #8a2f02 100%);
+    background:radial-gradient(circle at 50% 72%, #A8330A, #D8410F 58%, #D8410F 100%);
     filter:blur(.4px);
   }
   .puff{
     position:absolute; left:50%; top:22%; transform:translateX(-50%);
     width:110px; height:58px; border-radius:50%;
-    background:radial-gradient(ellipse at 50% 60%, rgba(176,189,198,.42), rgba(176,189,198,0) 76%);
+    background:radial-gradient(ellipse at 50% 60%, rgba(18,18,20,.42), rgba(18,18,20,0) 76%);
   }
   .bbox{
     position:absolute; border:1.5px solid var(--accent); border-radius:3px;
   }
   .bbox.fire{left:38%; bottom:9%; width:26%; height:31%}
-  .bbox.smoke{left:22%; top:24%; width:56%; height:22%; border-color:#9aa9b3; border-style:dashed; border-width:1px}
+  .bbox.smoke{left:22%; top:24%; width:56%; height:22%; border-color:#4E4E56; border-style:dashed; border-width:1px}
   .lbl{
     position:absolute; font-family:"IBM Plex Mono",ui-monospace,monospace;
     font-size:7.5px; letter-spacing:.08em; text-transform:uppercase;
@@ -124,7 +127,7 @@
   }
   .lbl.fire{left:38%; bottom:calc(9% + 31%); background:var(--accent); color:#fff}
   .lbl.smoke{left:50%; top:calc(24% - 12px); transform:translateX(-50%);
-    background:#9aa9b3; color:#0A0E11}
+    background:#4E4E56; color:#DEDEDA}
   .hudbar{
     position:absolute; left:0; right:0; top:0;
     display:flex; justify-content:space-between; align-items:center;
@@ -167,7 +170,7 @@
     font-size:10.5px; letter-spacing:.1em; color:var(--soft);
   }
   @media (max-width:620px){
-    h1{font-size:29px}
+    h1{font-size:30px}
     .demo{flex-direction:column; gap:26px}
     .phone{width:170px}
   }
@@ -177,7 +180,7 @@
 <header class="aq-topbar">
   <div class="aq-topbar-inner">
     <a class="aq-brand" href="/" aria-label="AQUASCOUT home">
-      <img src="/mark-light.png" alt="" width="30" height="30" />
+      <img src="/mark-ink.png" alt="" width="28" height="28" />
       <span>AQUASCOUT</span>
     </a>
     <nav class="aq-nav" id="aqnav">
@@ -328,7 +331,7 @@
 <footer class="aq-foot">
   <div class="aq-foot-inner">
     <div class="aq-foot-l">
-      <span class="aq-foot-brand"><img src="/mark-light.png" alt="" width="22" height="22" /> AQUASCOUT</span>
+      <span class="aq-foot-brand"><img src="/mark-ink.png" alt="" width="22" height="22" /> AQUASCOUT</span>
       <span class="aq-foot-sub">On-device fire and smoke detection for Android. Built at Saint Columban College, Pagadian City.</span>
     </div>
     <nav class="aq-foot-nav">
