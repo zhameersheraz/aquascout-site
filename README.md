@@ -11,7 +11,6 @@ The site leads with the detection loop, shows the real app on the phone, and end
 | `/` | Hero with a live simulated detection viewfinder, what the app does, how a frame becomes an alert, two real device screenshots, and the APK download. No prototype band and no results band. |
 | `/about.html` | What the project is, why it exists, how it was built, and an explicit list of what it does not do |
 | `/privacy.html` | What data is stored, what leaves the device, and why each permission is requested |
-| `/prototype.html` | Interactive 3D rover. Orbit it, drive it with WASD, toggle the pump and cameras, and simulate an alert. |
 | `/diagrams/aquascout-architecture.html` | The device trust boundary diagram |
 | `/diagrams/how-it-works.html` | Plain-language walkthrough of the five detection steps |
 
@@ -28,7 +27,7 @@ Near-black with an ember accent.
 
 ### Token compatibility note
 
-`style.css` still exposes the original token names (`--ink`, `--ground`, `--signal`, ...) because `prototype.css` was written against them. **Their roles did not change**: `--ink` is the dark surface, `--ground` is the light surface, so `--ground` is what text is coloured with. Do not swap them to "fix" the naming.
+Note the naming: `--ink` is the dark surface and `--ground` is the light one, so text is coloured with `--ground`. The names read backwards. Do not "fix" them.
 
 `diagrams/chrome.css` is separate on purpose. The two diagram pages carry their own `<style>` block and their own `.foot` and `.wrap` rules, so loading `style.css` there would fight over body background, wrapper padding and the footer. The shared header and footer live under `aq-*` class names there instead.
 
@@ -50,14 +49,11 @@ It is a universal APK rather than per-ABI splits so that no classmate has to pic
 | `index.html` | Home page |
 | `about.html` | About the project |
 | `privacy.html` | Privacy policy |
-| `prototype.html` | 3D rover page |
 | `diagrams/*.html` | Standalone figures, each with its own inline stylesheet |
 | `style.css` | Shared tokens, layout, components |
 | `diagrams/chrome.css` | Header and footer for the diagram pages only |
-| `prototype.css` | 3D page: stage, control panel, hotspots |
 | `viewfinder.js` | The hero detection loop. Drifts a plume, acquires with converging corner brackets, tracks with a jittering confidence, then drops and re-acquires |
 | `nav.js` | Mobile menu and scroll reveal |
-| `prototype.js` | Three.js scene, rover assembly, drive physics, hotspots, event log |
 | `mark-light.png`, `mark-ember.png` | AQUASCOUT compass mark, white and ember, cropped to its bounding box |
 | `favicon-16/32/48.png`, `apple-touch-icon.png`, `android-chrome-192/512.png`, `icon-512.png` | Browser, iOS and Android icons |
 | `og-image.png` | Link preview card, 1200x630 |
@@ -88,7 +84,7 @@ Always evaluate a favicon by rendering it at 16x16 and then magnifying, not by l
 
 ## Notes
 
-- Three.js is loaded from a CDN. If it fails to load, the prototype stage shows a plain message rather than a blank canvas.
+- Three.js is loaded from a CDN. If it fails to load, the hero viewfinder canvas shows a plain message rather than a blank box.
 - `viewfinder.js` and the 3D loop both respect `prefers-reduced-motion`.
 - `.hotspots` clips its overflow. Without it, the absolutely positioned hotspot labels push the document wider than the viewport and the page scrolls sideways on a phone.
 - `.screens` clips its overflow too. The ember glow behind the handsets extends 28% past each side by design, and at narrow widths that was pushing the document wide.
