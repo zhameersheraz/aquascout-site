@@ -27,6 +27,12 @@
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=300" }
       ]
+    },
+    {
+      "source": "/(favicon-.*|icon-512|android-chrome-.*|apple-touch-icon).png",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
     }
   ]
 }
