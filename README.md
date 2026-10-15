@@ -69,11 +69,16 @@ It is a universal APK rather than per-ABI splits so that no classmate has to pic
 
 `mark-light.png` and the icon set are cut from the 1024px transparent source mark. The source is black, which is invisible on this ground, so the glyph's alpha channel is reused as the paint mask and the original RGB is discarded.
 
-Three things about the favicons that are easy to get wrong:
+The tab icons are **transparent with an ember mark**. An earlier set was a near-black tile with a white mark, which on a light browser tab reads as a black rectangle rather than a logo. Ember was chosen over white because a white mark needs an opaque dark tile to survive, which is exactly what the transparent version removes; ember holds up against both light and dark tab chrome.
 
-- **Icons must be fully opaque.** An earlier set was built with `img.paste(g, pos, g)`, which applies the mark's alpha twice, and LANCZOS then left edge pixels at alpha 193-220. The browser composites those against the tab colour, so the tab showed a washed-out grey smear. Every icon is now composited with `Image.alpha_composite` and has its alpha forced to 255.
-- **Scale the glyph to the TILE, not to the source.** An earlier version resized to a fraction of the source image size and pasted it into a px-sized canvas. At 16px the mark landed near `-230px` and almost none of it was inside the tile, so the shipped favicons were effectively blank squares.
-- **Small sizes use the compass alone.** The mark is a compass plus three wave lines; at 16px those collapse. The compass is cropped at row 600, which is where the bottom arc closes without dragging wave fragments in.
+Four traps in favicon generation, all of which shipped once:
+
+- **Scale the glyph to the TILE, not to the source.** Resizing to a fraction of the source image and pasting into a px-sized canvas put the mark near `-230px` at 16px, so the shipped icons were blank squares that still returned HTTP 200 with a plausible byte size.
+- **Do not double-apply alpha.** `img.paste(g, pos, g)` applies the mark's alpha twice; LANCZOS then leaves edges at alpha 193-220 and the browser composites them into a grey smear. That applies to *opaque* icons, which use `alpha_composite` then `putalpha(255)`.
+- **Do not dilate at 16px.** The compass ring is one pixel wide there, so any widening, 8-neighbour `MaxFilter(3)` or a 4-neighbour cross, fills the ring interior and the icon becomes a solid blob. Measured ink: plain 7.8-9.0%, cross-dilated 40%. Plain wins.
+- **Small sizes use the compass alone**, cropped at row 600, which is where the bottom arc closes without dragging wave fragments in. Compass plus three wave lines cannot resolve at 16px.
+
+`apple-touch-icon.png` keeps its dark tile deliberately: iOS places it on the home screen over an unpredictable wallpaper, where a transparent mark can vanish.
 
 `app-dashboard.png` and `app-alerts.png` are real captures from the build, not mock-ups.
 
