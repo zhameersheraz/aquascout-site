@@ -247,14 +247,36 @@
         <p class="kicker"><span class="tick" aria-hidden="true"></span> Get the app</p>
         <h2>Point it at a room. See what it does.</h2>
         <p class="get-lede">
-          One signed APK. Android 8 and up. Detection and SMS work without an
-          account; signing in only adds log sync across your devices.
+          Android 8 and up. Detection works without an account; signing in only
+          adds log sync across your devices.
         </p>
 
-        <a class="btn btn-ember btn-lg" href="/AQUASCOUT-1.51.apk" download>
-          Download the APK
-          <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 6.5L8 10l3.5-3.5M2.5 13h11"/></svg>
-        </a>
+        <div class="get-ways">
+          <div class="way">
+            <a class="btn btn-ember btn-lg" href="https://play.google.com/apps/internaltest/4701668131224318256" target="_blank" rel="noopener">
+              Join on Google Play
+              <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+            <p class="way-note">
+              <b>Recommended.</b> Sign in with the Google account you were
+              added with, tap Accept, then install from the Play Store. Until
+              the store listing is finished the app appears under the temporary
+              name <b>com.scc.aquascout (unreviewed)</b>. That is the same app.
+            </p>
+          </div>
+
+          <div class="way">
+            <a class="btn btn-ghost btn-lg" href="/AQUASCOUT-1.51.apk" download>
+              Download the APK
+              <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 6.5L8 10l3.5-3.5M2.5 13h11"/></svg>
+            </a>
+            <p class="way-note">
+              No Google account needed. Your browser will ask once, the first
+              time, to allow installs from it. Installing this way does
+              <b>not</b> register you as a Play tester.
+            </p>
+          </div>
+        </div>
 
         <ul class="get-facts">
           <li><b>39.3 MB</b> download</li>
@@ -264,11 +286,9 @@
         </ul>
 
         <p class="play-note">
-          This is the same signed build that is in Google Play internal testing,
-          so it is the app your classmates are testing. Install the file
-          directly, or join the Play test track and install from the store.
-          Installing from a browser will ask you once, the first time, to allow
-          installs from it.
+          To send an SMS alert, paste your Semaphore API key into Settings
+          first. Without it the detector still runs and logs detections, but no
+          message is ever sent.
         </p>
       </div>
     </div>

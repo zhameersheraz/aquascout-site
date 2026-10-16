@@ -583,6 +583,27 @@ h1,h2,h3,h4{
 .get h2{ font-size:clamp(28px,4.4vw,46px); margin-bottom:18px; max-width:20ch; }
 .get-lede{ margin:0 0 30px; font-size:16.5px; color:var(--text-2); max-width:56ch; }
 
+/* Two install routes side by side. Play is first because an APK sideload is
+   invisible to Play Console and never shows up as an installed tester. */
+.get-ways{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(18px,2.5vw,28px);
+}
+.way{ min-width:0; }
+.way .btn{ width:100%; }
+.way-note{
+  margin:14px 0 0;
+  font-size:13.5px;
+  line-height:1.62;
+  color:var(--text-3);
+}
+.way-note b{ color:var(--text-2); font-weight:600; }
+
+@media (max-width:760px){
+  .get-ways{ grid-template-columns:minmax(0,1fr); }
+}
+
 .get-facts{
   display:flex; flex-wrap:wrap; gap:10px;
   margin:26px 0 30px; padding:0; list-style:none;
