@@ -33,12 +33,12 @@ Note the naming: `--ink` is the dark surface and `--ground` is the light one, so
 
 ## The APK
 
-`AQUASCOUT-1.54.apk` is the signed release build, copied straight from `app/build/outputs/apk/release/app-release.apk`.
+`AQUASCOUT-1.55.apk` is the signed release build, copied straight from `app/build/outputs/apk/release/app-release.apk`.
 
 - Signed with `CN=AQUASCOUT, OU=Saint Columban College`, APK Signature Scheme v2
 - Same keystore as the Google Play closed testing upload
 - 38.8 MB, universal: arm64-v8a, armeabi-v7a, x86, x86_64
-- SHA-256 `8870E20AB7799742FAA3AFFE1372D2EF7A35F6F02CC5348E06EA29F3D6D97D52`
+- SHA-256 `47B6CFB1A58B6138BABC370A4D291EDE761CC0DBF1FAF8F9B57ED36BF6BFC6FC`
 - 16 KB page size ready: every native library in the APK is 16 KB ELF aligned, so it runs on Android 15+ devices that use 16 KB memory pages
 
 It is a universal APK rather than per-ABI splits so that no classmate has to pick the right file. About 17 MB of the total is x86 and x86_64 native libraries, which no physical phone needs.
@@ -59,7 +59,7 @@ It is a universal APK rather than per-ABI splits so that no classmate has to pic
 | `favicon-16/32/48.png`, `apple-touch-icon.png`, `android-chrome-192/512.png`, `icon-512.png` | Browser, iOS and Android icons |
 | `og-image.png` | Link preview card, 1200x630 |
 | `site.webmanifest` | PWA manifest |
-| `AQUASCOUT-1.54.apk` | The installable release build |
+| `AQUASCOUT-1.55.apk` | The installable release build |
 | `vercel.json` | Vercel config: clean URLs, security headers, cache policy |
 
 ### Asset generation
