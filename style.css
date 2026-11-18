@@ -227,6 +227,82 @@ h1,h2,h3,h4{
   overflow:hidden; white-space:nowrap;
 }
 
+/* ── Loading plate ────────────────────────────────────────── */
+
+html.booting{ overflow:hidden; }
+
+.boot{
+  position:fixed; inset:0; z-index:300;
+  background:var(--ink);
+  display:grid; place-items:center;
+  transition:opacity .6s cubic-bezier(.22,1,.36,1), visibility .6s;
+}
+.boot.done{ opacity:0; visibility:hidden; pointer-events:none; }
+.boot::before{
+  content:"";
+  position:absolute; inset:0;
+  background:radial-gradient(44% 40% at 50% 46%, rgba(255,122,26,.18), transparent 70%);
+}
+
+.boot-stage{
+  position:relative;
+  display:flex; flex-direction:column; align-items:center;
+  gap:20px;
+}
+
+.boot-ret{ width:132px; height:132px; overflow:visible; }
+.boot-brackets{
+  fill:none; stroke:var(--ember); stroke-width:2; stroke-linecap:square;
+  transform-origin:120px 120px;
+  animation:bootConverge .85s cubic-bezier(.22,1,.36,1) both;
+}
+.boot.done .boot-brackets{ animation:bootRelease .5s cubic-bezier(.55,0,.55,1) forwards; }
+@keyframes bootConverge{
+  from{ transform:scale(2); opacity:0; }
+  to  { transform:scale(1); opacity:1; }
+}
+@keyframes bootRelease{
+  to{ transform:scale(1.75); opacity:0; }
+}
+
+.boot-ring{
+  fill:none; stroke:var(--ember); stroke-width:1.5; opacity:.45;
+  stroke-dasharray:478; stroke-dashoffset:478;
+  transform-origin:120px 120px;
+  animation:bootRing 1.5s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes bootRing{ to{ stroke-dashoffset:0; } }
+
+.boot-word{
+  margin:0;
+  font-family:var(--disp);
+  font-size:22px; letter-spacing:.06em;
+  color:var(--cream);
+  opacity:0;
+  animation:bootWord .7s cubic-bezier(.22,1,.36,1) .25s forwards;
+}
+@keyframes bootWord{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+
+.boot-bar{
+  position:relative;
+  width:168px; height:1px;
+  background:var(--hair);
+  overflow:hidden;
+}
+.boot-bar i{
+  position:absolute; left:0; top:0; bottom:0; width:0%;
+  background:var(--ember);
+  box-shadow:0 0 10px rgba(255,122,26,.9);
+  transition:width .18s linear;
+}
+
+.boot-status{
+  margin:0;
+  font-family:var(--mono);
+  font-size:10px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--faint);
+}
+
 /* ── Hero ────────────────────────────────────────────────── */
 
 .hero{

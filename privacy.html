@@ -29,6 +29,24 @@
 </head>
 <body>
 
+<div class="boot" id="boot" role="status" aria-label="Loading AQUASCOUT">
+  <div class="boot-stage">
+    <svg class="boot-ret" viewBox="0 0 240 240" aria-hidden="true">
+      <circle class="boot-ring" cx="120" cy="120" r="76"></circle>
+      <g class="boot-brackets">
+        <path d="M56 92 V56 H92"></path>
+        <path d="M184 56 H148 V92"></path>
+        <path d="M148 184 V148 H184"></path>
+        <path d="M92 148 H56 V184"></path>
+      </g>
+    </svg>
+    <p class="boot-word">AQUASCOUT</p>
+    <div class="boot-bar"><i id="bootBar"></i></div>
+    <p class="boot-status" id="bootStatus">SCANNING</p>
+  </div>
+</div>
+<noscript><style>#boot{display:none}</style></noscript>
+
 <header class="topbar">
   <div class="wrap topbar-inner">
     <a class="brand" href="/" aria-label="AQUASCOUT home">
@@ -179,6 +197,7 @@
   </div>
 </footer>
 
+<script src="/boot.js"></script>
 <script src="/nav.js"></script>
 </body>
 </html>
