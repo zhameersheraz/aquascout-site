@@ -19,7 +19,7 @@
   --aq-mono:    "IBM Plex Mono", ui-monospace, monospace;
   --aq-sans:    "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --aq-disp:    "Instrument Serif", "Times New Roman", Georgia, serif;
-  --aq-maxw:    1240px;
+  --aq-maxw:    1560px;
 }
 
 .aq-topbar{
@@ -31,9 +31,9 @@
 }
 .aq-topbar-inner{
   max-width:var(--aq-maxw); margin:0 auto;
-  padding:0 24px;
+  padding:0 clamp(20px, 4.4vw, 72px);
   display:flex; align-items:center; gap:20px;
-  height:66px;
+  height:68px;
 }
 .aq-brand{
   display:flex; align-items:center; gap:10px;
@@ -94,7 +94,8 @@
   padding:36px 0 44px;
 }
 .aq-foot-inner{
-  max-width:var(--aq-maxw); margin:0 auto; padding:0 24px;
+  max-width:var(--aq-maxw); margin:0 auto;
+  padding:0 clamp(20px, 4.4vw, 72px);
   display:flex; flex-wrap:wrap; gap:24px;
   align-items:flex-start; justify-content:space-between;
 }
@@ -111,7 +112,9 @@
 }
 .aq-foot-nav{ display:flex; flex-wrap:wrap; gap:10px 26px; }
 .aq-foot-nav a{
-  font-size:14px; color:var(--aq-text-2); text-decoration:none;
+  font-family:var(--aq-mono);
+  font-size:10.5px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--aq-text-2); text-decoration:none;
   border-bottom:1px solid transparent;
   transition:color .18s, border-color .18s;
 }

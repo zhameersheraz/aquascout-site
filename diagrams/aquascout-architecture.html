@@ -25,7 +25,7 @@
     font-family:"IBM Plex Sans",system-ui,sans-serif;
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:1240px; margin:0 auto; padding:24px 24px 56px}
+  .wrap{max-width:1560px; margin:0 auto; padding:24px clamp(20px, 4.4vw, 72px) 56px}
   .topline{
     display:flex; align-items:center; justify-content:space-between;
     gap:16px; flex-wrap:wrap;
@@ -34,14 +34,15 @@
   }
   .home{
     display:inline-flex; align-items:center; gap:8px;
-    font-family:"IBM Plex Sans",system-ui,sans-serif;
-    font-size:14px; font-weight:500; color:var(--ink);
-    text-decoration:none;
-    border:1px solid var(--rule-solid); border-radius:6px;
-    padding:8px 14px 8px 11px;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:11px; font-weight:500;
+    letter-spacing:.16em; text-transform:uppercase;
+    color:var(--ink); text-decoration:none;
+    border:1px solid var(--rule-solid); border-radius:2px;
+    padding:11px 18px 11px 14px;
     transition:border-color .18s, background .18s;
   }
-  .home:hover{ border-color:var(--ink); background:var(--paper-2); }
+  .home:hover{ border-color:var(--accent); color:var(--accent); background:var(--paper-2); }
   .home svg{ transition:transform .18s; }
   .home:hover svg{ transform:translateX(-3px); }
   .home:focus-visible{ outline:2px solid var(--link); outline-offset:2px; }
