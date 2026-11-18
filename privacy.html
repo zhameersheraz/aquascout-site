@@ -24,7 +24,7 @@
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
@@ -32,7 +32,7 @@
 <header class="topbar">
   <div class="wrap topbar-inner">
     <a class="brand" href="/" aria-label="AQUASCOUT home">
-      <img class="brand-mark" src="/mark-light.png" alt="" width="30" height="30" />
+      <img class="brand-mark" src="/mark-light.png" alt="" width="28" height="28" />
       <span class="brand-word">AQUASCOUT</span>
     </a>
 
@@ -43,7 +43,7 @@
       <a href="/privacy" aria-current="page">Privacy</a>
     </nav>
 
-    <a class="btn btn-ember" href="/#get">Get the APK</a>
+    <a class="btn btn-ember" href="https://play.google.com/store/apps/details?id=com.scc.aquascout" target="_blank" rel="noopener">Get it on Play</a>
 
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="topnav">
       <span></span><span></span>
@@ -147,18 +147,35 @@
 <footer class="foot">
   <div class="wrap foot-inner">
     <div class="foot-l">
-      <span class="foot-brand"><img src="/mark-light.png" alt="" width="22" height="22" /> AQUASCOUT</span>
+      <span class="foot-brand"><img src="/mark-light.png" alt="" width="24" height="24" /> AQUASCOUT</span>
       <span class="foot-sub">On-device fire and smoke detection for Android. Built at Saint Columban College, Pagadian City.</span>
     </div>
-    <nav class="foot-nav">
-      <a href="/#how">How it works</a>
-      <a href="/#screens">The app</a>
-      <a href="/about">About</a>
-      <a href="/privacy">Privacy</a>
-      <a href="/diagrams/aquascout-architecture">Architecture</a>
-      <a href="/#get">Download</a>
-      <a href="mailto:zhameersheraztampugao@gmail.com">Contact</a>
-    </nav>
+
+    <div>
+      <p class="foot-h">Product</p>
+      <nav class="foot-nav">
+        <a href="/#how">How it works</a>
+        <a href="/#screens">The app</a>
+        <a href="/#does">What it does</a>
+        <a href="/#get">Get it on Play</a>
+      </nav>
+    </div>
+
+    <div>
+      <p class="foot-h">Project</p>
+      <nav class="foot-nav">
+        <a href="/about">About</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/diagrams/aquascout-architecture">Architecture</a>
+      </nav>
+    </div>
+
+    <div>
+      <p class="foot-h">Contact</p>
+      <nav class="foot-nav">
+        <a class="foot-mail" href="mailto:zhameersheraztampugao@gmail.com">zhameersheraztampugao@gmail.com</a>
+      </nav>
+    </div>
   </div>
 </footer>
 

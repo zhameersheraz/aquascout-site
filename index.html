@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AQUASCOUT — Fire and smoke detection that runs on your phone</title>
 <meta name="description" content="A custom YOLOv8n model detects fire and smoke on the phone camera at 2.0 frames per second. No image leaves the device. SMS alert with GPS to your emergency contact." />
-<meta name="theme-color" content="#08080A" />
+<meta name="theme-color" content="#07070A" />
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AQUASCOUT" />
@@ -23,7 +23,7 @@
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
@@ -31,7 +31,7 @@
 <header class="topbar">
   <div class="wrap topbar-inner">
     <a class="brand" href="/" aria-label="AQUASCOUT home">
-      <img class="brand-mark" src="/mark-light.png" alt="" width="30" height="30" />
+      <img class="brand-mark" src="/mark-light.png" alt="" width="28" height="28" />
       <span class="brand-word">AQUASCOUT</span>
     </a>
 
@@ -54,62 +54,113 @@
 
   <!-- ── HERO ────────────────────────────────────────────── -->
   <section class="hero">
-    <div class="wrap hero-grid">
+    <span class="hero-rail" aria-hidden="true">Detection runs on the phone</span>
 
-      <div class="hero-copy">
-        <p class="kicker reveal" style="--d:0.02s">
-          <span class="tick" aria-hidden="true"></span>
-          Android 8+ &middot; two classes only
-        </p>
+    <div class="hero-dots">
+      <a href="https://play.google.com/store/apps/details?id=com.scc.aquascout" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </a>
+      <a href="/diagrams/aquascout-architecture" aria-label="Architecture diagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-9 5 6 3-4 4 7z"/></svg>
+      </a>
+      <a href="/privacy" aria-label="Privacy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.5-3 8.2-7 9.5-4-1.3-7-5-7-9.5V6z"/></svg>
+      </a>
+    </div>
 
-        <h1 class="hero-title">
-          <span class="reveal" style="--d:0.08s">Fire and smoke</span>
-          <span class="reveal grad" style="--d:0.14s">detection that runs</span>
-          <span class="reveal" style="--d:0.20s">where the camera</span>
-          <span class="reveal" style="--d:0.26s">already is.</span>
-        </h1>
+    <div class="wrap hero-inner">
+      <p class="kicker reveal" style="--d:0.02s">
+        <span class="tick" aria-hidden="true"></span>
+        Android 8+ &middot; two classes only
+      </p>
 
-        <p class="hero-lede reveal" style="--d:0.34s">
-          A 3.3&nbsp;MB YOLOv8n model runs on your handset's CPU. When it sees fire or
-          smoke, it texts your emergency contact with the GPS pin. Nothing is
-          uploaded. There is nothing to install but the app.
-        </p>
+      <h1 class="hero-title">
+        <span class="reveal" style="--d:0.08s">Fire and smoke</span>
+        <span class="reveal" style="--d:0.14s"><em>detection</em> that runs</span>
+        <span class="reveal" style="--d:0.20s">where the camera already is.</span>
+      </h1>
 
-        <div class="hero-actions reveal" style="--d:0.42s">
-          <a class="btn btn-ember btn-lg" href="https://play.google.com/store/apps/details?id=com.scc.aquascout" target="_blank" rel="noopener">Get it on Google Play</a>
-          <a class="btn btn-ghost btn-lg" href="/diagrams/aquascout-architecture">
-            See what leaves the phone
-            <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          </a>
-        </div>
+      <p class="hero-lede reveal" style="--d:0.28s">
+        A 3.3&nbsp;MB YOLOv8n model runs on your handset's CPU. When it sees fire or
+        smoke, it texts your emergency contact with the GPS pin. Nothing is
+        uploaded. There is nothing to install but the app.
+      </p>
 
-        <ul class="hero-chips reveal" style="--d:0.5s">
-          <li>Nothing uploaded</li>
-          <li>Works offline</li>
-          <li>Signed release build</li>
-        </ul>
+      <div class="hero-actions reveal" style="--d:0.34s">
+        <a class="btn btn-ember btn-lg" href="https://play.google.com/store/apps/details?id=com.scc.aquascout" target="_blank" rel="noopener">Get it on Google Play</a>
+        <a class="btn btn-line btn-lg" href="/diagrams/aquascout-architecture">
+          See what leaves the phone
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
       </div>
 
-      <!-- Signature: a viewfinder that actually detects -->
-      <figure class="hero-rig reveal" style="--d:0.18s">
-        <div class="rig">
-          <canvas id="viewfinder" width="560" height="660" aria-label="Simulated live detection viewfinder"></canvas>
-          <div class="rig-caption">
+      <ul class="hero-chips reveal" style="--d:0.42s">
+        <li>Nothing uploaded</li>
+        <li>Works offline</li>
+        <li>Signed release build</li>
+      </ul>
+    </div>
+
+    <figure class="hero-stage reveal" style="--d:0.3s">
+      <div class="device" id="device">
+        <div class="device-inner">
+          <div class="device-shell">
+            <div class="device-screen">
+              <canvas id="viewfinder" width="560" height="660" aria-label="Simulated live detection viewfinder"></canvas>
+            </div>
+          </div>
+          <div class="device-bar">
+            <span class="device-dot" aria-hidden="true"></span>
             <span>Simulated feed</span>
-            <span class="rig-dot" aria-hidden="true"></span>
             <span>YOLOv8n dynamic INT8</span>
           </div>
         </div>
-        <figcaption>
-          The box and the number are the product. Everything else is the phone you
-          already have.
-        </figcaption>
-      </figure>
+      </div>
 
+      <a class="scroll-badge" href="#does" aria-label="Scroll to what it does">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <defs>
+            <path id="badgeRing" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"></path>
+          </defs>
+          <circle cx="50" cy="50" r="48.5" fill="none" stroke="rgba(244,237,226,.16)" stroke-width="1"></circle>
+          <text fill="currentColor" font-size="7" letter-spacing="3.1" font-family="IBM Plex Mono, monospace">
+            <textPath href="#badgeRing" startOffset="0">ON DEVICE &middot; NO CLOUD &middot; </textPath>
+          </text>
+        </svg>
+        <span class="arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M6 13l6 6 6-6"/></svg>
+        </span>
+      </a>
+
+      <figcaption class="sr-only">
+        The box and the number are the product. Everything else is the phone you already have.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ── SPEC BAND ────────────────────────────────────────── -->
+  <section class="strip">
+    <div class="wrap strip-grid">
+      <div class="stat reveal" style="--d:0.02s">
+        <b>0.748</b>
+        <span>held-out test precision on the D-Fire split</span>
+      </div>
+      <div class="stat reveal" style="--d:0.06s">
+        <b>2.0</b>
+        <span>frames per second on the handset CPU</span>
+      </div>
+      <div class="stat reveal" style="--d:0.1s">
+        <b>3.3 MB</b>
+        <span>INT8 model, runs with the radio off</span>
+      </div>
+      <div class="stat reveal" style="--d:0.14s">
+        <b>0</b>
+        <span>camera frames uploaded, ever</span>
+      </div>
     </div>
   </section>
 
-  <!-- ── WHAT IT DOES ────────────────────────────────────── -->
+  <!-- ── WHAT IT DOES ─────────────────────────────────────── -->
   <section id="does" class="does">
     <div class="wrap">
       <header class="sec-head reveal">
@@ -117,60 +168,46 @@
         <h2>Four jobs, done on the phone.</h2>
       </header>
 
-      <dl class="features">
-        <div class="feature reveal" style="--d:0.04s">
-          <div class="feat-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="3.2"/><circle cx="12" cy="12" r="8"/>
-              <path d="M12 1.5v2.6M12 19.9v2.6M1.5 12h2.6M19.9 12h2.6"/>
-            </svg>
-          </div>
-          <dt>Detects</dt>
-          <dd>Two classes only, fire and smoke. A focused model does one job better than a general one.</dd>
-        </div>
+      <ol class="jobs">
+        <li class="job reveal" style="--d:0.04s">
+          <span class="job-n">01</span>
+          <h3>Detects</h3>
+          <p>Two classes only, fire and smoke. A focused model does one job better than a general one.</p>
+          <span class="job-tag">ON DEVICE</span>
+        </li>
 
-        <div class="feature reveal" style="--d:0.08s">
-          <div class="feat-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4.5h16v11H9l-5 4v-15z"/><path d="M8.5 9h7M8.5 12h4"/>
-            </svg>
-          </div>
-          <dt>Alerts</dt>
-          <dd>SMS to one number you choose, with the phone's GPS pin. Works on any carrier, needs no app on the receiving end.</dd>
-        </div>
+        <li class="job reveal" style="--d:0.08s">
+          <span class="job-n">02</span>
+          <h3>Alerts</h3>
+          <p>SMS to one number you choose, with the phone's GPS pin. Works on any carrier, needs no app on the receiving end.</p>
+          <span class="job-tag">SMS + GPS</span>
+        </li>
 
-        <div class="feature reveal" style="--d:0.12s">
-          <div class="feat-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2.5l7.5 3v5.6c0 4.6-3.1 8.4-7.5 9.9-4.4-1.5-7.5-5.3-7.5-9.9V5.5l7.5-3z"/>
-              <path d="M8.8 12.2l2.2 2.2 4.2-4.4"/>
-            </svg>
-          </div>
-          <dt>Keeps quiet</dt>
-          <dd>
+        <li class="job reveal" style="--d:0.12s">
+          <span class="job-n">03</span>
+          <h3>Keeps quiet</h3>
+          <p>
             Frames never leave the handset. Firebase stores your alert log, not
             your camera.
             <a href="/diagrams/aquascout-architecture">
               See the trust boundary
               <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
             </a>
-          </dd>
-        </div>
+          </p>
+          <span class="job-tag">NO UPLOAD</span>
+        </li>
 
-        <div class="feature reveal" style="--d:0.16s">
-          <div class="feat-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3.2l2.6 5.5 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.5l6-.8L12 3.2z"/>
-            </svg>
-          </div>
-          <dt>Lets you override</dt>
-          <dd>Smell smoke before the camera sees it? Hold the red button for a second and a half.</dd>
-        </div>
-      </dl>
+        <li class="job reveal" style="--d:0.16s">
+          <span class="job-n">04</span>
+          <h3>Lets you override</h3>
+          <p>Smell smoke before the camera sees it? Hold the red button for a second and a half.</p>
+          <span class="job-tag">HOLD 1.5s</span>
+        </li>
+      </ol>
     </div>
   </section>
 
-  <!-- ── HOW IT WORKS ────────────────────────────────────── -->
+  <!-- ── HOW IT WORKS ─────────────────────────────────────── -->
   <section id="how" class="how">
     <div class="wrap">
       <header class="sec-head reveal">
@@ -180,17 +217,17 @@
 
       <ol class="steps">
         <li class="step reveal" style="--d:0.04s">
-          <span class="step-n">STEP 01</span>
+          <span class="step-n">01</span>
           <h3>The phone looks</h3>
           <p>The camera feed goes straight into the TFLite interpreter. No upload, no round trip, no waiting on a signal.</p>
         </li>
-        <li class="step reveal" style="--d:0.10s">
-          <span class="step-n">STEP 02</span>
+        <li class="step reveal" style="--d:0.1s">
+          <span class="step-n">02</span>
           <h3>The model decides</h3>
           <p>Boxes above your confidence threshold become detections, each one labelled fire or smoke with a score you can see.</p>
         </li>
         <li class="step reveal" style="--d:0.16s">
-          <span class="step-n">STEP 03</span>
+          <span class="step-n">03</span>
           <h3>Somebody is told</h3>
           <p>If you do not acknowledge it, the alert escalates by SMS to your emergency contact with your coordinates attached.</p>
         </li>
@@ -198,20 +235,30 @@
     </div>
   </section>
 
-  <!-- ── APP SCREENS ─────────────────────────────────────── -->
+  <!-- ── APP SCREENS ──────────────────────────────────────── -->
   <section id="screens" class="screens">
     <div class="wrap">
       <header class="sec-head reveal">
         <p class="kicker kicker-mute"><span class="tick" aria-hidden="true"></span> On the phone</p>
         <h2>The whole interface.</h2>
-        <p>
-          Two screens, taken from the build on this page. The detector runs on
-          the handset, so what you see is what the phone is doing, not a mock-up.
-        </p>
       </header>
 
-      <div class="screen-grid">
-        <figure class="phone-shot reveal" style="--d:0.04s">
+      <div class="shots">
+        <div class="shots-copy reveal" style="--d:0.04s">
+          <p class="kicker kicker-mute">Two screens</p>
+          <h3>Taken from the build on this page.</h3>
+          <p>
+            The detector runs on the handset, so what you see is what the phone is
+            doing, not a mock-up.
+          </p>
+          <p>
+            Model accuracy and speed, camera status and the two actions that matter
+            on one screen. Every detection kept with its confidence, its time and
+            whether you reviewed it on the other.
+          </p>
+        </div>
+
+        <figure class="shot reveal" style="--d:0.1s">
           <div class="phone-shell">
             <img src="/app-dashboard.png" alt="AQUASCOUT dashboard showing model accuracy, frame rate, camera status and the live detect button" width="864" height="1920" loading="lazy" />
           </div>
@@ -221,7 +268,7 @@
           </figcaption>
         </figure>
 
-        <figure class="phone-shot reveal" style="--d:0.12s">
+        <figure class="shot reveal" style="--d:0.16s">
           <div class="phone-shell">
             <img src="/app-alerts.png" alt="AQUASCOUT alerts list showing detected fire and smoke events with confidence scores and timestamps" width="864" height="1920" loading="lazy" />
           </div>
@@ -240,10 +287,10 @@
     </div>
   </section>
 
-  <!-- ── GET ─────────────────────────────────────────────── -->
+  <!-- ── GET ──────────────────────────────────────────────── -->
   <section id="get" class="get">
-    <div class="wrap">
-      <div class="get-card reveal">
+    <div class="wrap get-panel">
+      <div class="reveal">
         <p class="kicker"><span class="tick" aria-hidden="true"></span> Get the app</p>
         <h2>Point it at a room. See what it does.</h2>
         <p class="get-lede">
@@ -255,7 +302,7 @@
           <div class="way">
             <a class="btn btn-ember btn-lg" href="https://play.google.com/store/apps/details?id=com.scc.aquascout" target="_blank" rel="noopener">
               Install on Google Play
-              <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
             </a>
             <p class="way-note">
               <b>Recommended.</b> AQUASCOUT is live on Google Play in 177
@@ -266,9 +313,9 @@
           </div>
 
           <div class="way">
-            <a class="btn btn-ghost btn-lg" href="/AQUASCOUT-1.56.apk" download>
+            <a class="btn btn-line btn-lg" href="/AQUASCOUT-1.56.apk" download>
               Download APK 1.56
-              <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 6.5L8 10l3.5-3.5M2.5 13h11"/></svg>
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 6.5L8 10l3.5-3.5M2.5 13h11"/></svg>
             </a>
             <p class="way-note">
               The same 1.56 build, sideloaded (39 MB). No
@@ -283,17 +330,30 @@
           </div>
         </div>
 
-        <ul class="get-facts">
-          <li><b>11.5 MB</b> on Play</li>
-          <li><b>v1.56</b> (26)</li>
-          <li><b>Android 8+</b> (API 24)</li>
-          <li><b>arm64 + armv7 + x86</b></li>
-        </ul>
-
         <p class="play-note">
           To send an SMS alert, paste your Semaphore API key into Settings
           first. Without it the detector still runs and logs detections, but no
           message is ever sent.
+        </p>
+      </div>
+
+      <div class="reveal" style="--d:0.08s">
+        <p class="kicker kicker-mute" style="margin-bottom:18px">The build</p>
+        <ul class="get-facts">
+          <li><span>Version</span> <b>1.56 (26)</b></li>
+          <li><span>Size on Play</span> <b>11.5 MB</b></li>
+          <li><span>APK</span> <b>39 MB</b></li>
+          <li><span>Android</span> <b>8+ (API 24)</b></li>
+          <li><span>Target SDK</span> <b>36</b></li>
+          <li><span>ABIs</span> <b>arm64 + armv7 + x86</b></li>
+          <li><span>Model</span> <b>YOLOv8n INT8</b></li>
+          <li><span>Account</span> <b>Optional</b></li>
+        </ul>
+
+        <p class="sha">
+          Play App Signing is on, so the build in your hands is signed by Google,
+          not by us. <b>Signed release build</b>, same one the testers ran since
+          23 October.
         </p>
       </div>
     </div>
@@ -304,22 +364,40 @@
 <footer class="foot">
   <div class="wrap foot-inner">
     <div class="foot-l">
-      <span class="foot-brand"><img src="/mark-light.png" alt="" width="22" height="22" /> AQUASCOUT</span>
+      <span class="foot-brand"><img src="/mark-light.png" alt="" width="24" height="24" /> AQUASCOUT</span>
       <span class="foot-sub">On-device fire and smoke detection for Android. Built at Saint Columban College, Pagadian City.</span>
     </div>
-    <nav class="foot-nav">
-      <a href="#how">How it works</a>
-      <a href="#screens">The app</a>
-      <a href="/about">About</a>
-      <a href="/privacy">Privacy</a>
-      <a href="/diagrams/aquascout-architecture">Architecture</a>
-      <a href="#get">Download</a>
-      <a href="mailto:zhameersheraztampugao@gmail.com">Contact</a>
-    </nav>
+
+    <div>
+      <p class="foot-h">Product</p>
+      <nav class="foot-nav">
+        <a href="#how">How it works</a>
+        <a href="#screens">The app</a>
+        <a href="#does">What it does</a>
+        <a href="#get">Get it on Play</a>
+      </nav>
+    </div>
+
+    <div>
+      <p class="foot-h">Project</p>
+      <nav class="foot-nav">
+        <a href="/about">About</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/diagrams/aquascout-architecture">Architecture</a>
+      </nav>
+    </div>
+
+    <div>
+      <p class="foot-h">Contact</p>
+      <nav class="foot-nav">
+        <a class="foot-mail" href="mailto:zhameersheraztampugao@gmail.com">zhameersheraztampugao@gmail.com</a>
+      </nav>
+    </div>
   </div>
 </footer>
 
 <script src="/nav.js"></script>
+<script src="/motion.js"></script>
 <script src="/viewfinder.js"></script>
 </body>
 </html>
