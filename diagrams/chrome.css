@@ -16,6 +16,17 @@
   --aq-line-2:  rgba(255,255,255,.16);
   --aq-ember:   #FF7A1A;
   --aq-ember-lo:#E2570A;
+  --aq-ember-hi:#FFB347;
+  --aq-panel:   #131319;
+  --aq-soft:    #74747F;
+  --aq-bg:      #08080A;
+  --aq-onbg:    rgba(255,255,255,.45);
+  --aq-onbg-2:  rgba(255,255,255,.80);
+  --aq-onbg-3:  rgba(255,255,255,.12);
+  --aq-onbg-4:  rgba(255,255,255,.26);
+  --aq-topbar:  rgba(8,8,10,.72);
+  --aq-menu:    #0A0A0E;
+  --aq-foot:    linear-gradient(180deg,#08080A,#0B0B10);
   --aq-mono:    "IBM Plex Mono", ui-monospace, monospace;
   --aq-sans:    "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --aq-disp:    "Instrument Serif", "Times New Roman", Georgia, serif;
@@ -24,7 +35,7 @@
 
 .aq-topbar{
   position:sticky; top:0; z-index:60;
-  background:rgba(8,8,10,.72);
+  background:var(--aq-topbar);
   backdrop-filter:blur(16px) saturate(1.5);
   -webkit-backdrop-filter:blur(16px) saturate(1.5);
   border-bottom:1px solid var(--aq-line);
@@ -90,7 +101,7 @@
 .aq-foot{
   margin-top:48px;
   border-top:1px solid var(--aq-line);
-  background:linear-gradient(180deg,#08080A,#0B0B10);
+  background:var(--aq-foot);
   padding:36px 0 44px;
 }
 .aq-foot-inner{
@@ -140,3 +151,57 @@
   .aq-burger{ display:block; }
   .aq-foot-inner{ flex-direction:column; }
 }
+/* ── Light mode ─────────────────────────────────────────── */
+
+html[data-theme="light"]{
+  --aq-bg:      #F6F1E7;
+  --aq-text:    #191612;
+  --aq-text-2:  #4B433A;
+  --aq-line:    rgba(25,22,18,.13);
+  --aq-line-2:  rgba(25,22,18,.24);
+  --aq-ember:   #DB530B;
+  --aq-ember-lo:#B94007;
+  --aq-ember-hi:#B94007;
+  --aq-panel:   #FFFFFF;
+  --aq-soft:    #8B8274;
+  --aq-bg:      #F1EADD;
+  --aq-onbg:    rgba(25,22,18,.45);
+  --aq-onbg-2:  rgba(25,22,18,.80);
+  --aq-onbg-3:  rgba(25,22,18,.13);
+  --aq-onbg-4:  rgba(25,22,18,.26);
+  --aq-topbar:  rgba(246,241,231,.86);
+  --aq-menu:    #F6F1E7;
+  --aq-foot:    linear-gradient(180deg,#F1EADD,#EFE8DB);
+
+  /* the diagram pages keep their own token names for the page chrome */
+  --paper:      #F6F1E7;
+  --paper-2:    #EFE8DB;
+  --ink:        #191612;
+  --muted:      #4B433A;
+  --soft:       #8B8274;
+  --rule:       rgba(25,22,18,.13);
+  --rule-solid: rgba(25,22,18,.24);
+  --accent:     #DB530B;
+  --accent-tint:rgba(219,83,11,.10);
+  --link:       #B94007;
+
+  color-scheme: light;
+}
+html[data-theme="light"] .aq-brand img{ filter:brightness(0) opacity(.88); }
+
+/* The toggle, same mark as the main site. */
+.aq-theme-toggle{
+  width:38px; height:38px;
+  display:grid; place-content:center;
+  background:none;
+  border:1px solid var(--aq-line-2);
+  border-radius:50%;
+  color:var(--aq-text-2);
+  cursor:pointer;
+  transition:border-color .18s, color .18s, transform .18s;
+}
+.aq-theme-toggle:hover{ border-color:var(--aq-ember); color:var(--aq-ember); transform:translateY(-2px); }
+.aq-theme-toggle svg{ width:17px; height:17px; }
+.aq-theme-toggle .ic-moon{ display:none; }
+html[data-theme="light"] .aq-theme-toggle .ic-sun{ display:none; }
+html[data-theme="light"] .aq-theme-toggle .ic-moon{ display:block; }

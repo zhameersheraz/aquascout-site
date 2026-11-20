@@ -25,7 +25,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/style.css" /><script>
+/* Set the ground before the first paint so the page never flashes the
+   other theme on reload. */
+(function(){try{var t=localStorage.getItem('aq-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();
+</script>
+
 </head>
 <body>
 
@@ -61,6 +66,14 @@
       <a href="/privacy" aria-current="page">Privacy</a>
     </nav>
 
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+      <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.4M12 19v2.4M2.6 12H5M19 12h2.4M5.4 5.4l1.7 1.7M16.9 16.9l1.7 1.7M18.6 5.4l-1.7 1.7M7.1 16.9l-1.7 1.7"/>
+      </svg>
+      <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 14.4A8.6 8.6 0 0 1 9.6 4a8.6 8.6 0 1 0 10.4 10.4z"/>
+      </svg>
+    </button>
     <a class="btn btn-ember" href="https://play.google.com/store/apps/details?id=com.scc.aquascout" target="_blank" rel="noopener">Get it on Play</a>
 
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="topnav">
@@ -197,6 +210,7 @@
   </div>
 </footer>
 
+<script src="/theme.js"></script>
 <script src="/boot.js"></script>
 <script src="/nav.js"></script>
 </body>

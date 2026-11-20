@@ -27,6 +27,15 @@
 
   --hair:   rgba(244,237,226,.13);
   --hair-2: rgba(244,237,226,.07);
+  --strong: rgba(244,237,226,.40);
+
+  /* Surfaces that need to flip with the theme. */
+  --topbar-bg: rgba(7,7,10,.78);
+  --menu-bg:   #0A0A0E;
+  --hover:     rgba(244,237,226,.022);
+  --soft-fill: rgba(244,237,226,.025);
+  --code-bg:   rgba(244,237,226,.05);
+  --ring:      rgba(244,237,226,.16);
 
   --disp: "Instrument Serif", "Times New Roman", Georgia, serif;
   --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -123,7 +132,7 @@ h1,h2,h3,h4{
 
 .topbar{
   position:sticky; top:0; z-index:60;
-  background:rgba(7,7,10,.78);
+  background:var(--topbar-bg);
   backdrop-filter:blur(18px) saturate(1.4);
   -webkit-backdrop-filter:blur(18px) saturate(1.4);
   border-bottom:1px solid var(--hair-2);
@@ -190,8 +199,8 @@ h1,h2,h3,h4{
 }
 .btn-line:hover{
   transform:translateY(-2px);
-  border-color:rgba(244,237,226,.4);
-  background:rgba(244,237,226,.04);
+  border-color:var(--strong);
+  background:var(--hover);
 }
 
 .btn-lg{ padding:17px 30px; font-size:11.5px; }
@@ -506,7 +515,7 @@ html.booting{ overflow:hidden; }
 .strip{
   border-top:1px solid var(--hair-2);
   border-bottom:1px solid var(--hair-2);
-  background:linear-gradient(180deg,rgba(244,237,226,.022),transparent);
+  background:linear-gradient(180deg,var(--hover),transparent);
 }
 .strip-grid{
   display:grid;
@@ -553,7 +562,7 @@ html.booting{ overflow:hidden; }
   border-bottom:1px solid var(--hair);
   transition:background .25s;
 }
-.job:hover{ background:rgba(244,237,226,.022); }
+.job:hover{ background:var(--hover); }
 .job-n{
   font-family:var(--mono);
   font-size:11px; letter-spacing:.2em;
@@ -770,7 +779,7 @@ html.booting{ overflow:hidden; }
 
 .foot{
   border-top:1px solid var(--hair-2);
-  background:linear-gradient(180deg,transparent,rgba(244,237,226,.014));
+  background:linear-gradient(180deg,transparent,var(--soft-fill));
   padding:clamp(44px,5vw,72px) 0 clamp(48px,5vw,76px);
 }
 .foot-inner{
@@ -840,7 +849,7 @@ html.booting{ overflow:hidden; }
 .prose a:hover{ border-bottom-color:var(--ember); }
 .prose code{
   font-family:var(--mono); font-size:.87em;
-  background:rgba(244,237,226,.05);
+  background:var(--code-bg);
   border:1px solid var(--hair);
   border-radius:2px; padding:1px 6px;
   color:var(--ember-hi);
@@ -895,7 +904,7 @@ td{ color:var(--cream-2); line-height:1.58; }
     border:1px solid var(--hair);
     padding:14px 16px;
     margin:0 0 12px;
-    background:rgba(244,237,226,.02);
+    background:var(--hover);
   }
   td{ display:block; border:0; padding:0; white-space:normal; }
   td + td{ margin-top:10px; }
@@ -935,7 +944,7 @@ td{ color:var(--cream-2); line-height:1.58; }
   border-radius:2px;
   padding:7px 14px;
   margin-right:8px;
-  background:rgba(244,237,226,.025);
+  background:var(--soft-fill);
 }
 
 /* ── Reveal on scroll ────────────────────────────────────── */
@@ -950,6 +959,63 @@ td{ color:var(--cream-2); line-height:1.58; }
 @media (prefers-reduced-motion:reduce){
   .reveal{ opacity:1; transform:none; transition:none; }
 }
+
+/* ── Light mode ──────────────────────────────────────────────
+   The same plate printed on cream stock. The device, the phone
+   shells and the viewfinder stay dark on purpose: they are the
+   product, and a dark object on cream is the reference look. */
+
+html[data-theme="light"]{
+  --ink:      #F6F1E7;
+  --ink-2:    #EFE8DB;
+  --panel:    #FFFFFF;
+  --panel-2:  #F1EADD;
+
+  --cream:    #191612;
+  --cream-2:  #4B433A;
+  --muted:    #6B6154;
+  --faint:    #8B8274;
+
+  --ember:      #DB530B;
+  --ember-hi:   #B94007;
+  --ember-soft: rgba(219,83,11,.10);
+  --ember-line: rgba(219,83,11,.30);
+
+  --hair:   rgba(25,22,18,.14);
+  --hair-2: rgba(25,22,18,.08);
+  --strong: rgba(25,22,18,.34);
+
+  --topbar-bg: rgba(246,241,231,.86);
+  --menu-bg:   #F6F1E7;
+  --hover:     rgba(25,22,18,.03);
+  --soft-fill: rgba(25,22,18,.03);
+  --code-bg:   rgba(25,22,18,.05);
+  --ring:      rgba(25,22,18,.22);
+
+  color-scheme: light;
+}
+html[data-theme="light"] body::after{ opacity:.035; }
+html[data-theme="light"] .brand-mark,
+html[data-theme="light"] .foot-brand img{ filter:brightness(0) opacity(.88); }
+html[data-theme="light"] .hero-title em{ color:var(--ember); }
+
+/* ── Theme toggle ─────────────────────────────────────────── */
+
+.theme-toggle{
+  width:38px; height:38px;
+  display:grid; place-content:center;
+  background:none;
+  border:1px solid var(--hair);
+  border-radius:50%;
+  color:var(--muted);
+  cursor:pointer;
+  transition:border-color .18s, color .18s, transform .18s;
+}
+.theme-toggle:hover{ border-color:var(--ember); color:var(--ember); transform:translateY(-2px); }
+.theme-toggle svg{ width:17px; height:17px; }
+.theme-toggle .ic-moon{ display:none; }
+html[data-theme="light"] .theme-toggle .ic-sun{ display:none; }
+html[data-theme="light"] .theme-toggle .ic-moon{ display:block; }
 
 /* ── Responsive ──────────────────────────────────────────── */
 
@@ -975,7 +1041,7 @@ td{ color:var(--cream-2); line-height:1.58; }
   .topnav{
     position:absolute; top:68px; left:0; right:0;
     flex-direction:column; gap:0;
-    background:#0A0A0E;
+    background:var(--menu-bg);
     border-bottom:1px solid var(--hair);
     box-shadow:0 24px 40px -20px rgba(0,0,0,.9);
     padding:8px var(--gut) 16px;
